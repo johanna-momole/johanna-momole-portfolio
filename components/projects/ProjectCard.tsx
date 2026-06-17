@@ -1,3 +1,5 @@
+import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
 import type { Project } from "@/content/projects"
@@ -139,11 +141,23 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           </div>
         )}
 
-        {/* No-link note */}
+        {/* Case study link or coming-soon note */}
         {!project.repositoryUrl && !project.demoUrl && (
-          <p className="mt-auto pt-3 text-[9px] text-white/22 border-t border-white/6">
-            Case study coming soon
-          </p>
+          project.hasCaseStudy ? (
+            <div className="mt-auto border-t border-white/[0.06] pt-3">
+              <Link
+                href={`/projects/${project.slug}`}
+                className="inline-flex items-center gap-1.5 text-[10px] font-medium text-aqua/70 transition-colors hover:text-aqua focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-aqua/40"
+              >
+                View case study
+                <ArrowRightIcon className="size-3" aria-hidden="true" />
+              </Link>
+            </div>
+          ) : (
+            <p className="mt-auto border-t border-white/[0.06] pt-3 text-[9px] text-white/22">
+              Case study coming soon
+            </p>
+          )
         )}
       </div>
     </article>

@@ -1,6 +1,8 @@
 "use client"
 
+import Link from "next/link"
 import { motion, useReducedMotion } from "motion/react"
+import { ArrowRightIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
 import type { Project } from "@/content/projects"
@@ -147,6 +149,20 @@ export function FeaturedProjectCard({
             </span>
           )}
         </div>
+
+        {/* Case study link */}
+        {project.hasCaseStudy && (
+          <div className="mt-3 border-t border-white/[0.07] pt-3">
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-aqua/70 transition-colors hover:text-aqua focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-aqua/40"
+              onClick={(e) => e.stopPropagation()}
+            >
+              View case study
+              <ArrowRightIcon className="size-3" aria-hidden="true" />
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Hover accent line */}

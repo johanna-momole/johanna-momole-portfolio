@@ -41,6 +41,7 @@ export type Project = {
   repositoryUrl: string
   demoUrl: string
   featured: boolean
+  hasCaseStudy: boolean
   visual: ProjectVisualVariant
 }
 
@@ -74,6 +75,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: true,
+    hasCaseStudy: true,
     visual: "signal",
   },
   {
@@ -102,6 +104,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: true,
+    hasCaseStudy: false,
     visual: "cohort",
   },
   {
@@ -132,6 +135,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: true,
+    hasCaseStudy: false,
     visual: "referral",
   },
   {
@@ -159,6 +163,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: false,
+    hasCaseStudy: false,
     visual: "genomics",
   },
   {
@@ -186,6 +191,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: false,
+    hasCaseStudy: false,
     visual: "vaccination",
   },
 ]
