@@ -11,13 +11,12 @@ export const siteConfig = {
     { label: "About",      href: "/#about" },
     { label: "Experience", href: "/#experience" },
     { label: "Notes",      href: "/notes" },
-    { label: "Contact",    href: "/#contact" },
   ],
 
   social: {
     linkedin: "",
     github:   "",
-    email:    "johannafiola25@gmail.com",
+    email:    "johanna.momole@gmail.com",
   },
 
   resume: "#resume",

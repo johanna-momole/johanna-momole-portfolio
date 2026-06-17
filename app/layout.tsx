@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/shared/ThemeProvider"
 import { SiteHeader } from "@/components/layout/SiteHeader"
+import { SiteFooter } from "@/components/shared/SiteFooter"
+import { BackgroundVideo } from "@/components/shared/BackgroundVideo"
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -68,17 +69,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <div className="relative z-[1] flex min-h-screen flex-col">
           <SiteHeader />
           <main id="main-content" className="flex flex-col flex-1">
             {children}
           </main>
-        </ThemeProvider>
+          <SiteFooter />
+        </div>
+        {/* BackgroundVideo is after content in DOM so the pause button receives focus last */}
+        <BackgroundVideo />
       </body>
     </html>
   )

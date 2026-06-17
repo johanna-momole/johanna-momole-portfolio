@@ -15,8 +15,6 @@ import {
   SheetTitle,
   SheetClose,
 } from "@/components/ui/sheet"
-import { ThemeToggle } from "@/components/shared/ThemeToggle"
-
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const prefersReduced = useReducedMotion()
@@ -31,9 +29,9 @@ export function SiteHeader() {
       <nav
         aria-label="Main navigation"
         className={cn(
-          "flex items-center justify-between gap-4 rounded-[28px] border border-black/8 dark:border-white/10",
-          "bg-ivory/80 dark:bg-deep-blue/90 backdrop-blur-xl",
-          "px-5 py-3 shadow-[0_2px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_24px_rgba(0,0,0,0.4)]"
+          "flex items-center justify-between gap-4 rounded-[28px] border border-white/[0.12]",
+          "bg-[#0B1728]/82 backdrop-blur-2xl",
+          "px-5 py-3 shadow-[0_2px_28px_rgba(0,0,0,0.45)]"
         )}
       >
         {/* Logo / monogram */}
@@ -43,12 +41,12 @@ export function SiteHeader() {
           className="flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <span
-            className="flex size-8 items-center justify-center rounded-full bg-near-black text-ivory text-xs font-bold tracking-wide dark:bg-ivory dark:text-near-black"
+            className="flex size-8 items-center justify-center rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold tracking-wide"
             aria-hidden="true"
           >
             JM
           </span>
-          <span className="hidden text-sm font-medium sm:block">
+          <span className="hidden text-sm font-medium text-white/80 sm:block">
             Johanna Momole
           </span>
         </Link>
@@ -60,9 +58,9 @@ export function SiteHeader() {
               <Link
                 href={item.href}
                 className={cn(
-                  "rounded-full px-4 py-1.5 text-sm font-medium text-foreground/70",
-                  "transition-colors hover:text-foreground hover:bg-black/5 dark:hover:bg-white/8",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  "rounded-full px-4 py-1.5 text-sm font-medium text-white/60",
+                  "transition-colors hover:text-white hover:bg-white/[0.08]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                 )}
               >
                 {item.label}
@@ -73,19 +71,17 @@ export function SiteHeader() {
 
         {/* Desktop right actions */}
         <div className="hidden items-center gap-2 md:flex">
-          <ThemeToggle />
           <Button
             size="sm"
-            className="rounded-full bg-near-black text-ivory dark:bg-ivory dark:text-near-black hover:opacity-80"
+            className="rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
             asChild
           >
             <Link href="/#contact">Contact</Link>
           </Button>
         </div>
 
-        {/* Mobile: theme toggle + hamburger */}
+        {/* Mobile: hamburger */}
         <div className="flex items-center gap-1 md:hidden">
-          <ThemeToggle />
           <Button
             variant="ghost"
             size="icon-sm"
@@ -101,7 +97,7 @@ export function SiteHeader() {
 
       {/* Mobile sheet */}
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-        <SheetContent side="right" id="mobile-nav" className="w-72 bg-ivory dark:bg-deep-blue">
+        <SheetContent side="right" id="mobile-nav" className="w-72 bg-[#0B1728]">
           <SheetHeader className="pb-6">
             <SheetTitle className="text-left font-medium">
               {siteConfig.name}
@@ -116,7 +112,7 @@ export function SiteHeader() {
                       href={item.href}
                       className={cn(
                         "flex items-center rounded-xl px-4 py-3 text-base font-medium",
-                        "text-foreground/70 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/8",
+                        "text-white/65 hover:text-white hover:bg-white/[0.08]",
                         "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       )}
                     >
@@ -130,7 +126,7 @@ export function SiteHeader() {
           <div className="mt-8 px-4">
             <Button
               size="lg"
-              className="w-full rounded-full bg-near-black text-ivory dark:bg-ivory dark:text-near-black hover:opacity-80"
+              className="w-full rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
               asChild
             >
               <Link href="/#contact" onClick={() => setMobileOpen(false)}>

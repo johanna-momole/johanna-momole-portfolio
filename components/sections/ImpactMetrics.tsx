@@ -31,7 +31,7 @@ function MetricItem({
       }}
       className={cn(
         "flex flex-col gap-2 px-8 py-6",
-        "border-b border-border last:border-b-0",
+        "border-b border-white/10 last:border-b-0",
         "sm:border-b-0 sm:border-r sm:last:border-r-0"
       )}
     >
@@ -53,7 +53,7 @@ export function ImpactMetrics() {
 
   return (
     <section
-      className="w-full border-t border-border bg-soft-white dark:bg-deep-blue/40"
+      className="w-full"
       aria-labelledby="metrics-heading"
     >
       <div className="mx-auto max-w-[1440px] px-8 py-16 md:px-16">
@@ -72,7 +72,8 @@ export function ImpactMetrics() {
         {/* Metrics grid */}
         <div
           className={cn(
-            "grid grid-cols-1 rounded-[24px] border border-border overflow-hidden",
+            "grid grid-cols-1 overflow-hidden rounded-[24px]",
+            "border border-white/10 bg-[#09101D]/55 backdrop-blur-xl",
             "sm:grid-cols-2 lg:grid-cols-4"
           )}
         >

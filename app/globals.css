@@ -9,9 +9,9 @@
   --color-ivory:         #F3F1EC;
   --color-soft-white:    #FAF9F6;
   --color-near-black:    #090B0C;
-  --color-deep-blue:     #102027;
-  --color-aqua:          #C9F2EE;
-  --color-lilac:         #D9D1FF;
+  --color-deep-blue:     #0D1526;
+  --color-aqua:          #7FE7F2;
+  --color-lilac:         #C6A0FF;
   --color-blush:         #F1D7E4;
   --color-organic-green: #87A878;
   --color-chartreuse:    #C7FF35;
@@ -65,75 +65,75 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Light theme ───────────────────────────────────────────────────────────── */
+/* ─── Base theme (video-dark unified) ──────────────────────────────────────── */
 :root {
-  --background:                 #F3F1EC;
-  --foreground:                 #090B0C;
-  --card:                       #FAF9F6;
-  --card-foreground:            #090B0C;
-  --popover:                    #FAF9F6;
-  --popover-foreground:         #090B0C;
-  --primary:                    #090B0C;
-  --primary-foreground:         #FAF9F6;
-  --secondary:                  #E8E5DD;
-  --secondary-foreground:       #090B0C;
-  --muted:                      #E8E5DD;
-  --muted-foreground:           oklch(0.48 0 0);
-  --accent:                     #C9F2EE;
-  --accent-foreground:          #090B0C;
-  --destructive:                oklch(0.577 0.245 27.325);
-  --border:                     oklch(0.88 0 0 / 60%);
-  --input:                      oklch(0.88 0 0);
-  --ring:                       #090B0C;
-  --chart-1:                    #C9F2EE;
-  --chart-2:                    #D9D1FF;
+  --background:                 #050713;
+  --foreground:                 #F8F7F4;
+  --card:                       #0D1526;
+  --card-foreground:            #F8F7F4;
+  --popover:                    #0D1526;
+  --popover-foreground:         #F8F7F4;
+  --primary:                    #F8F7F4;
+  --primary-foreground:         #050713;
+  --secondary:                  #1a2540;
+  --secondary-foreground:       #E2E8F0;
+  --muted:                      #1a2540;
+  --muted-foreground:           rgba(203, 213, 225, 0.65);
+  --accent:                     #7FE7F2;
+  --accent-foreground:          #050713;
+  --destructive:                oklch(0.704 0.191 22.216);
+  --border:                     rgba(255, 255, 255, 0.12);
+  --input:                      rgba(255, 255, 255, 0.12);
+  --ring:                       #7FE7F2;
+  --chart-1:                    #7FE7F2;
+  --chart-2:                    #C6A0FF;
   --chart-3:                    #87A878;
   --chart-4:                    #F1D7E4;
   --chart-5:                    #C7FF35;
   --radius:                     0.625rem;
-  --sidebar:                    #FAF9F6;
-  --sidebar-foreground:         #090B0C;
-  --sidebar-primary:            #090B0C;
-  --sidebar-primary-foreground: #FAF9F6;
-  --sidebar-accent:             #E8E5DD;
-  --sidebar-accent-foreground:  #090B0C;
-  --sidebar-border:             oklch(0.88 0 0 / 60%);
-  --sidebar-ring:               #090B0C;
+  --sidebar:                    #0D1526;
+  --sidebar-foreground:         #F8F7F4;
+  --sidebar-primary:            #7FE7F2;
+  --sidebar-primary-foreground: #050713;
+  --sidebar-accent:             #1a2540;
+  --sidebar-accent-foreground:  #F8F7F4;
+  --sidebar-border:             rgba(255, 255, 255, 0.12);
+  --sidebar-ring:               #7FE7F2;
 }
 
-/* ─── Dark theme ────────────────────────────────────────────────────────────── */
+/* ─── Dark theme (mirrors base — video background is always dark) ───────────── */
 .dark {
-  --background:                 #090B0C;
-  --foreground:                 #FAF9F6;
-  --card:                       #102027;
-  --card-foreground:            #FAF9F6;
-  --popover:                    #102027;
-  --popover-foreground:         #FAF9F6;
-  --primary:                    #FAF9F6;
-  --primary-foreground:         #090B0C;
-  --secondary:                  #1a2f3a;
-  --secondary-foreground:       #FAF9F6;
-  --muted:                      #1a2f3a;
-  --muted-foreground:           oklch(0.65 0 0);
-  --accent:                     #C9F2EE;
-  --accent-foreground:          #090B0C;
+  --background:                 #050713;
+  --foreground:                 #F8F7F4;
+  --card:                       #0D1526;
+  --card-foreground:            #F8F7F4;
+  --popover:                    #0D1526;
+  --popover-foreground:         #F8F7F4;
+  --primary:                    #F8F7F4;
+  --primary-foreground:         #050713;
+  --secondary:                  #1a2540;
+  --secondary-foreground:       #E2E8F0;
+  --muted:                      #1a2540;
+  --muted-foreground:           rgba(203, 213, 225, 0.65);
+  --accent:                     #7FE7F2;
+  --accent-foreground:          #050713;
   --destructive:                oklch(0.704 0.191 22.216);
-  --border:                     oklch(1 0 0 / 10%);
-  --input:                      oklch(1 0 0 / 15%);
-  --ring:                       oklch(0.556 0 0);
-  --chart-1:                    #C9F2EE;
-  --chart-2:                    #D9D1FF;
+  --border:                     rgba(255, 255, 255, 0.12);
+  --input:                      rgba(255, 255, 255, 0.12);
+  --ring:                       #7FE7F2;
+  --chart-1:                    #7FE7F2;
+  --chart-2:                    #C6A0FF;
   --chart-3:                    #87A878;
   --chart-4:                    #F1D7E4;
   --chart-5:                    #C7FF35;
-  --sidebar:                    #102027;
-  --sidebar-foreground:         #FAF9F6;
-  --sidebar-primary:            #C9F2EE;
-  --sidebar-primary-foreground: #090B0C;
-  --sidebar-accent:             #1a2f3a;
-  --sidebar-accent-foreground:  #FAF9F6;
-  --sidebar-border:             oklch(1 0 0 / 10%);
-  --sidebar-ring:               oklch(0.556 0 0);
+  --sidebar:                    #0D1526;
+  --sidebar-foreground:         #F8F7F4;
+  --sidebar-primary:            #7FE7F2;
+  --sidebar-primary-foreground: #050713;
+  --sidebar-accent:             #1a2540;
+  --sidebar-accent-foreground:  #F8F7F4;
+  --sidebar-border:             rgba(255, 255, 255, 0.12);
+  --sidebar-ring:               #7FE7F2;
 }
 
 /* ─── Base layer ────────────────────────────────────────────────────────────── */

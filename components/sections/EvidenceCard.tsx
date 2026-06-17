@@ -10,6 +10,7 @@ interface EvidenceCardProps {
   label: string
   detail: string
   floatDelay?: number
+  floatY?: number
   className?: string
 }
 
@@ -68,6 +69,7 @@ export function EvidenceCard({
   label,
   detail,
   floatDelay = 0,
+  floatY = -8,
   className,
 }: EvidenceCardProps) {
   const prefersReduced = useReducedMotion()
@@ -78,7 +80,7 @@ export function EvidenceCard({
         prefersReduced
           ? {}
           : {
-              y: [0, -8, 0],
+              y: [0, floatY, 0],
               transition: {
                 duration: 4 + floatDelay * 0.5,
                 delay: floatDelay,
@@ -87,9 +89,27 @@ export function EvidenceCard({
               },
             }
       }
-      className={cn("pointer-events-none select-none", className)}
+      whileHover={
+        prefersReduced
+          ? {}
+          : { y: -5, transition: { duration: 0.22, ease: "easeOut" } }
+      }
+      tabIndex={0}
+      className={cn(
+        "group select-none rounded-[20px] outline-none",
+        "focus-visible:ring-2 focus-visible:ring-aqua/50 focus-visible:ring-offset-0",
+        className
+      )}
     >
-      <GlassPanel variant="dark" className="w-[178px] p-4">
+      <GlassPanel
+        variant="dark"
+        className={cn(
+          "w-[178px] p-4",
+          "transition-all duration-200",
+          "group-hover:border-white/[0.20] group-hover:bg-white/[0.08] group-hover:shadow-[0_8px_36px_rgba(0,0,0,0.45)]",
+          "group-focus-visible:border-white/[0.18] group-focus-visible:bg-white/[0.07]"
+        )}
+      >
         {/* Category eyebrow */}
         <p className="mb-2 text-[9px] font-medium tracking-[0.16em] uppercase text-aqua/60">
           {category}
