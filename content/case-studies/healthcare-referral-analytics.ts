@@ -5,9 +5,9 @@ export const healthcareReferralCaseStudy: CaseStudy = {
   title: "Healthcare Referral Analytics",
   subtitle: "Provider Network, Referral Performance, and Operational Workflow Analysis",
   positioning:
-    "Connecting provider network data, referral patterns, and operational workflows to support hospital strategy and patient access at Siloam Hospitals Kebon Jeruk.",
+    "Connecting provider network data, referral patterns, and operational workflows to support hospital strategy and patient access at Siloam Hospitals.",
   summary: [
-    "In 2024, I led analytical work at Siloam Hospitals Kebon Jeruk focused on understanding and improving the hospital's external referral network. This involved mapping provider relationships, analyzing referral flow by service line and geography, and identifying workflow bottlenecks in EMR-related administrative processes.",
+    "In 2024, I led analytical work at Siloam Hospitals focused on understanding and improving the hospital's external referral network. This involved mapping provider relationships, analyzing referral flow by service line and geography, and identifying workflow bottlenecks in EMR-related administrative processes.",
     "The work combined SQL-based operational queries, Python-driven pattern analysis, and Tableau dashboards that made referral performance visible to hospital leadership. Analytical outputs contributed to partnership development decisions and operational process redesign.",
     "Confirmed professional outcomes from 2024 include 216% referral revenue growth, the addition of more than 200 partner agreements, and a 45.5% reduction in EMR-related processing time. These outcomes reflect team and organizational effort alongside analytical contributions.",
   ],
@@ -15,7 +15,7 @@ export const healthcareReferralCaseStudy: CaseStudy = {
     "How can provider network data, referral flow patterns, and EMR workflow information be combined to support hospital referral strategy, partnership development, and operational efficiency at a regional health system?",
   context: {
     motivation:
-      "Siloam Hospitals Kebon Jeruk operates within a regional healthcare market where referral relationships are central to patient access and revenue sustainability. Leadership needed a clearer view of which provider partnerships were performing, which geographic zones were underserved, and where administrative workflows were creating bottlenecks that slowed the referral process.",
+      "Siloam Hospitals operates within a regional healthcare market where referral relationships are central to patient access and revenue sustainability. Leadership needed a clearer view of which provider partnerships were performing, which geographic zones were underserved, and where administrative workflows were creating bottlenecks that slowed the referral process.",
     background:
       "Referral analytics in hospital settings sits at the intersection of business intelligence, clinical operations, and relationship management. The analytical challenge is not just generating metrics, but translating them into views that operational and strategic stakeholders can act on. EMR-related administrative workflows often carry hidden latency that compounds over volume, and identifying the specific friction points requires combining multiple operational data categories.",
   },
@@ -191,7 +191,7 @@ export const healthcareReferralCaseStudy: CaseStudy = {
   ],
   dataQualityMeasures: [
     "Portfolio dashboard previews use synthetic representative data and do not contain patient information or confidential hospital records",
-    "Confirmed professional outcomes are documented results from Johanna's work at Siloam Hospitals Kebon Jeruk in 2024 and represent organizational outcomes, not analytical output alone",
+    "Confirmed professional outcomes are documented results from Johanna's work at Siloam Hospitals in 2024 and represent organizational outcomes, not analytical output alone",
     "The 216% referral revenue growth refers specifically to referral revenue, not total hospital revenue",
     "The 45.5% refers specifically to a reduction in EMR-related processing time, not to overall hospital operational efficiency",
     "The 200+ partner agreements refers to agreements added in 2024, not the total active partner count at year-end",
@@ -234,7 +234,7 @@ export const healthcareReferralCaseStudy: CaseStudy = {
       id: "generalizability",
       title: "Context specificity",
       description:
-        "Referral network patterns and workflow findings are specific to the organizational context, service-line mix, and market of Siloam Hospitals Kebon Jeruk. Results and methods may not transfer directly to different hospital settings.",
+        "Referral network patterns and workflow findings are specific to the organizational context, service-line mix, and market of Siloam Hospitals. Results and methods may not transfer directly to different hospital settings.",
       mitigation:
         "The case study describes methods in terms transferable to other hospital contexts while grounding specific outcomes in the Siloam Hospitals context explicitly.",
     },
@@ -271,5 +271,5 @@ export const healthcareReferralCaseStudy: CaseStudy = {
     "A 45.5% reduction in EMR-related processing time in 2024, supported by analytical identification of workflow bottlenecks and evidence-based process redesign recommendations.",
   ],
   resultsProvenance:
-    "These outcomes reflect Johanna's professional work at Siloam Hospitals Kebon Jeruk. The portfolio visualizations are synthetic representative interfaces and do not reproduce confidential hospital data. The analytical work contributed to and informed these outcomes alongside team effort, clinical operations, and broader organizational factors. The portfolio case study should not be interpreted as the sole cause of the reported results.",
+    "These outcomes reflect Johanna's professional work at Siloam Hospitals. The portfolio visualizations are synthetic representative interfaces and do not reproduce confidential hospital data. The analytical work contributed to and informed these outcomes alongside team effort, clinical operations, and broader organizational factors. The portfolio case study should not be interpreted as the sole cause of the reported results.",
 }

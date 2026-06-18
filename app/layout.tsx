@@ -70,14 +70,20 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <div className="relative z-[1] flex min-h-screen flex-col">
-          <SiteHeader />
+          <div className="print:hidden">
+            <SiteHeader />
+          </div>
           <main id="main-content" className="flex flex-col flex-1">
             {children}
           </main>
-          <SiteFooter />
+          <div className="print:hidden">
+            <SiteFooter />
+          </div>
         </div>
         {/* BackgroundVideo is after content in DOM so the pause button receives focus last */}
-        <BackgroundVideo />
+        <div className="print:hidden">
+          <BackgroundVideo />
+        </div>
       </body>
     </html>
   )
