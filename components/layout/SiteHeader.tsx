@@ -76,7 +76,7 @@ export function SiteHeader() {
             className="rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
             asChild
           >
-            <Link href="/#contact">Contact</Link>
+            <Link href="/contact">Contact</Link>
           </Button>
         </div>
 
@@ -129,7 +129,7 @@ export function SiteHeader() {
               className="w-full rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
               asChild
             >
-              <Link href="/#contact" onClick={() => setMobileOpen(false)}>
+              <Link href="/contact" onClick={() => setMobileOpen(false)}>
                 Contact
               </Link>
             </Button>

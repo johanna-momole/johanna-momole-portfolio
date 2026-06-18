@@ -68,8 +68,6 @@ export default function ResumePage() {
                   </p>
                 </div>
 
-                {/* Desktop download — hidden when no PDF exists; uncomment and point to file when ready */}
-                {/* TODO: place PDF at public/resume/Johanna-Momole-Resume.pdf to enable this button */}
                 <div className="flex items-center gap-3 print:hidden">
                   <a
                     href={`mailto:${siteConfig.social.email}`}
@@ -79,14 +77,15 @@ export default function ResumePage() {
                     <MailIcon className="size-3.5" aria-hidden="true" />
                     Email
                   </a>
-                  <span
-                    className="inline-flex h-9 cursor-not-allowed items-center gap-2 rounded-full border border-white/[0.07] px-4 text-xs font-medium text-white/25"
-                    title="Resume PDF will be available soon"
-                    aria-label="Resume PDF not yet available"
+                  <a
+                    href={siteConfig.resumePdf}
+                    download
+                    className="inline-flex h-9 items-center gap-2 rounded-full border border-aqua/30 bg-aqua/[0.08] px-4 text-xs font-semibold text-white transition-all hover:border-aqua/45 hover:bg-aqua/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aqua/50"
+                    aria-label="Download Johanna Momole's résumé as a PDF"
                   >
                     <ArrowDownToLineIcon className="size-3.5" aria-hidden="true" />
-                    Download PDF
-                  </span>
+                    Download R&eacute;sum&eacute;
+                  </a>
                 </div>
               </div>
 

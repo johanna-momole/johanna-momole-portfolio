@@ -15,12 +15,28 @@ export const siteConfig = {
   ],
 
   social: {
-    linkedin: "",
-    github:   "",
+    linkedin: "https://www.linkedin.com/in/johanna-fiola-d-m/",
+    github:   "https://github.com/johanna-momole",
     email:    "johanna.momole@gmail.com",
   },
 
-  resume: "#resume",
+  resume: "/resume",
+  resumePdf: "/resume/Johanna-Momole-Resume.pdf",
+
+  contact: {
+    interests: [
+      "Real-world evidence",
+      "Pharmacovigilance",
+      "Healthcare analytics",
+      "Biomedical informatics",
+      "Analytical product development",
+      "Healthcare strategy",
+    ],
+    location:
+      "Based in the Philadelphia region and open to opportunities across Pennsylvania, New Jersey, New York, and remote U.S. teams.",
+    collaboration:
+      "Open to full-time roles, contract research, and collaborative projects in healthcare analytics, real-world evidence, and biomedical informatics.",
+  },
 
   metrics: [
     {

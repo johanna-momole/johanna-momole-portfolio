@@ -94,7 +94,7 @@ export function FeaturedProjects() {
             <p className="text-sm text-white/35">
               Selected case studies are being expanded.{" "}
               <Link
-                href="/#contact"
+                href="/contact"
                 className="text-white/60 underline underline-offset-4 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-sm"
               >
                 Reach out to learn more.
