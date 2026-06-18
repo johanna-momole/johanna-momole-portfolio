@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
 import type { Project } from "@/content/projects"
-import type { CaseStudy } from "@/content/case-studies/glp1-pharmacovigilance"
+import type { CaseStudy } from "@/content/case-studies/types"
 
 const statusColors: Record<string, string> = {
   "Ongoing":        "text-chartreuse/80 border-chartreuse/25 bg-chartreuse/5",
@@ -75,14 +75,12 @@ export function CaseStudyHero({ project, caseStudy }: CaseStudyHeroProps) {
                   </span>
                 </dd>
               </div>
-              <div>
-                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">Analysis Window</dt>
-                <dd className="text-sm font-medium text-white/75">{caseStudy.dataScale.analysisPeriod}</dd>
-              </div>
-              <div>
-                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">Records Harmonized</dt>
-                <dd className="text-sm font-medium text-white/75">{caseStudy.dataScale.totalRecords}</dd>
-              </div>
+              {caseStudy.dataScale.items.slice(0, 2).map(({ label, value }) => (
+                <div key={label}>
+                  <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">{label}</dt>
+                  <dd className="text-sm font-medium text-white/75">{value}</dd>
+                </div>
+              ))}
               <div>
                 <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">Role</dt>
                 <dd className="text-sm font-medium text-white/75">{project.role}</dd>

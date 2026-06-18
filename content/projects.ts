@@ -104,7 +104,7 @@ export const projects: Project[] = [
     repositoryUrl: "",
     demoUrl: "",
     featured: true,
-    hasCaseStudy: false,
+    hasCaseStudy: true,
     visual: "cohort",
   },
   {
@@ -119,7 +119,7 @@ export const projects: Project[] = [
     filterCategory: "Healthcare Analytics",
     status: "Completed",
     date: "",
-    role: "Analyst",
+    role: "Network & Relation Executive",
     methods: [
       "Network analysis",
       "Revenue attribution",
@@ -129,13 +129,13 @@ export const projects: Project[] = [
     technologies: ["SQL", "Python", "Tableau"],
     metrics: [
       { value: "216%", label: "Referral revenue growth" },
-      { value: "45.5%", label: "Faster EMR-related workflow" },
+      { value: "45.5%", label: "Reduction in EMR-related processing time" },
     ],
     image: "",
     repositoryUrl: "",
     demoUrl: "",
     featured: true,
-    hasCaseStudy: false,
+    hasCaseStudy: true,
     visual: "referral",
   },
   {

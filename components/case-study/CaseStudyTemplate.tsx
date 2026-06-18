@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import Link from "next/link"
 import { ArrowLeftIcon, MailIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -7,33 +8,16 @@ import { TableOfContents, type TocItem } from "@/components/case-study/TableOfCo
 import { MethodsSection } from "@/components/case-study/MethodsSection"
 import { DataSourceCard } from "@/components/case-study/DataSourceCard"
 import { LimitationCallout } from "@/components/case-study/LimitationCallout"
-import { DataPipelineDiagram } from "@/components/case-study/DataPipelineDiagram"
-import { StudyDesignDiagram } from "@/components/case-study/StudyDesignDiagram"
 import { OutputPreviewCard } from "@/components/case-study/OutputPreviewCard"
 import { CaseStudyNav } from "@/components/case-study/CaseStudyNav"
 import { RelatedProjects } from "@/components/case-study/RelatedProjects"
 import { siteConfig } from "@/content/site"
 import type { Project } from "@/content/projects"
-import type { CaseStudy } from "@/content/case-studies/glp1-pharmacovigilance"
+import type { CaseStudy } from "@/content/case-studies/types"
 
-const TOC_ITEMS: TocItem[] = [
-  { id: "executive-summary",  label: "Executive Summary" },
-  { id: "research-question",  label: "Research Question" },
-  { id: "project-context",    label: "Project Context" },
-  { id: "my-role",            label: "My Role" },
-  { id: "data-sources",       label: "Data Sources" },
-  { id: "data-engineering",   label: "Data Engineering" },
-  { id: "methodology",        label: "Analytical Methods" },
-  { id: "output-previews",    label: "Output Previews" },
-  { id: "data-quality",       label: "Data Quality" },
-  { id: "limitations",        label: "Limitations" },
-  { id: "technology",         label: "Technology Stack" },
-  { id: "lessons",            label: "Lessons Learned" },
-  { id: "next-steps",         label: "Next Steps" },
-]
+// ── Local helpers ─────────────────────────────────────────────────────────────
 
-// Reusable section heading pattern
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <p className="mb-3 text-[10px] font-medium tracking-[0.18em] uppercase text-aqua/55">
       {children}
@@ -41,7 +25,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   )
 }
 
-function SectionH2({ id, children }: { id?: string; children: React.ReactNode }) {
+function SectionH2({ id, children }: { id?: string; children: ReactNode }) {
   return (
     <h2
       id={id}
@@ -56,12 +40,45 @@ function SectionDivider() {
   return <div className="border-b border-white/[0.05]" />
 }
 
+// ── Props ─────────────────────────────────────────────────────────────────────
+
 interface CaseStudyTemplateProps {
   project: Project
   caseStudy: CaseStudy
+  workflowDiagram?: ReactNode
+  methodologyDiagram?: ReactNode
 }
 
-export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateProps) {
+// ── Component ─────────────────────────────────────────────────────────────────
+
+export function CaseStudyTemplate({
+  project,
+  caseStudy: cs,
+  workflowDiagram,
+  methodologyDiagram,
+}: CaseStudyTemplateProps) {
+
+  // TOC is computed from props so the "Results" entry appears only when the
+  // project has confirmed results.
+  const tocItems: TocItem[] = [
+    { id: "executive-summary",  label: "Executive Summary" },
+    { id: "research-question",  label: "Research Question" },
+    { id: "project-context",    label: "Project Context" },
+    { id: "my-role",            label: "My Role" },
+    { id: "data-sources",       label: "Data Sources" },
+    { id: "data-engineering",   label: "Data Engineering" },
+    { id: "methodology",        label: "Analytical Methods" },
+    { id: "output-previews",    label: "Output Previews" },
+    ...(cs.results && cs.results.length > 0
+      ? [{ id: "results", label: cs.resultsTocLabel ?? cs.resultsTitle ?? "Results" }]
+      : []),
+    { id: "data-quality",       label: "Data Quality" },
+    { id: "limitations",        label: "Limitations" },
+    { id: "technology",         label: "Technology Stack" },
+    { id: "lessons",            label: "Lessons Learned" },
+    { id: "next-steps",         label: "Next Steps" },
+  ]
+
   return (
     <>
       {/* ── Back link ──────────────────────────────────────────────────────── */}
@@ -82,7 +99,7 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
           {/* ── TOC sidebar (xl+) ─────────────────────────────────────────── */}
           <aside className="hidden w-[200px] shrink-0 xl:block" aria-label="Page sections">
             <div className="sticky top-28">
-              <TableOfContents items={TOC_ITEMS} />
+              <TableOfContents items={tocItems} />
             </div>
           </aside>
 
@@ -184,16 +201,11 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
             <section aria-labelledby="data-sources">
               <Reveal delay={0.05}>
                 <SectionLabel>Inputs</SectionLabel>
-                <SectionH2 id="data-sources">Data Sources &amp; Scale</SectionH2>
+                <SectionH2 id="data-sources">{cs.dataSourcesTitle ?? "Data Sources & Scale"}</SectionH2>
 
-                {/* Scale strip */}
+                {/* Scale strip — labels and values from content data */}
                 <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {[
-                    { label: "Records Harmonized", value: cs.dataScale.totalRecords },
-                    { label: "Analysis Window",    value: cs.dataScale.analysisPeriod },
-                    { label: "GLP-1 Cases",        value: cs.dataScale.exposureCases },
-                    { label: "Signals Detected",   value: cs.dataScale.signalsDetected },
-                  ].map(({ label, value }) => (
+                  {cs.dataScale.items.map(({ label, value }) => (
                     <div
                       key={label}
                       className="rounded-[16px] border border-white/[0.07] bg-white/[0.03] px-4 py-4"
@@ -208,22 +220,24 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
                   ))}
                 </div>
 
-                {/* Exposures */}
-                <div className="mt-6">
-                  <p className="mb-3 text-[10px] font-medium tracking-[0.14em] uppercase text-white/28">
-                    Exposures analyzed
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {cs.exposures.map((exp) => (
-                      <span
-                        key={exp}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/60"
-                      >
-                        {exp}
-                      </span>
-                    ))}
+                {/* Exposures — only rendered when the project has an exposures list */}
+                {cs.exposures && cs.exposures.length > 0 && (
+                  <div className="mt-6">
+                    <p className="mb-3 text-[10px] font-medium tracking-[0.14em] uppercase text-white/28">
+                      Exposures analyzed
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {cs.exposures.map((exp) => (
+                        <span
+                          key={exp}
+                          className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/60"
+                        >
+                          {exp}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Source cards */}
                 <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -242,34 +256,37 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
                 <SectionLabel>Pipeline</SectionLabel>
                 <SectionH2 id="data-engineering">Data Engineering Workflow</SectionH2>
                 <p className="mt-3 text-sm leading-relaxed text-white/50">
-                  FAERS quarterly ASCII files are ingested into PostgreSQL, harmonized, deduplicated, and processed through a reproducible analysis pipeline.
+                  {cs.dataSources[0]?.notes
+                    ? cs.dataSources[0].notes
+                    : "Data is processed through a structured, reproducible pipeline."}
                 </p>
               </Reveal>
 
-              {/* Pipeline diagram — dark glass panel, full width */}
-              <Reveal delay={0.1}>
-                <div
-                  className={cn(
-                    "relative mt-6 overflow-hidden rounded-[24px]",
-                    "border border-white/[0.09] bg-[#07101A]/70 backdrop-blur-lg",
-                    "px-6 py-7"
-                  )}
-                >
-                  {/* Dot grid texture */}
+              {/* Workflow diagram slot — renders only when a diagram is provided */}
+              {workflowDiagram && (
+                <Reveal delay={0.1}>
                   <div
-                    className="pointer-events-none absolute inset-0 opacity-100"
-                    style={{
-                      backgroundImage:
-                        "radial-gradient(circle at 1px 1px, rgba(127,231,242,0.04) 1px, transparent 0)",
-                      backgroundSize: "28px 28px",
-                    }}
-                    aria-hidden="true"
-                  />
-                  <div className="relative">
-                    <DataPipelineDiagram />
+                    className={cn(
+                      "relative mt-6 overflow-hidden rounded-[24px]",
+                      "border border-white/[0.09] bg-[#07101A]/70 backdrop-blur-lg",
+                      "px-6 py-7"
+                    )}
+                  >
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-100"
+                      style={{
+                        backgroundImage:
+                          "radial-gradient(circle at 1px 1px, rgba(127,231,242,0.04) 1px, transparent 0)",
+                        backgroundSize: "28px 28px",
+                      }}
+                      aria-hidden="true"
+                    />
+                    <div className="relative">
+                      {workflowDiagram}
+                    </div>
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              )}
 
               {/* Workflow steps list */}
               <Reveal delay={0.15}>
@@ -316,13 +333,14 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
                 <SectionLabel>Methods</SectionLabel>
                 <SectionH2 id="methodology">Analytical Methodology</SectionH2>
                 <p className="mt-3 text-sm leading-relaxed text-white/50">
-                  Disproportionality analysis applied to sex-stratified FAERS data. Expand each method for description and purpose.
+                  Expand each method for description and purpose.
                 </p>
               </Reveal>
 
               <Reveal delay={0.1}>
                 <div className="mt-6">
-                  <StudyDesignDiagram className="mb-6" />
+                  {/* Methodology diagram slot — renders only when a diagram is provided */}
+                  {methodologyDiagram}
                   <MethodsSection methods={cs.methods} />
                 </div>
               </Reveal>
@@ -356,6 +374,37 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
               </Reveal>
             </section>
 
+            {/* ── 8b. Results (conditional — only for projects with confirmed outcomes) */}
+            {cs.results && cs.results.length > 0 && (
+              <>
+                <SectionDivider />
+                <section aria-labelledby="results">
+                  <Reveal delay={0.05}>
+                    <SectionLabel>Confirmed Outcomes</SectionLabel>
+                    <SectionH2 id="results">{cs.resultsTitle ?? "Results"}</SectionH2>
+                    <ul className="mt-6 space-y-3">
+                      {cs.results.map((result, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span
+                            className="mt-1.5 size-1.5 shrink-0 rounded-full bg-chartreuse/55"
+                            aria-hidden="true"
+                          />
+                          <p className="text-sm leading-relaxed text-white/60">{result}</p>
+                        </li>
+                      ))}
+                    </ul>
+                    {cs.resultsProvenance && (
+                      <div className="mt-6 rounded-[14px] border border-white/[0.07] bg-white/[0.02] px-5 py-4">
+                        <p className="text-[11px] leading-relaxed text-white/38">
+                          {cs.resultsProvenance}
+                        </p>
+                      </div>
+                    )}
+                  </Reveal>
+                </section>
+              </>
+            )}
+
             <SectionDivider />
 
             {/* ── 9. Data Quality ──────────────────────────────────────────── */}
@@ -385,7 +434,7 @@ export function CaseStudyTemplate({ project, caseStudy: cs }: CaseStudyTemplateP
                 <SectionLabel>Responsible Interpretation</SectionLabel>
                 <SectionH2 id="limitations">Limitations</SectionH2>
                 <p className="mt-3 text-sm leading-relaxed text-white/50">
-                  Understanding these limitations is essential for correctly interpreting results from FAERS-based disproportionality analysis.
+                  Understanding these limitations is essential for correctly interpreting results.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>

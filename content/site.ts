@@ -8,7 +8,7 @@ export const siteConfig = {
 
   nav: [
     { label: "Work",       href: "/#work" },
-    { label: "About",      href: "/#about" },
+    { label: "About",      href: "/about" },
     { label: "Experience", href: "/#experience" },
     { label: "Notes",      href: "/notes" },
   ],
@@ -34,7 +34,7 @@ export const siteConfig = {
     },
     {
       value: "45.5%",
-      label: "Faster EMR-related workflow",
+      label: "Reduction in EMR-related processing time",
       category: "Workflow Efficiency",
     },
     {
@@ -66,7 +66,7 @@ export const siteConfig = {
       id: "workflow",
       category: "Workflow Efficiency",
       value: "45.5%",
-      label: "faster healthcare workflow",
+      label: "reduction in EMR-related processing time",
       detail: "EMR process optimization",
     },
   ],

@@ -1,83 +1,16 @@
-// ── Types ─────────────────────────────────────────────────────────────────────
+// ── Types re-exported from shared module for backward compatibility ────────────
+import type { CaseStudy } from "./types"
 
-export type DataSource = {
-  name: string
-  acronym: string
-  type: string
-  period: string
-  scale: string
-  tables?: string[]
-  notes: string
-}
-
-export type WorkflowStep = {
-  step: number
-  label: string
-  description: string
-  output: string
-  tech: string[]
-}
-
-export type Method = {
-  name: string
-  type: "primary" | "sensitivity" | "quality" | "validation"
-  description: string
-  purpose: string
-}
-
-export type Limitation = {
-  id: string
-  title: string
-  description: string
-  mitigation: string
-}
-
-export type TechCategory = {
-  category: string
-  items: string[]
-}
-
-export type OutputPreview = {
-  id: string
-  title: string
-  description: string
-  visualType: "forest-plot" | "trend-chart" | "table"
-  isPlaceholder: true
-}
-
-export type CaseStudy = {
-  slug: string
-  title: string
-  subtitle: string
-  positioning: string
-  summary: string[]
-  researchQuestion: string
-  context: {
-    motivation: string
-    background: string
-  }
-  role: {
-    title: string
-    summary: string
-    responsibilities: string[]
-  }
-  dataSources: DataSource[]
-  dataScale: {
-    totalRecords: string
-    analysisPeriod: string
-    exposureCases: string
-    signalsDetected: string
-  }
-  exposures: string[]
-  workflowSteps: WorkflowStep[]
-  methods: Method[]
-  outputPreviews: OutputPreview[]
-  dataQualityMeasures: string[]
-  limitations: Limitation[]
-  technologies: TechCategory[]
-  lessonsLearned: string[]
-  nextSteps: string[]
-}
+export type {
+  DataSource,
+  WorkflowStep,
+  Method,
+  Limitation,
+  TechCategory,
+  DataScaleItem,
+  OutputPreview,
+  CaseStudy,
+} from "./types"
 
 // ── GLP-1 Pharmacovigilance Case Study ────────────────────────────────────────
 
@@ -144,10 +77,12 @@ export const glp1CaseStudy: CaseStudy = {
   ],
 
   dataScale: {
-    totalRecords: "18.5M+",
-    analysisPeriod: "Q1 2021 – Q4 2024",
-    exposureCases: "158K+",
-    signalsDetected: "665",
+    items: [
+      { label: "Records Harmonized", value: "18.5M+" },
+      { label: "Analysis Window",    value: "Q1 2021 – Q4 2024" },
+      { label: "GLP-1 Cases",        value: "158K+" },
+      { label: "Signals Detected",   value: "665" },
+    ],
   },
 
   exposures: [
