@@ -353,16 +353,18 @@ export function CaseStudyTemplate({
               <Reveal delay={0.05}>
                 <SectionLabel>Analysis Outputs</SectionLabel>
                 <SectionH2 id="output-previews">Selected Output Previews</SectionH2>
-                <div
-                  className="mt-3 inline-flex items-center gap-2 rounded-[10px] border border-blush/15 bg-blush/[0.04] px-3 py-2"
-                >
-                  <span className="text-[9px] font-medium tracking-[0.14em] uppercase text-blush/55">
-                    Analysis in progress
-                  </span>
-                  <span className="text-[10px] text-white/40">
-                    Visualizations below show illustrative layout only. Actual findings will be added upon completion.
-                  </span>
-                </div>
+                {cs.outputDisclosure ? (
+                  <p className="mt-3 text-[11px] leading-relaxed text-white/45">{cs.outputDisclosure}</p>
+                ) : (
+                  <div className="mt-3 inline-flex items-center gap-2 rounded-[10px] border border-blush/15 bg-blush/[0.04] px-3 py-2">
+                    <span className="text-[9px] font-medium tracking-[0.14em] uppercase text-blush/55">
+                      Analysis in progress
+                    </span>
+                    <span className="text-[10px] text-white/40">
+                      Visualizations below show illustrative layout only. Actual findings will be added upon completion.
+                    </span>
+                  </div>
+                )}
               </Reveal>
 
               <Reveal delay={0.1}>

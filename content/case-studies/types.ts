@@ -57,7 +57,9 @@ export type OutputPreview = {
     | "sql-preview"
     | "network"
     | "matrix"
-  isPlaceholder: true
+  isPlaceholder: boolean
+  imageSrc?: string
+  imageAlt?: string
 }
 
 export type CaseStudy = {
@@ -94,4 +96,5 @@ export type CaseStudy = {
   resultsTocLabel?: string
   resultsProvenance?: string
   dataSourcesTitle?: string
+  outputDisclosure?: string
 }

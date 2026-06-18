@@ -5,6 +5,7 @@ import { projects } from "@/content/projects"
 import { glp1CaseStudy } from "@/content/case-studies/glp1-pharmacovigilance"
 import { rweStudioCaseStudy } from "@/content/case-studies/real-world-evidence-studio"
 import { healthcareReferralCaseStudy } from "@/content/case-studies/healthcare-referral-analytics"
+import { geneticRiskMapCaseStudy } from "@/content/case-studies/genetic-risk-map"
 import type { CaseStudy } from "@/content/case-studies/types"
 import { CaseStudyHero } from "@/components/case-study/CaseStudyHero"
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
@@ -14,6 +15,8 @@ import { RwePipelineDiagram } from "@/components/case-study/RwePipelineDiagram"
 import { RweCohortDesignDiagram } from "@/components/case-study/RweCohortDesignDiagram"
 import { ReferralWorkflowDiagram } from "@/components/case-study/ReferralWorkflowDiagram"
 import { ReferralNetworkDiagram } from "@/components/case-study/ReferralNetworkDiagram"
+import { GenomicsPipelineDiagram } from "@/components/case-study/GenomicsPipelineDiagram"
+import { ScoringMethodologyDiagram } from "@/components/case-study/ScoringMethodologyDiagram"
 
 // ── Case study registry ───────────────────────────────────────────────────────
 
@@ -38,6 +41,11 @@ const caseStudyMap: Record<string, CaseStudyEntry> = {
     data: healthcareReferralCaseStudy,
     workflowDiagram: <ReferralWorkflowDiagram />,
     methodologyDiagram: <ReferralNetworkDiagram className="mb-6" />,
+  },
+  "genetic-risk-map": {
+    data: geneticRiskMapCaseStudy,
+    workflowDiagram: <GenomicsPipelineDiagram />,
+    methodologyDiagram: <ScoringMethodologyDiagram className="mb-6" />,
   },
 }
 
