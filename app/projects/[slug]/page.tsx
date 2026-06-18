@@ -6,6 +6,7 @@ import { glp1CaseStudy } from "@/content/case-studies/glp1-pharmacovigilance"
 import { rweStudioCaseStudy } from "@/content/case-studies/real-world-evidence-studio"
 import { healthcareReferralCaseStudy } from "@/content/case-studies/healthcare-referral-analytics"
 import { geneticRiskMapCaseStudy } from "@/content/case-studies/genetic-risk-map"
+import { hpvVaccinationCaseStudy } from "@/content/case-studies/hpv-vaccination-analytics"
 import type { CaseStudy } from "@/content/case-studies/types"
 import { CaseStudyHero } from "@/components/case-study/CaseStudyHero"
 import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate"
@@ -17,6 +18,8 @@ import { ReferralWorkflowDiagram } from "@/components/case-study/ReferralWorkflo
 import { ReferralNetworkDiagram } from "@/components/case-study/ReferralNetworkDiagram"
 import { GenomicsPipelineDiagram } from "@/components/case-study/GenomicsPipelineDiagram"
 import { ScoringMethodologyDiagram } from "@/components/case-study/ScoringMethodologyDiagram"
+import { VaccinationWorkflowDiagram } from "@/components/case-study/VaccinationWorkflowDiagram"
+import { VaccinationModelDiagram } from "@/components/case-study/VaccinationModelDiagram"
 
 // ── Case study registry ───────────────────────────────────────────────────────
 
@@ -46,6 +49,11 @@ const caseStudyMap: Record<string, CaseStudyEntry> = {
     data: geneticRiskMapCaseStudy,
     workflowDiagram: <GenomicsPipelineDiagram />,
     methodologyDiagram: <ScoringMethodologyDiagram className="mb-6" />,
+  },
+  "hpv-vaccination-analytics": {
+    data: hpvVaccinationCaseStudy,
+    workflowDiagram: <VaccinationWorkflowDiagram />,
+    methodologyDiagram: <VaccinationModelDiagram className="mb-6" />,
   },
 }
 
