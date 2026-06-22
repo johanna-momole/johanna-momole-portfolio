@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils"
 // (distinct from dot grid / scan-line / cross-hatch used in existing diagrams).
 // SMOTE step is visually flagged with a caution ring and "!" indicator.
 
-const TRACK_Y = 78
+const TRACK_Y = 88
 const NODE_W  = 80
-const NODE_H  = 32
+const NODE_H  = 38
 const NODE_RX = 7
 
 const STAGES = [
@@ -70,7 +70,7 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
   return (
     <div className={cn("w-full overflow-x-auto", className)}>
       <svg
-        viewBox="0 0 840 152"
+        viewBox="0 0 840 172"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -87,18 +87,18 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
             <line x1="0" y1="16" x2="16" y2="0" stroke="#F1D7E4" strokeWidth="0.4" strokeOpacity="0.05" />
           </pattern>
           <marker id="vax-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
-            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C9F2EE" fillOpacity="0.35" />
+            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C9F2EE" fillOpacity="0.45" />
           </marker>
         </defs>
 
-        <rect width="840" height="152" rx="16" fill="url(#vax-wf-bg)" />
-        <rect width="840" height="152" rx="16" fill="url(#vax-diag)" />
+        <rect width="840" height="172" rx="16" fill="url(#vax-wf-bg)" />
+        <rect width="840" height="172" rx="16" fill="url(#vax-diag)" />
 
         {/* Header */}
-        <text x="16" y="20" fontSize="6" fill="#F1D7E4" fillOpacity="0.35" fontFamily="monospace" fontWeight="500" letterSpacing="2">
+        <text x="16" y="20" fontSize="7.5" fill="#F1D7E4" fillOpacity="0.52" fontFamily="monospace" fontWeight="500" letterSpacing="2">
           HPV VACCINATION ANALYTICS WORKFLOW
         </text>
-        <text x="16" y="30" fontSize="5" fill="#F1D7E4" fillOpacity="0.15" fontFamily="monospace">
+        <text x="16" y="30" fontSize="6" fill="#F1D7E4" fillOpacity="0.28" fontFamily="monospace">
           Survey · Extract · Merge · Recode · SMOTE · Train · Evaluate
         </text>
         <line x1="16" y1="36" x2="824" y2="36" stroke="#F1D7E4" strokeWidth="0.5" strokeOpacity="0.08" />
@@ -112,8 +112,8 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
             x2={STAGES[i + 1].cx - NODE_W / 2 - 1}
             y2={TRACK_Y}
             stroke={stage.color}
-            strokeWidth="0.8"
-            strokeOpacity="0.18"
+            strokeWidth="0.9"
+            strokeOpacity="0.25"
             markerEnd="url(#vax-arrow)"
           />
         ))}
@@ -133,8 +133,8 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
                   x={nodeX - 4} y={nodeY - 4}
                   width={NODE_W + 8} height={NODE_H + 8}
                   rx={NODE_RX + 2}
-                  fill={stage.color} fillOpacity="0.04"
-                  stroke={stage.color} strokeWidth="0.6" strokeOpacity="0.28"
+                  fill={stage.color} fillOpacity="0.05"
+                  stroke={stage.color} strokeWidth="0.7" strokeOpacity="0.35"
                 />
               )}
 
@@ -144,16 +144,16 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
                 width={NODE_W} height={NODE_H}
                 rx={NODE_RX}
                 fill={stage.color}
-                fillOpacity={isLast ? 0.12 : stage.warn ? 0.09 : 0.06}
+                fillOpacity={isLast ? 0.13 : stage.warn ? 0.10 : 0.07}
                 stroke={stage.color}
-                strokeWidth="0.7"
-                strokeOpacity={isLast ? 0.65 : stage.warn ? 0.55 : 0.28}
+                strokeWidth="0.8"
+                strokeOpacity={isLast ? 0.70 : stage.warn ? 0.60 : 0.35}
               />
 
               {/* Step number */}
               <text
                 x={stage.cx} y={TRACK_Y - 4}
-                fontSize="5.5" fill={stage.color} fillOpacity="0.42"
+                fontSize="7" fill={stage.color} fillOpacity="0.55"
                 fontFamily="monospace" textAnchor="middle"
               >
                 {String(i + 1).padStart(2, "0")}
@@ -161,9 +161,9 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
 
               {/* Stage label */}
               <text
-                x={stage.cx} y={TRACK_Y + 7}
-                fontSize="6.5" fill={stage.color}
-                fillOpacity={isLast ? 0.90 : 0.72}
+                x={stage.cx} y={TRACK_Y + 8}
+                fontSize="8" fill={stage.color}
+                fillOpacity={isLast ? 0.95 : 0.82}
                 fontFamily="monospace" fontWeight="bold" textAnchor="middle"
               >
                 {stage.label}
@@ -179,9 +179,9 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
                     key={li}
                     x={stage.cx}
                     y={baseY}
-                    fontSize="4.5"
+                    fontSize="6"
                     fill={stage.color}
-                    fillOpacity={stage.warn ? 0.48 : 0.28}
+                    fillOpacity={stage.warn ? 0.65 : 0.45}
                     fontFamily="monospace"
                     textAnchor="middle"
                   >
@@ -197,11 +197,11 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
                     cx={stage.cx + 32} cy={nodeY - 10}
                     r={6}
                     fill={stage.color} fillOpacity="0.12"
-                    stroke={stage.color} strokeWidth="0.5" strokeOpacity="0.55"
+                    stroke={stage.color} strokeWidth="0.6" strokeOpacity="0.60"
                   />
                   <text
                     x={stage.cx + 32} y={nodeY - 7}
-                    fontSize="7.5" fill={stage.color} fillOpacity="0.82"
+                    fontSize="7.5" fill={stage.color} fillOpacity="0.88"
                     fontFamily="monospace" fontWeight="bold" textAnchor="middle"
                   >
                     !
@@ -213,10 +213,10 @@ export function VaccinationWorkflowDiagram({ className }: VaccinationWorkflowDia
         })}
 
         {/* Footer */}
-        <text x="16" y="143" fontSize="4.5" fill="#F1D7E4" fillOpacity="0.14" fontFamily="monospace">
+        <text x="16" y="162" fontSize="6" fill="#F1D7E4" fillOpacity="0.28" fontFamily="monospace">
           R · NHANESA · TIDYVERSE · CARET · XGBOOST · SMOTEFAMILY · MLMETRICS · GGPLOT2
         </text>
-        <text x="560" y="143" fontSize="4.5" fill="#C7FF35" fillOpacity="0.25" fontFamily="monospace">
+        <text x="560" y="162" fontSize="6" fill="#C7FF35" fillOpacity="0.42" fontFamily="monospace">
           BMIN503/EPID600 · COURSE ANALYSIS
         </text>
       </svg>

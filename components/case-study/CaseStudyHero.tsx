@@ -95,10 +95,10 @@ export function CaseStudyHero({ project, caseStudy }: CaseStudyHeroProps) {
 
           {/* ── Right: project visual ──────────────────────────────────────── */}
           <div
-            className="hidden overflow-hidden rounded-[24px] border border-white/[0.08] lg:block"
+            className="hidden aspect-[8/5] self-center overflow-hidden rounded-[24px] border border-white/[0.08] lg:block"
             aria-hidden="true"
           >
-            <ProjectVisual variant={project.visual} className="h-full w-full" />
+            <ProjectVisual variant={project.visual} context="compact" className="h-full w-full" />
           </div>
         </div>
       </div>

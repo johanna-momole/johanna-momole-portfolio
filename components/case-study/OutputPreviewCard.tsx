@@ -421,15 +421,26 @@ function MatrixSVG() {
 
 // ── Visual map ────────────────────────────────────────────────────────────────
 
+import {
+  RweAttritionFunnelSVG,
+  RweSqlWorkspaceSVG,
+  RweBaselineBalanceSVG,
+  RweEvidenceBriefSVG,
+} from "@/components/case-study/RweOutputVisuals"
+
 const VISUAL_MAP: Record<OutputPreview["visualType"], () => React.ReactElement> = {
-  "forest-plot":      ForestPlotSVG,
-  "trend-chart":      TrendChartSVG,
-  "table":            DataQualitySVG,
-  "bar-chart":        BarChartSVG,
-  "picot-interface":  PicotInterfaceSVG,
-  "sql-preview":      SqlPreviewSVG,
-  "network":          NetworkSVG,
-  "matrix":           MatrixSVG,
+  "forest-plot":            ForestPlotSVG,
+  "trend-chart":            TrendChartSVG,
+  "table":                  DataQualitySVG,
+  "bar-chart":              BarChartSVG,
+  "picot-interface":        PicotInterfaceSVG,
+  "sql-preview":            SqlPreviewSVG,
+  "network":                NetworkSVG,
+  "matrix":                 MatrixSVG,
+  "rwe-attrition-funnel":   RweAttritionFunnelSVG,
+  "rwe-sql-workspace":      RweSqlWorkspaceSVG,
+  "rwe-baseline-balance":   RweBaselineBalanceSVG,
+  "rwe-evidence-brief":     RweEvidenceBriefSVG,
 }
 
 import Image from "next/image"
@@ -480,6 +491,7 @@ function RealImageVisual({ preview }: { preview: OutputPreview }) {
 export function OutputPreviewCard({ preview, chartContent }: OutputPreviewCardProps) {
   const hasChart     = Boolean(chartContent)
   const hasRealImage = !hasChart && Boolean(preview.imageSrc)
+  const isPolished   = !hasChart && !hasRealImage && !preview.isPlaceholder
 
   return (
     <div className="overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.02]">
@@ -496,6 +508,10 @@ export function OutputPreviewCard({ preview, chartContent }: OutputPreviewCardPr
           <span className="rounded-full border border-organic-green/22 bg-organic-green/[0.06] px-2 py-0.5 text-[8px] font-medium tracking-wide text-organic-green/65">
             Original project output
           </span>
+        ) : isPolished ? (
+          <span className="rounded-full border border-aqua/22 bg-aqua/[0.05] px-2 py-0.5 text-[8px] font-medium tracking-wide text-aqua/65">
+            Analysis preview
+          </span>
         ) : (
           <span className="rounded-full border border-blush/20 bg-blush/5 px-2 py-0.5 text-[8px] font-medium tracking-wide text-blush/55">
             Illustrative output structure
@@ -508,6 +524,13 @@ export function OutputPreviewCard({ preview, chartContent }: OutputPreviewCardPr
         <div className="px-4 py-4">{chartContent}</div>
       ) : hasRealImage ? (
         <RealImageVisual preview={preview} />
+      ) : isPolished ? (
+        <div className="relative overflow-hidden">
+          {(() => {
+            const Visual = VISUAL_MAP[preview.visualType]
+            return Visual ? <Visual /> : null
+          })()}
+        </div>
       ) : (
         <PlaceholderVisual preview={preview} />
       )}
@@ -515,7 +538,7 @@ export function OutputPreviewCard({ preview, chartContent }: OutputPreviewCardPr
       {/* Description — suppressed for interactive chart cards; the chart renders its own explanation */}
       {!hasChart && (
         <div className="px-4 py-3">
-          <p className="text-[11px] leading-relaxed text-white/40">
+          <p className="text-[11px] leading-relaxed text-white/62">
             {preview.description}
           </p>
         </div>

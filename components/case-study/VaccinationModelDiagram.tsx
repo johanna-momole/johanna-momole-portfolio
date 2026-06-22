@@ -39,7 +39,7 @@ export function VaccinationModelDiagram({ className }: VaccinationModelDiagramPr
       </p>
 
       <svg
-        viewBox="0 0 680 300"
+        viewBox="0 0 680 340"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -57,89 +57,89 @@ export function VaccinationModelDiagram({ className }: VaccinationModelDiagramPr
             <line x1="7"  y1="10" x2="13" y2="10" stroke="#D9D1FF" strokeWidth="0.4" strokeOpacity="0.04" />
           </pattern>
           <marker id="vax-mod-arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
-            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C9F2EE" fillOpacity="0.40" />
+            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C9F2EE" fillOpacity="0.45" />
           </marker>
           <marker id="vax-mod-arr-warn" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
-            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C7FF35" fillOpacity="0.40" />
+            <path d="M0,0.5 L5,2.5 L0,4.5 Z" fill="#C7FF35" fillOpacity="0.45" />
           </marker>
         </defs>
 
-        <rect width="680" height="300" rx="16" fill="url(#vax-mod-bg)" />
-        <rect width="680" height="300" rx="16" fill="url(#vax-cross)" />
+        <rect width="680" height="340" rx="16" fill="url(#vax-mod-bg)" />
+        <rect width="680" height="340" rx="16" fill="url(#vax-cross)" />
 
         {/* Header */}
-        <text x="16" y="20" fontSize="6" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace" fontWeight="500" letterSpacing="2">
+        <text x="16" y="20" fontSize="7" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" fontWeight="500" letterSpacing="2">
           MODELING APPROACH
         </text>
-        <line x1="16" y1="26" x2="664" y2="26" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.10" />
+        <line x1="16" y1="28" x2="664" y2="28" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.10" />
 
         {/* ── Row 1: Predictor chips ──────────────────────────────────────── */}
-        <rect x="55"  y="34" width="160" height="26" rx="6" fill="#D9D1FF" fillOpacity="0.07" stroke="#D9D1FF" strokeWidth="0.6" strokeOpacity="0.30" />
-        <text x="135" y="44" fontSize="7"   fill="#D9D1FF" fillOpacity="0.82" fontFamily="monospace" fontWeight="bold" textAnchor="middle">INSURANCE</text>
-        <text x="135" y="55" fontSize="4.5" fill="#D9D1FF" fillOpacity="0.38" fontFamily="monospace" textAnchor="middle">HIQ011</text>
+        <rect x="55"  y="34" width="160" height="28" rx="6" fill="#D9D1FF" fillOpacity="0.08" stroke="#D9D1FF" strokeWidth="0.7" strokeOpacity="0.35" />
+        <text x="135" y="46" fontSize="8"   fill="#D9D1FF" fillOpacity="0.88" fontFamily="monospace" fontWeight="bold" textAnchor="middle">INSURANCE</text>
+        <text x="135" y="57" fontSize="6"   fill="#D9D1FF" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">HIQ011</text>
 
-        <rect x="260" y="34" width="160" height="26" rx="6" fill="#F1D7E4" fillOpacity="0.07" stroke="#F1D7E4" strokeWidth="0.6" strokeOpacity="0.30" />
-        <text x="340" y="44" fontSize="7"   fill="#F1D7E4" fillOpacity="0.82" fontFamily="monospace" fontWeight="bold" textAnchor="middle">FAMILY SAVINGS</text>
-        <text x="340" y="55" fontSize="4.5" fill="#F1D7E4" fillOpacity="0.38" fontFamily="monospace" textAnchor="middle">IND310 · economic proxy</text>
+        <rect x="260" y="34" width="160" height="28" rx="6" fill="#F1D7E4" fillOpacity="0.08" stroke="#F1D7E4" strokeWidth="0.7" strokeOpacity="0.35" />
+        <text x="340" y="46" fontSize="8"   fill="#F1D7E4" fillOpacity="0.88" fontFamily="monospace" fontWeight="bold" textAnchor="middle">FAMILY SAVINGS</text>
+        <text x="340" y="57" fontSize="6"   fill="#F1D7E4" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">IND310 · economic proxy</text>
 
-        <rect x="465" y="34" width="160" height="26" rx="6" fill="#C9F2EE" fillOpacity="0.07" stroke="#C9F2EE" strokeWidth="0.6" strokeOpacity="0.30" />
-        <text x="545" y="44" fontSize="7"   fill="#C9F2EE" fillOpacity="0.82" fontFamily="monospace" fontWeight="bold" textAnchor="middle">EDUCATION</text>
-        <text x="545" y="55" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace" textAnchor="middle">DMDEDUC2</text>
+        <rect x="465" y="34" width="160" height="28" rx="6" fill="#C9F2EE" fillOpacity="0.08" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.35" />
+        <text x="545" y="46" fontSize="8"   fill="#C9F2EE" fillOpacity="0.88" fontFamily="monospace" fontWeight="bold" textAnchor="middle">EDUCATION</text>
+        <text x="545" y="57" fontSize="6"   fill="#C9F2EE" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">DMDEDUC2</text>
 
         {/* Arrows: chips → merge box */}
-        <line x1="135" y1="60" x2="135" y2="72" stroke="#D9D1FF" strokeWidth="0.7" strokeOpacity="0.20" markerEnd="url(#vax-mod-arr)" />
-        <line x1="340" y1="60" x2="340" y2="72" stroke="#F1D7E4" strokeWidth="0.7" strokeOpacity="0.20" markerEnd="url(#vax-mod-arr)" />
-        <line x1="545" y1="60" x2="545" y2="72" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.20" markerEnd="url(#vax-mod-arr)" />
+        <line x1="135" y1="62" x2="135" y2="78" stroke="#D9D1FF" strokeWidth="0.8" strokeOpacity="0.25" markerEnd="url(#vax-mod-arr)" />
+        <line x1="340" y1="62" x2="340" y2="78" stroke="#F1D7E4" strokeWidth="0.8" strokeOpacity="0.25" markerEnd="url(#vax-mod-arr)" />
+        <line x1="545" y1="62" x2="545" y2="78" stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.25" markerEnd="url(#vax-mod-arr)" />
 
         {/* ── Row 2: Merge & recode ───────────────────────────────────────── */}
-        <rect x="95" y="74" width="490" height="28" rx="7" fill="#C9F2EE" fillOpacity="0.06" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.28" />
-        <text x="340" y="85" fontSize="6.5" fill="#C9F2EE" fillOpacity="0.72" fontFamily="monospace" fontWeight="500" textAnchor="middle">MERGE &amp; BINARY RECODE</text>
-        <text x="340" y="96" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.28" fontFamily="monospace" textAnchor="middle">Left join on SEQN · Complete-case filter · All variables recoded to binary 1/2</text>
+        <rect x="95" y="80" width="490" height="36" rx="7" fill="#C9F2EE" fillOpacity="0.07" stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.32" />
+        <text x="340" y="96" fontSize="7.5" fill="#C9F2EE" fillOpacity="0.82" fontFamily="monospace" fontWeight="500" textAnchor="middle">MERGE &amp; BINARY RECODE</text>
+        <text x="340" y="109" fontSize="6" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" textAnchor="middle">Left join on SEQN · Complete-case filter · All variables recoded to binary 1/2</text>
 
         {/* Arrow → SMOTE */}
-        <line x1="340" y1="102" x2="340" y2="114" stroke="#C7FF35" strokeWidth="0.7" strokeOpacity="0.22" markerEnd="url(#vax-mod-arr-warn)" />
+        <line x1="340" y1="116" x2="340" y2="130" stroke="#C7FF35" strokeWidth="0.8" strokeOpacity="0.28" markerEnd="url(#vax-mod-arr-warn)" />
 
         {/* ── Row 3: SMOTE (caution) ──────────────────────────────────────── */}
-        <rect x="95" y="116" width="490" height="28" rx="7" fill="#C7FF35" fillOpacity="0.06" stroke="#C7FF35" strokeWidth="0.7" strokeOpacity="0.40" />
-        <text x="340" y="127" fontSize="6.5" fill="#C7FF35" fillOpacity="0.78" fontFamily="monospace" fontWeight="500" textAnchor="middle">SMOTE CLASS BALANCING</text>
-        <text x="340" y="138" fontSize="4.5" fill="#C7FF35" fillOpacity="0.38" fontFamily="monospace" textAnchor="middle">K=5 nearest neighbors · dup_size=2 · smotefamily</text>
+        <rect x="95" y="132" width="490" height="36" rx="7" fill="#C7FF35" fillOpacity="0.06" stroke="#C7FF35" strokeWidth="0.8" strokeOpacity="0.45" />
+        <text x="340" y="148" fontSize="7.5" fill="#C7FF35" fillOpacity="0.88" fontFamily="monospace" fontWeight="500" textAnchor="middle">SMOTE CLASS BALANCING</text>
+        <text x="340" y="161" fontSize="6" fill="#C7FF35" fillOpacity="0.55" fontFamily="monospace" textAnchor="middle">K=5 nearest neighbors · dup_size=2 · smotefamily</text>
 
         {/* Caution indicator */}
-        <circle cx="574" cy="124" r="7" fill="#C7FF35" fillOpacity="0.12" stroke="#C7FF35" strokeWidth="0.6" strokeOpacity="0.55" />
-        <text x="574" y="128" fontSize="8" fill="#C7FF35" fillOpacity="0.85" fontFamily="monospace" fontWeight="bold" textAnchor="middle">!</text>
+        <circle cx="574" cy="142" r="8" fill="#C7FF35" fillOpacity="0.12" stroke="#C7FF35" strokeWidth="0.7" strokeOpacity="0.60" />
+        <text x="574" y="147" fontSize="9" fill="#C7FF35" fillOpacity="0.90" fontFamily="monospace" fontWeight="bold" textAnchor="middle">!</text>
 
         {/* Leakage note */}
-        <text x="340" y="156" fontSize="4.5" fill="#C7FF35" fillOpacity="0.48" fontFamily="monospace" textAnchor="middle">
+        <text x="340" y="182" fontSize="6" fill="#C7FF35" fillOpacity="0.62" fontFamily="monospace" textAnchor="middle">
           ! Applied to full dataset before 70/30 split. Introduces potential information leakage.
         </text>
 
         {/* Branching arrows → two model boxes */}
-        <path d="M 340,160 L 340,170 L 190,170 L 190,180" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.18" fill="none" markerEnd="url(#vax-mod-arr)" />
-        <path d="M 340,160 L 340,170 L 490,170 L 490,180" stroke="#F1D7E4" strokeWidth="0.7" strokeOpacity="0.18" fill="none" markerEnd="url(#vax-mod-arr)" />
+        <path d="M 340,188 L 340,200 L 190,200 L 190,210" stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.22" fill="none" markerEnd="url(#vax-mod-arr)" />
+        <path d="M 340,188 L 340,200 L 490,200 L 490,210" stroke="#F1D7E4" strokeWidth="0.8" strokeOpacity="0.22" fill="none" markerEnd="url(#vax-mod-arr)" />
 
         {/* ── Row 4: Model boxes ──────────────────────────────────────────── */}
-        <rect x="90" y="182" width="200" height="38" rx="7" fill="#C9F2EE" fillOpacity="0.06" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.28" />
-        <text x="190" y="195" fontSize="7"   fill="#C9F2EE" fillOpacity="0.78" fontFamily="monospace" fontWeight="bold" textAnchor="middle">XGBOOST</text>
-        <text x="190" y="206" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">binary:logistic · max_depth=3</text>
-        <text x="190" y="215" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">eta=0.1 · nrounds=100</text>
+        <rect x="90" y="212" width="200" height="48" rx="7" fill="#C9F2EE" fillOpacity="0.07" stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.32" />
+        <text x="190" y="228" fontSize="7"   fill="#C9F2EE" fillOpacity="0.88" fontFamily="monospace" fontWeight="bold" textAnchor="middle">XGBOOST</text>
+        <text x="190" y="240" fontSize="6"   fill="#C9F2EE" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">binary:logistic · max_depth=3</text>
+        <text x="190" y="250" fontSize="6"   fill="#C9F2EE" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">eta=0.1 · nrounds=100</text>
 
-        <rect x="390" y="182" width="200" height="38" rx="7" fill="#F1D7E4" fillOpacity="0.06" stroke="#F1D7E4" strokeWidth="0.7" strokeOpacity="0.28" />
-        <text x="490" y="195" fontSize="7"   fill="#F1D7E4" fillOpacity="0.78" fontFamily="monospace" fontWeight="bold" textAnchor="middle">LOGISTIC REGRESSION</text>
-        <text x="490" y="206" fontSize="4.5" fill="#F1D7E4" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">glm · binomial family</text>
-        <text x="490" y="215" fontSize="4.5" fill="#F1D7E4" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">coefficient-based importance</text>
+        <rect x="390" y="212" width="200" height="48" rx="7" fill="#F1D7E4" fillOpacity="0.07" stroke="#F1D7E4" strokeWidth="0.8" strokeOpacity="0.32" />
+        <text x="490" y="228" fontSize="7"   fill="#F1D7E4" fillOpacity="0.88" fontFamily="monospace" fontWeight="bold" textAnchor="middle">LOGISTIC REGRESSION</text>
+        <text x="490" y="240" fontSize="6"   fill="#F1D7E4" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">glm · binomial family</text>
+        <text x="490" y="250" fontSize="6"   fill="#F1D7E4" fillOpacity="0.52" fontFamily="monospace" textAnchor="middle">coefficient-based importance</text>
 
         {/* T-connector: two model boxes → evaluation */}
-        <path d="M 190,220 L 190,234 L 490,234 L 490,220" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.16" fill="none" />
-        <line x1="340" y1="234" x2="340" y2="244" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.22" markerEnd="url(#vax-mod-arr)" />
+        <path d="M 190,260 L 190,274 L 490,274 L 490,260" stroke="#C9F2EE" strokeWidth="0.7" strokeOpacity="0.20" fill="none" />
+        <line x1="340" y1="274" x2="340" y2="284" stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.28" markerEnd="url(#vax-mod-arr)" />
 
         {/* ── Row 5: Evaluation ───────────────────────────────────────────── */}
-        <rect x="95" y="246" width="490" height="26" rx="6" fill="#D9D1FF" fillOpacity="0.06" stroke="#D9D1FF" strokeWidth="0.6" strokeOpacity="0.24" />
-        <text x="340" y="257" fontSize="6.5" fill="#D9D1FF" fillOpacity="0.70" fontFamily="monospace" fontWeight="500" textAnchor="middle">EVALUATION (POST-SMOTE SPLIT)</text>
-        <text x="340" y="267" fontSize="4.5" fill="#D9D1FF" fillOpacity="0.28" fontFamily="monospace" textAnchor="middle">Confusion matrix · Accuracy · Precision · Recall · F1 · Feature importance</text>
+        <rect x="95" y="286" width="490" height="30" rx="6" fill="#D9D1FF" fillOpacity="0.07" stroke="#D9D1FF" strokeWidth="0.7" strokeOpacity="0.28" />
+        <text x="340" y="301" fontSize="7.5" fill="#D9D1FF" fillOpacity="0.82" fontFamily="monospace" fontWeight="500" textAnchor="middle">EVALUATION (POST-SMOTE SPLIT)</text>
+        <text x="340" y="312" fontSize="6"   fill="#D9D1FF" fillOpacity="0.48" fontFamily="monospace" textAnchor="middle">Confusion matrix · Accuracy · Precision · Recall · F1 · Feature importance</text>
 
         {/* Footer */}
-        <line x1="16" y1="282" x2="664" y2="282" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.08" />
-        <text x="340" y="292" fontSize="4.5" fill="#C7FF35" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">
+        <line x1="16" y1="326" x2="664" y2="326" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.08" />
+        <text x="340" y="335" fontSize="6" fill="#C7FF35" fillOpacity="0.50" fontFamily="monospace" textAnchor="middle">
           ! Diagram documents the original course workflow. See Limitations for methodological notes.
         </text>
       </svg>

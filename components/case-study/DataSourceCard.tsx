@@ -57,7 +57,7 @@ export function DataSourceCard({ source, className }: DataSourceCardProps) {
       )}
 
       {/* Notes */}
-      <p className="border-t border-white/[0.06] pt-3 text-[10px] leading-relaxed text-white/38">
+      <p className="mt-1 border-t border-white/[0.06] pt-4 text-[11px] leading-relaxed text-white/65">
         {source.notes}
       </p>
     </div>

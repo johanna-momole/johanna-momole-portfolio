@@ -188,28 +188,36 @@ export const rweStudioCaseStudy: CaseStudy = {
 
   outputPreviews: [
     {
-      id: "picot-interface",
-      title: "PICOT and Cohort Definition Interface",
+      id: "rwe-attrition-funnel",
+      title: "Cohort Attrition Funnel",
       description:
-        "Structured input interface for decomposing clinical questions into Population, Intervention, Comparator, Outcome, and Time components. Illustrative interface layout. Example criteria shown.",
-      visualType: "picot-interface",
-      isPlaceholder: true,
+        "This view shows how the study population narrows step by step from all available patients in the OMOP CDM source to the final analysis cohort, documenting the number removed at each eligibility and design criterion. Each step is traceable back to the upstream cohort specification.",
+      visualType: "rwe-attrition-funnel",
+      isPlaceholder: false,
     },
     {
-      id: "sql-workspace",
+      id: "rwe-sql-workspace",
       title: "Generated SQL Workspace",
       description:
-        "SQL generation output targeting OMOP CDM tables. Query logic reflects the cohort criteria entered in the definition stage. Illustrative SQL. Does not reference a real database or patient population.",
-      visualType: "sql-preview",
-      isPlaceholder: true,
+        "This panel shows how the dashboard translates a structured cohort definition into OMOP CDM-compliant SQL, including the new-user design logic, concept set references, and observation period constraints. The generated query is reproducible and versioned — the same cohort specification produces the same SQL on any compatible data source.",
+      visualType: "rwe-sql-workspace",
+      isPlaceholder: false,
     },
     {
-      id: "cohort-diagnostics",
-      title: "Cohort Diagnostics Interface",
+      id: "rwe-baseline-balance",
+      title: "Cohort Diagnostics: Baseline Balance",
       description:
-        "Cohort characterization output including attrition tracking, covariate distribution, and baseline balance summary across exposure groups. Diagnostic preview. Layout shown, values illustrative.",
-      visualType: "bar-chart",
-      isPlaceholder: true,
+        "This output checks whether the two study groups are comparable at baseline after propensity score matching. Each covariate is plotted twice: open circles show the imbalance before matching and filled circles show the residual difference after. Points to the left of the threshold line indicate acceptable balance.",
+      visualType: "rwe-baseline-balance",
+      isPlaceholder: false,
+    },
+    {
+      id: "rwe-evidence-brief",
+      title: "Evidence Brief Summary",
+      description:
+        "This summary condenses the full analysis into a short, decision-ready brief that highlights the study question, population, result, confidence interval, and key interpretation notes. It is designed for audiences who need the main finding and its context without reviewing the full analytic output.",
+      visualType: "rwe-evidence-brief",
+      isPlaceholder: false,
     },
   ],
 

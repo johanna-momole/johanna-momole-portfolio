@@ -25,7 +25,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
       {/* Visual */}
       <div className="relative aspect-[8/5] w-full shrink-0 overflow-hidden">
         <div className="absolute inset-0 z-10 ring-1 ring-inset ring-white/5" aria-hidden="true" />
-        <ProjectVisual variant={project.visual} className="h-full w-full" />
+        <ProjectVisual variant={project.visual} context="compact" className="h-full w-full" />
       </div>
 
       {/* Content */}

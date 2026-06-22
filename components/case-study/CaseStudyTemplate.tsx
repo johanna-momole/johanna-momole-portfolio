@@ -241,8 +241,11 @@ export function CaseStudyTemplate({
                   </div>
                 )}
 
-                {/* Source cards */}
-                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {/* Source cards — single source spans full width */}
+                <div className={cn(
+                  "mt-6 grid gap-4",
+                  cs.dataSources.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"
+                )}>
                   {cs.dataSources.map((source) => (
                     <DataSourceCard key={source.acronym} source={source} />
                   ))}
@@ -307,9 +310,9 @@ export function CaseStudyTemplate({
                       <div className="min-w-0 flex-1">
                         <div className="mb-1 flex flex-wrap items-baseline gap-3">
                           <span className="text-xs font-semibold text-white/75">{step.label}</span>
-                          <span className="text-[10px] text-white/30">{step.output}</span>
+                          <span className="text-[10px] text-white/45">{step.output}</span>
                         </div>
-                        <p className="text-xs leading-relaxed text-white/50">{step.description}</p>
+                        <p className="text-xs leading-relaxed text-white/62">{step.description}</p>
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           {step.tech.map((t) => (
                             <span

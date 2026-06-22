@@ -57,6 +57,10 @@ export type OutputPreview = {
     | "sql-preview"
     | "network"
     | "matrix"
+    | "rwe-attrition-funnel"
+    | "rwe-sql-workspace"
+    | "rwe-baseline-balance"
+    | "rwe-evidence-brief"
   isPlaceholder: boolean
   imageSrc?: string
   imageAlt?: string

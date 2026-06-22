@@ -264,6 +264,187 @@ function SignalVisual({ className }: { className?: string }) {
   )
 }
 
+/* ─── Signal compact (GLP-1) — single landscape overview ──────────────────── */
+function SignalVisualCompact({ className }: { className?: string }) {
+  // Pre-computed log-scale x-coords: x = 38 + (log(ROR) - log(0.5)) / (log(3.5) - log(0.5)) * 137
+  // NULL_X (ROR=1.0) = 87, axis ticks: 0.5→38, 1.0→87, 2.0→136, 3.0→164
+  const NULL_X = 87
+  const forestRows = [
+    { label: "SEMA",  ror: 130, lo: 111, hi: 149, sig: true,  color: "#C9F2EE", rorLabel: "1.85" },
+    { label: "LIRA",  ror: 116, lo:  98, hi: 134, sig: true,  color: "#C9F2EE", rorLabel: "1.52" },
+    { label: "DULA",  ror: 104, lo:  84, hi: 125, sig: false, color: "#C9F2EE", rorLabel: "1.28" },
+    { label: "EXEN",  ror: 123, lo: 105, hi: 141, sig: true,  color: "#C9F2EE", rorLabel: "1.67" },
+    { label: "TIRZE", ror: 142, lo: 126, hi: 157, sig: true,  color: "#D9D1FF", rorLabel: "2.18" },
+  ]
+
+  const sexEvents     = ["GI", "META", "ENDO", "CARD"]
+  const femaleSignals = [0.80, 0.45, 0.62, 1.00]
+  const maleSignals   = [0.50, 0.92, 0.30, 0.70]
+
+  // Trend x/y mapped to: x 34–340, y 160 (high/Q4'24) → 210 (low/Q1'21)
+  const trendPts = [
+    { x:  34, y: 210 },
+    { x: 119, y: 194 },
+    { x: 220, y: 178 },
+    { x: 340, y: 160 },
+  ]
+
+  return (
+    <svg
+      viewBox="0 0 360 230"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={cn("w-full h-full", className)}
+    >
+      <defs>
+        <radialGradient id="sig-c-bg" cx="30%" cy="20%" r="90%">
+          <stop offset="0%" stopColor="#152430" />
+          <stop offset="100%" stopColor="#090B0C" />
+        </radialGradient>
+      </defs>
+
+      <rect width="360" height="230" fill="url(#sig-c-bg)" rx="12" />
+
+      {/* Subtle grid */}
+      <g stroke="#C9F2EE" strokeWidth="0.4" opacity="0.04">
+        {[50, 100, 150, 200].map((y) => (
+          <line key={y} x1="0" y1={y} x2="360" y2={y} />
+        ))}
+        {[90, 180, 270].map((x) => (
+          <line key={x} x1={x} y1="0" x2={x} y2="230" />
+        ))}
+      </g>
+
+      {/* ════ HEADER (y 0–25) ════ */}
+      <text x="14" y="13" fontSize="6.5" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" fontWeight="500" letterSpacing="1">FAERS SIGNAL ANALYSIS</text>
+      <rect x="268" y="4" width="78" height="14" rx="7" fill="#C9F2EE" fillOpacity="0.08" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.25" />
+      <text x="307" y="13" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.72" fontFamily="monospace" textAnchor="middle">COMPLETED</text>
+      <text x="14" y="21" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.22" fontFamily="monospace">GLP-1 · 18.5M+ FAERS RECORDS · 5 AGENTS · 2021–2024</text>
+      <rect x="0" y="25" width="360" height="0.5" fill="#C9F2EE" fillOpacity="0.08" />
+
+      {/* ════ LEFT: ROR Forest Plot (x 0–190, y 25–140) ════ */}
+      <text x="14" y="35" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">ROR DISPROPORTIONALITY (95% CI)</text>
+      <rect x="14" y="38" width="168" height="0.4" fill="#C9F2EE" fillOpacity="0.06" />
+
+      {/* Null line + axis */}
+      <line x1={NULL_X} y1="42" x2={NULL_X} y2="126" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.20" strokeDasharray="2,2" />
+      <line x1="38" y1="126" x2="175" y2="126" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.14" />
+      {[
+        { x: 38,  label: "0.5" },
+        { x: 87,  label: "1.0" },
+        { x: 136, label: "2.0" },
+        { x: 164, label: "3.0" },
+      ].map(({ x, label }) => (
+        <g key={label}>
+          <line x1={x} y1="124" x2={x} y2="128" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.18" />
+          <text x={x} y="135" fontSize="4" fill="#C9F2EE" fillOpacity="0.22" fontFamily="monospace" textAnchor="middle">{label}</text>
+        </g>
+      ))}
+
+      {/* Forest rows — row spacing 15px starting at y=53 */}
+      {forestRows.map(({ label, ror, lo, hi, sig, color, rorLabel }, i) => {
+        const rowY    = 53 + i * 15
+        const isTirze = color === "#D9D1FF"
+        const ptFill  = isTirze ? "#C7FF35" : "#C9F2EE"
+        const ptOpac  = isTirze ? 0.90 : (sig ? 0.65 : 0.28)
+        return (
+          <g key={label}>
+            <text x="14" y={rowY + 3} fontSize="5" fill={color} fillOpacity={isTirze ? 0.72 : 0.45} fontFamily="monospace">{label}</text>
+            <line x1={lo} y1={rowY} x2={hi} y2={rowY} stroke={color} strokeWidth="0.8" strokeOpacity={sig ? 0.50 : 0.22} />
+            <line x1={lo} y1={rowY - 2.5} x2={lo} y2={rowY + 2.5} stroke={color} strokeWidth="0.8" strokeOpacity={sig ? 0.45 : 0.18} />
+            <line x1={hi} y1={rowY - 2.5} x2={hi} y2={rowY + 2.5} stroke={color} strokeWidth="0.8" strokeOpacity={sig ? 0.45 : 0.18} />
+            <polygon
+              points={`${ror},${rowY - 3.5} ${ror + 3.5},${rowY} ${ror},${rowY + 3.5} ${ror - 3.5},${rowY}`}
+              fill={ptFill} fillOpacity={ptOpac}
+            />
+            <text x={hi + 4} y={rowY + 3} fontSize="3.5" fill={color} fillOpacity={isTirze ? 0.58 : 0.30} fontFamily="monospace">{rorLabel}</text>
+          </g>
+        )
+      })}
+
+      {/* Column separator */}
+      <line x1="190" y1="26" x2="190" y2="139" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.10" />
+
+      {/* ════ RIGHT: Sex-Stratified Signals (x 195–360, y 25–140) ════ */}
+      <text x="200" y="35" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">SEX-STRATIFIED SIGNALS</text>
+      <rect x="200" y="38" width="152" height="0.4" fill="#C9F2EE" fillOpacity="0.06" />
+
+      <text x="248" y="49" fontSize="6" fill="#D9D1FF" fillOpacity="0.65" fontFamily="monospace" textAnchor="middle">FEMALE</text>
+      <text x="325" y="49" fontSize="6" fill="#C9F2EE" fillOpacity="0.65" fontFamily="monospace" textAnchor="middle">MALE</text>
+      <line x1="285" y1="40" x2="285" y2="132" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.10" />
+
+      {/* Bubble rows — row spacing 17px starting at y=65 */}
+      {sexEvents.map((evt, i) => {
+        const rowY = 65 + i * 17
+        const fv   = femaleSignals[i]
+        const mv   = maleSignals[i]
+        const fMax = fv >= 0.95
+        const mMax = mv >= 0.85
+        return (
+          <g key={evt}>
+            <text x="200" y={rowY + 3} fontSize="5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">{evt}</text>
+            <circle cx="248" cy={rowY} r={3 + fv * 6}
+              fill={fMax ? "#C7FF35" : "#D9D1FF"}
+              fillOpacity={fMax ? 0.88 : 0.22 + fv * 0.45}
+            />
+            {fMax && <circle cx="248" cy={rowY} r={3 + fv * 6 + 3} fill="#C7FF35" fillOpacity="0.08" />}
+            <circle cx="325" cy={rowY} r={3 + mv * 6}
+              fill={mMax ? "#C7FF35" : "#C9F2EE"}
+              fillOpacity={mMax ? 0.88 : 0.20 + mv * 0.42}
+            />
+            {mMax && <circle cx="325" cy={rowY} r={3 + mv * 6 + 3} fill="#C7FF35" fillOpacity="0.08" />}
+          </g>
+        )
+      })}
+
+      <text x="200" y="137" fontSize="3.5" fill="#C9F2EE" fillOpacity="0.18" fontFamily="monospace">Bubble radius = relative signal strength</text>
+
+      {/* Row divider */}
+      <rect x="0" y="140" width="360" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      {/* ════ QUARTERLY TREND (y 140–222) ════ */}
+      <text x="14" y="151" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">QUARTERLY SIGNAL TREND</text>
+      <rect x="14" y="154" width="332" height="0.4" fill="#C9F2EE" fillOpacity="0.06" />
+
+      <line x1="32" y1="160" x2="32" y2="210" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.10" />
+
+      {/* Trend area + line */}
+      <path
+        d="M34,210 C62,205 94,199 119,194 C152,189 187,183 220,178 C260,172 300,166 340,160 L340,210 L34,210 Z"
+        fill="#C9F2EE" fillOpacity="0.05"
+      />
+      <path
+        d="M34,210 C62,205 94,199 119,194 C152,189 187,183 220,178 C260,172 300,166 340,160"
+        fill="none" stroke="#C9F2EE" strokeWidth="1.5" strokeOpacity="0.45"
+      />
+
+      {/* Trend points */}
+      {trendPts.map(({ x, y }, i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r={i === 3 ? 4 : 3}
+            fill={i === 3 ? "#C7FF35" : "#C9F2EE"}
+            fillOpacity={i === 3 ? 0.95 : 0.55}
+          />
+          {i === 3 && <circle cx={x} cy={y} r="7" fill="#C7FF35" fillOpacity="0.10" />}
+        </g>
+      ))}
+
+      {/* X-axis + labels */}
+      <line x1="32" y1="210" x2="348" y2="210" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.14" />
+      {[
+        { q: "Q1'21", x:  34 },
+        { q: "Q1'22", x: 119 },
+        { q: "Q1'23", x: 220 },
+        { q: "Q4'24", x: 340 },
+      ].map(({ q, x }) => (
+        <text key={q} x={x} y="218" fontSize="5" fill="#C9F2EE" fillOpacity="0.28" fontFamily="monospace" textAnchor="middle">{q}</text>
+      ))}
+
+      <text x="180" y="226" fontSize="3.8" fill="#C9F2EE" fillOpacity="0.15" fontFamily="monospace" textAnchor="middle">158K+ GLP-1 CASES · ROR · PRR · BH ADJUSTMENT · HYPOTHESIS-GENERATING ONLY</text>
+    </svg>
+  )
+}
+
 /* ─── Cohort (RWE Studio) ──────────────────────────────────────────────────── */
 function CohortVisual({ className }: { className?: string }) {
   return (
@@ -761,11 +942,15 @@ function VaccinationVisual({ className }: { className?: string }) {
 interface ProjectVisualProps {
   variant: ProjectVisualVariant
   className?: string
+  /** "homepage" → tall 5-panel portrait; "compact" → landscape overview */
+  context?: "homepage" | "compact"
 }
 
-export function ProjectVisual({ variant, className }: ProjectVisualProps) {
+export function ProjectVisual({ variant, className, context = "homepage" }: ProjectVisualProps) {
   switch (variant) {
-    case "signal":     return <SignalVisual className={className} />
+    case "signal":     return context === "compact"
+                         ? <SignalVisualCompact className={className} />
+                         : <SignalVisual className={className} />
     case "cohort":     return <CohortVisual className={className} />
     case "referral":   return <ReferralVisual className={className} />
     case "genomics":   return <GenomicsVisual className={className} />
