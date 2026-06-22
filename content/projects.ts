@@ -88,7 +88,7 @@ export const projects: Project[] = [
       "An analytical product translating clinical questions into cohort definitions, generated queries, and interpretable evidence outputs.",
     category: "Analytical Product · Real-World Evidence",
     filterCategory: "Real-World Evidence",
-    status: "Completed",
+    status: "In development",
     date: "",
     role: "Analyst and Developer",
     methods: [

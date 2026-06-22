@@ -186,6 +186,11 @@ export const rweStudioCaseStudy: CaseStudy = {
     },
   ],
 
+  outputLayout: "stacked",
+
+  outputDisclosure:
+    "All analytical outputs shown below are illustrative. Data is entirely synthetic and does not represent real patients, real clinical records, or a completed study. These visuals demonstrate the type of evidence the product is designed to generate.",
+
   outputPreviews: [
     {
       id: "rwe-attrition-funnel",

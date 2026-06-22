@@ -375,10 +375,11 @@ export function CaseStudyTemplate({
               <Reveal delay={0.1}>
                 {(() => {
                   const hasCharts = Boolean(chartRegistry && Object.keys(chartRegistry).length > 0)
+                  const useStacked = hasCharts || cs.outputLayout === "stacked"
                   return (
                     <div className={cn(
                       "mt-6 gap-5",
-                      hasCharts
+                      useStacked
                         ? "flex flex-col"
                         : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                     )}>

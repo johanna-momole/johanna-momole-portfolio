@@ -104,7 +104,7 @@ export default function ContactPage() {
                     Availability
                   </h2>
                   <p className="text-sm leading-relaxed text-white/60">
-                    Graduate study at the University of Pennsylvania completes in May 2026. Available for roles and projects starting around that time, and open to early conversations.
+                    Graduate study at the University of Pennsylvania is complete. Available for full-time roles now and open to early conversations about upcoming opportunities.
                   </p>
                 </div>
               </div>

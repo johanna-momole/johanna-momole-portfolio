@@ -101,4 +101,5 @@ export type CaseStudy = {
   resultsProvenance?: string
   dataSourcesTitle?: string
   outputDisclosure?: string
+  outputLayout?: "grid" | "stacked"
 }
