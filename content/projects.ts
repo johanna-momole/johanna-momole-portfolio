@@ -56,7 +56,7 @@ export const projects: Project[] = [
       "Sex-stratified signal detection across 18.5M+ FDA adverse event records using disproportionality analysis for GLP-1 receptor agonists.",
     category: "Real-World Evidence · Pharmacovigilance",
     filterCategory: "Real-World Evidence",
-    status: "Ongoing",
+    status: "Completed",
     date: "",
     role: "Analyst",
     methods: [
@@ -72,7 +72,7 @@ export const projects: Project[] = [
       { value: "18.5M+", label: "FAERS records harmonized" },
     ],
     image: "",
-    repositoryUrl: "",
+    repositoryUrl: "https://github.com/johanna-momole/glp1-faers-capstone",
     demoUrl: "",
     featured: true,
     hasCaseStudy: true,
@@ -88,7 +88,7 @@ export const projects: Project[] = [
       "An analytical product translating clinical questions into cohort definitions, generated queries, and interpretable evidence outputs.",
     category: "Analytical Product · Real-World Evidence",
     filterCategory: "Real-World Evidence",
-    status: "In development",
+    status: "Completed",
     date: "",
     role: "Analyst and Developer",
     methods: [
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     technologies: ["Python", "SQL", "R", "OMOP CDM"],
     metrics: [],
     image: "",
-    repositoryUrl: "",
+    repositoryUrl: "https://github.com/johanna-momole/real-world-evidence-studio",
     demoUrl: "",
     featured: true,
     hasCaseStudy: true,
@@ -119,7 +119,7 @@ export const projects: Project[] = [
     filterCategory: "Healthcare Analytics",
     status: "Completed",
     date: "",
-    role: "Network & Relation Executive",
+    role: "Network & Relation Executive (Healthcare Analytics & Strategy)",
     methods: [
       "Network analysis",
       "Revenue attribution",
@@ -143,7 +143,7 @@ export const projects: Project[] = [
     title: "Genetic Risk Map",
     shortTitle: "Genetic Risk Map",
     description:
-      "A reproducible Python pipeline for computing gene-level association scores and relative score tiers from MAGMA or GWAS gene-level summary statistics. Built as a portfolio rebuild of BMIN 5100 coursework, with modular source modules, an input validation layer, configurable thresholds, and a 31-test pytest suite. Research and educational use only — outputs are relative rankings within the submitted gene set, not validated clinical risk estimates.",
+      "A reproducible Python pipeline for computing gene-level association scores and relative score tiers from MAGMA or GWAS gene-level summary statistics. Built as a portfolio rebuild of BMIN 5100 coursework, with modular source modules, an input validation layer, configurable thresholds, and a 31-test pytest suite. Research and educational use only. Outputs are relative rankings within the submitted gene set, not validated clinical risk estimates.",
     shortDescription:
       "Reproducible Python pipeline for gene-level association scoring, normalization, and relative tier assignment from MAGMA or GWAS summary statistics.",
     category: "Biomedical Data Science · Pipeline Engineering",
@@ -164,7 +164,7 @@ export const projects: Project[] = [
       { value: "31", label: "Unit tests" },
     ],
     image: "",
-    repositoryUrl: "",
+    repositoryUrl: "https://github.com/johanna-momole/riskmap-genomics",
     demoUrl: "",
     featured: false,
     hasCaseStudy: true,
@@ -175,9 +175,9 @@ export const projects: Project[] = [
     title: "HPV Vaccination Analytics",
     shortTitle: "HPV Analytics",
     description:
-      "A BMIN503/EPID600 course analysis examining whether insurance coverage, family savings, and education level are associated with reported HPV vaccine receipt using NHANES 2021-2023 data. Implements logistic regression and XGBoost with SMOTE class balancing in R. Includes a detailed methodological reflection on the original workflow's limitations and what a more rigorous rebuild would require.",
+      "This BMIN 5030: Data Science for Biomedical Informatics course project examined whether selected access and socioeconomic variables were associated with reported HPV vaccine receipt in NHANES 2021-2023 data. Implements logistic regression and XGBoost with SMOTE class balancing in R. Includes a detailed methodological reflection on the original workflow's limitations and what a more rigorous rebuild would require.",
     shortDescription:
-      "Course analysis of selected access and socioeconomic variables associated with reported HPV vaccine receipt in NHANES 2021-2023 data, using logistic regression and XGBoost in R.",
+      "BMIN 5030: Data Science for Biomedical Informatics course project examining selected access and socioeconomic variables associated with reported HPV vaccine receipt in NHANES 2021-2023 data.",
     category: "Public Health · Machine Learning",
     filterCategory: "Public Health",
     status: "Completed",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
       { value: "2", label: "Models evaluated" },
     ],
     image: "",
-    repositoryUrl: "",
+    repositoryUrl: "https://github.com/johanna-momole/BMIN503_Final_Project",
     demoUrl: "",
     featured: false,
     hasCaseStudy: true,

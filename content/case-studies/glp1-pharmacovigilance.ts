@@ -63,7 +63,7 @@ export const glp1CaseStudy: CaseStudy = {
       scale: "18.5M+ records harmonized",
       tables: ["DEMO", "DRUG", "REAC", "OUTC", "RPSR", "THER", "INDI"],
       notes:
-        "Primary data source. Spontaneous reporting system — results represent reporting signals, not population incidence.",
+        "Primary data source. Spontaneous reporting system. Results represent reporting signals, not population incidence.",
     },
     {
       name: "Medical Dictionary for Regulatory Activities",
@@ -219,30 +219,33 @@ export const glp1CaseStudy: CaseStudy = {
     },
   ],
 
+  outputDisclosure:
+    "Charts below are rendered from actual analysis outputs. Axes, scales, and data values reflect results from the full Q1 2021 through Q4 2024 FAERS run. Results are disproportionality signals only and do not establish causality or population-level incidence.",
+
   outputPreviews: [
     {
-      id: "forest-plot",
-      title: "Forest Plot Preview",
+      id: "sex-ror-scatter",
+      title: "Female vs Male ROR Comparison",
       description:
-        "Reporting Odds Ratio with 95% confidence intervals by adverse event category, stratified by sex. Actual analysis output — findings not shown.",
+        "Each point represents one MedDRA Preferred Term jointly evaluable in both sexes. Points above the dashed diagonal are disproportionately reported more in males; below in females. Color indicates signal classification after Benjamini-Hochberg adjustment.",
       visualType: "forest-plot",
-      isPlaceholder: true,
+      isPlaceholder: false,
     },
     {
       id: "quarterly-trend",
-      title: "Quarterly Reporting Trend",
+      title: "Quarterly Reporting Volume",
       description:
-        "Adverse event reporting volume by quarter (Q1 2021 through Q4 2024) for each exposure drug. Actual analysis output — findings not shown.",
+        "Deduplicated GLP-1 case counts per quarter with reporter-type composition (health professional vs consumer vs other). The right axis shows consumer reporter percentage. Dashed vertical lines mark key FDA approval dates.",
       visualType: "trend-chart",
-      isPlaceholder: true,
+      isPlaceholder: false,
     },
     {
-      id: "data-quality",
-      title: "Data Quality Summary",
+      id: "clinical-groups-forest",
+      title: "Pre-Specified Clinical Group Signals",
       description:
-        "Deduplication rates, missingness by demographic variable, and case count breakdowns by drug and sex stratum. Actual analysis output — findings not shown.",
-      visualType: "table",
-      isPlaceholder: true,
+        "Group-level ROR with 95% CI for seven pre-specified adverse event domains, stratified by sex. Each case counts once per group regardless of number of preferred terms. Comparator = all non-GLP-1 cases in the same sex stratum.",
+      visualType: "forest-plot",
+      isPlaceholder: false,
     },
   ],
 

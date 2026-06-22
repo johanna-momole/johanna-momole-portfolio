@@ -10,26 +10,26 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
   slug: "hpv-vaccination-analytics",
   title: "HPV Vaccination Analytics",
   subtitle:
-    "Exploring selected access and socioeconomic variables associated with reported HPV vaccine receipt in the analyzed NHANES 2021-2023 sample.",
+    "Examining whether selected access and socioeconomic variables were associated with reported HPV vaccine receipt in the analyzed NHANES 2021-2023 sample.",
   positioning:
-    "A BMIN503/EPID600 course analysis examining whether three binary predictors — insurance coverage, family savings, and education level — are associated with reported HPV vaccine receipt in a subset of the NHANES 2021-2023 survey. Logistic regression and XGBoost were compared with SMOTE class balancing. This case study documents both the original analytical workflow and a detailed methodological reflection on what a more rigorous rebuild would require.",
+    "A BMIN 5030: Data Science for Biomedical Informatics course project examining whether three binary predictors (insurance coverage, family savings, and education level) are associated with reported HPV vaccine receipt in a subset of the NHANES 2021-2023 survey. Logistic regression and XGBoost were compared with SMOTE class balancing. This case study documents both the original analytical workflow and a detailed methodological reflection on what a more rigorous rebuild would require.",
   summary: [
-    "This analysis was developed as the final project for BMIN503/EPID600 (Data Science for Biomedical Informatics) at the University of Pennsylvania. It examines three binary predictors — insurance coverage, family savings, and education level — in relation to reported HPV vaccine receipt using data from the NHANES 2021-2023 cycle.",
+    "This project was developed as the final submission for BMIN 5030: Data Science for Biomedical Informatics at the University of Pennsylvania. It examines three binary predictors (insurance coverage, family savings, and education level) in relation to reported HPV vaccine receipt using data from the NHANES 2021-2023 cycle.",
     "Logistic regression and XGBoost were implemented in R as complementary classification approaches. SMOTE was applied to address the class imbalance between vaccinated and non-vaccinated respondents. Feature importance was assessed using XGBoost gain scores and logistic regression coefficients. The analysis was evaluated on a post-SMOTE split, not on an independent held-out sample.",
     "This case study documents the original analytical workflow and its methodological limitations transparently. Because SMOTE was applied before the data split, the reported evaluation metrics should not be treated as externally validated performance estimates. A dedicated section describes what a more rigorous rebuild would require.",
   ],
   researchQuestion:
-    "Which selected access and socioeconomic variables — insurance coverage, family savings, and education level — were associated with reported HPV vaccine receipt in the analyzed NHANES 2021-2023 sample?",
+    "Which selected access and socioeconomic variables (insurance coverage, family savings, and education level) were associated with reported HPV vaccine receipt in the analyzed NHANES 2021-2023 sample?",
   context: {
     motivation:
-      "HPV vaccination rates in the United States remain below recommended targets, with disparities documented across socioeconomic, educational, and insurance-related dimensions. This BMIN503/EPID600 final project applied classification modeling to NHANES survey data to explore whether three selected binary variables showed measurable associations with reported vaccine receipt, and to practice applying machine learning techniques to an observational public-health dataset.",
+      "HPV vaccination rates in the United States remain below recommended targets, with disparities documented across socioeconomic, educational, and insurance-related dimensions. This BMIN 5030: Data Science for Biomedical Informatics final project applied classification modeling to NHANES survey data to explore whether three selected binary variables showed measurable associations with reported vaccine receipt, and to practice applying machine learning techniques to an observational public-health dataset.",
     background:
       "The National Health and Nutrition Examination Survey (NHANES) combines interview and physical examination data from a nationally representative sample of the United States civilian non-institutionalized population. The 2021-2023 data collection used the questionnaire module IMQ_L for immunization status and additional modules for insurance, income-related measures, and demographics. Because the HPV vaccination question (IMQ060) is directed at female participants and the education variable (DMDEDUC2) is collected only for participants aged 20 and older, the complete-case analytical dataset used in this project effectively represents female NHANES 2021-2023 respondents in the 20-to-49 age range with non-missing values on all four included variables. The original survey uses a complex sample design with clustering and stratification; this analysis did not apply survey design weights or design variables, which means the results cannot be generalized as nationally representative estimates.",
   },
   role: {
     title: "Analyst",
     summary:
-      "BMIN503/EPID600 final course project. Responsible for the full analytical workflow: variable selection, dataset construction, recoding, class balancing, model training, evaluation, and interpretation. Faculty consulted during development: Dr. Fuchiang Tsui (variable selection and data complexity) and Dr. Jesse Hsu (statistical modeling approaches), as acknowledged in the project documentation.",
+      "BMIN 5030: Data Science for Biomedical Informatics final course project. Responsible for the full analytical workflow: variable selection, dataset construction, recoding, class balancing, model training, evaluation, and interpretation. Faculty consulted during development: Dr. Fuchiang Tsui (variable selection and data complexity) and Dr. Jesse Hsu (statistical modeling approaches), as acknowledged in the project documentation.",
     responsibilities: [
       "Identify and load four NHANES 2021-2023 data modules using the nhanesA R package",
       "Merge modules on the NHANES sequence number (SEQN) and apply a complete-case filter",
@@ -166,34 +166,52 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
   ],
   outputPreviews: [
     {
-      id: "vaccination-status",
+      id: "hpv-vaccination-status",
       title: "Distribution of Reported HPV Vaccine Receipt",
       description:
-        "Frequency distribution of the binary outcome variable from the original course analysis. The final complete-case dataset before SMOTE contained 829 respondents: 323 who reported receiving an HPV vaccine and 506 who reported not receiving one (confirmed from the rendered table output in the original course submission). This distribution precedes SMOTE balancing.",
+        "Frequency distribution of the binary outcome variable. N=829 pre-SMOTE analytical sample, confirmed from the rendered table output in the original course submission.",
       visualType: "bar-chart",
       isPlaceholder: false,
-      imageSrc: "/images/case-studies/hpv-vaccination-analytics/hpv-vaccination-status.png",
-      imageAlt:
-        "Bar chart showing the frequency distribution of reported HPV vaccine receipt in the original NHANES 2021-2023 analytical dataset: 323 respondents reported receiving an HPV vaccine and 506 reported not receiving one (N=829 before SMOTE)",
     },
     {
-      id: "feature-importance-xgboost",
+      id: "hpv-insurance-coverage",
+      title: "Health Insurance Coverage",
+      description:
+        "Distribution of insurance coverage in the analytical sample. Covered (n=721) versus Not Covered (n=108).",
+      visualType: "bar-chart",
+      isPlaceholder: false,
+    },
+    {
+      id: "hpv-family-savings",
+      title: "Family Savings Level",
+      description:
+        "Distribution of the family savings variable (IND310). Less than $3,000 (n=582) versus $3,000 or more (n=247).",
+      visualType: "bar-chart",
+      isPlaceholder: false,
+    },
+    {
+      id: "hpv-education-level",
+      title: "Education Level",
+      description:
+        "Distribution of education level in the analytical sample. Below College (n=286) versus College or Above (n=543).",
+      visualType: "bar-chart",
+      isPlaceholder: false,
+    },
+    {
+      id: "hpv-feature-importance",
       title: "XGBoost Feature Importance (Gain)",
       description:
-        "Feature importance by gain from the XGBoost model fitted in the original course analysis. Gain measures the average improvement in the loss function contributed by each feature across all decision tree splits. The three predictors shown are Insurance (HIQ011), Family Savings (IND310), and Education (DMDEDUC2). This plot reflects the fitted model on one training split and does not establish causal relationships between predictors and vaccine receipt. Stability of these rankings is limited by the small predictor set and the evaluation design described in the Limitations section.",
+        "Feature importance by gain from the XGBoost model. Education ranked highest, followed by Insurance coverage and Family Savings.",
       visualType: "bar-chart",
       isPlaceholder: false,
-      imageSrc: "/images/case-studies/hpv-vaccination-analytics/feature-importance-xgboost.png",
-      imageAlt:
-        "Horizontal bar chart showing XGBoost feature importance by gain for the three predictors: Insurance, Family Savings, and Education, from the original BMIN503 course analysis",
     },
     {
-      id: "model-comparison",
-      title: "Model Evaluation Framework",
+      id: "hpv-logi-coefficients",
+      title: "Logistic Regression: Predictor Direction",
       description:
-        "Illustrative representation of the two-model evaluation design. Both XGBoost and logistic regression were evaluated on the same post-SMOTE 30% evaluation split using the same binary outcome and three predictors. Numerical metrics are documented in the Limitations section with appropriate methodological context.",
-      visualType: "table",
-      isPlaceholder: true,
+        "Direction of association between each predictor and HPV vaccination likelihood in the logistic regression model.",
+      visualType: "bar-chart",
+      isPlaceholder: false,
     },
   ],
   dataQualityMeasures: [
@@ -251,7 +269,7 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
       description:
         "The education variable (DMDEDUC2) is collected only for NHANES participants aged 20 and older. Because the complete-case filter required non-missing education data, the analytical sample was effectively restricted to female respondents aged 20 to 49, even though IMQ060 covers ages 9 to 49. Respondents aged 9 to 19 would have missing DMDEDUC2 values and were excluded.",
       mitigation:
-        "The population is described as 'female NHANES respondents ages 20 to 49 with complete data on all four modeled variables' — the 20-year lower bound is derived from the DMDEDUC2 variable scope (collected only for participants 20 and older), not estimated visually.",
+        "The population is described as 'female NHANES respondents ages 20 to 49 with complete data on all four modeled variables.' The 20-year lower bound is derived from the DMDEDUC2 variable scope (collected only for participants 20 and older), not estimated visually.",
     },
     {
       id: "family-savings-proxy",
@@ -289,7 +307,7 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
       id: "small-predictor-set",
       title: "Small and selected predictor set",
       description:
-        "The final models included only three predictors: insurance coverage, family savings, and education level. Factors documented in the broader literature on HPV vaccination — including age, race, ethnicity, geographic region, provider recommendation, and parental attitudes — were not included in the model. The analytical dataset also contained no sex or age variables in the final model specification.",
+        "The final models included only three predictors: insurance coverage, family savings, and education level. Factors documented in the broader literature on HPV vaccination (including age, race, ethnicity, geographic region, provider recommendation, and parental attitudes) were not included in the model. The analytical dataset also contained no sex or age variables in the final model specification.",
       mitigation:
         "Results are framed as patterns associated with the three selected variables, not as comprehensive explanations of HPV vaccine receipt. Unmeasured confounding is acknowledged.",
     },
@@ -313,7 +331,7 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
       id: "rebuild-reflection",
       title: "What I Would Change in a Rebuild",
       description:
-        "This reflection documents the methodological improvements that would be applied in a more rigorous version of this analysis:\n\n1. Split the original complete-case observations first, before any oversampling, to preserve an untouched evaluation set of real survey respondents.\n2. Apply SMOTE only to the training subset, not to the full dataset.\n3. Prefer applying oversampling within each training resample or cross-validation fold rather than once before the loop.\n4. Preserve the held-out evaluation set as strictly unseen data for final reporting.\n5. Use stratified resampling to maintain class proportions across folds.\n6. Report class-specific precision, recall, specificity, and full confusion matrices for both models rather than only accuracy and F1.\n7. Evaluate ROC-AUC and precision-recall AUC as threshold-independent performance summaries.\n8. Examine probability calibration to assess whether predicted probabilities correspond to observed frequencies.\n9. Compare both models against a simple baseline — for example, predicting the majority class for every observation.\n10. Incorporate NHANES survey weights and design variables to produce estimates that are appropriate for population-level inference.\n11. Include age as a predictor or perform age-stratified analyses, given its known association with vaccination likelihood.\n12. Explore a broader predictor set including race, ethnicity, geographic region, and provider access measures.\n13. Perform external or temporal validation before any practical application.",
+        "This reflection documents the methodological improvements that would be applied in a more rigorous version of this analysis:\n\n1. Split the original complete-case observations first, before any oversampling, to preserve an untouched evaluation set of real survey respondents.\n2. Apply SMOTE only to the training subset, not to the full dataset.\n3. Prefer applying oversampling within each training resample or cross-validation fold rather than once before the loop.\n4. Preserve the held-out evaluation set as strictly unseen data for final reporting.\n5. Use stratified resampling to maintain class proportions across folds.\n6. Report class-specific precision, recall, specificity, and full confusion matrices for both models rather than only accuracy and F1.\n7. Evaluate ROC-AUC and precision-recall AUC as threshold-independent performance summaries.\n8. Examine probability calibration to assess whether predicted probabilities correspond to observed frequencies.\n9. Compare both models against a simple baseline, for example predicting the majority class for every observation.\n10. Incorporate NHANES survey weights and design variables to produce estimates that are appropriate for population-level inference.\n11. Include age as a predictor or perform age-stratified analyses, given its known association with vaccination likelihood.\n12. Explore a broader predictor set including race, ethnicity, geographic region, and provider access measures.\n13. Perform external or temporal validation before any practical application.",
       mitigation:
         "This analysis was completed as a course project with the scope and time constraints of an academic submission. The reflection above is presented as evidence of methodological growth, not as a criticism of the original submission's educational value.",
     },
@@ -333,10 +351,10 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
     },
   ],
   lessonsLearned: [
-    "The ordering of preprocessing steps — specifically whether oversampling precedes or follows the train-test split — determines whether evaluation metrics describe model performance on unseen data or on data partially derived from the training distribution. This distinction has a large effect on recall and must be documented explicitly in any analysis that uses synthetic oversampling.",
+    "The ordering of preprocessing steps (specifically whether oversampling precedes or follows the train-test split) determines whether evaluation metrics describe model performance on unseen data or on data partially derived from the training distribution. This distinction has a large effect on recall and must be documented explicitly in any analysis that uses synthetic oversampling.",
     "A model that reports high recall but zero true negatives is not performing well on the classification task; it has collapsed to the positive class. Examining only F1 or accuracy without looking at the full confusion matrix would hide this failure mode.",
     "A small predictor set with high collinearity or shared variance can produce unstable feature importance rankings across model runs. Publishing a single-run importance chart as if it were a stable finding overstates what the analysis demonstrated.",
-    "The variable label in a survey codebook often differs from how a derived variable should be described publicly. IND310 is titled 'Total savings/cash assets for the family' — not a poverty index. Writing accurate public copy required reading the source codebook, not just the variable name that appeared in the analysis.",
+    "The variable label in a survey codebook often differs from how a derived variable should be described publicly. IND310 is titled 'Total savings/cash assets for the family,' not a poverty index. Writing accurate public copy required reading the source codebook, not just the variable name that appeared in the analysis.",
     "Framing an academic course analysis publicly requires an extra layer of precision: distinguishing what the original project claimed from what can be said about it with hindsight and methodological awareness. That reframing is itself a form of professional communication skill.",
   ],
   nextSteps: [
@@ -359,5 +377,5 @@ export const hpvVaccinationCaseStudy: CaseStudy = {
   resultsProvenance:
     "This case study documents the original BMIN503/EPID600 course analysis and its methodological limitations. Because SMOTE was applied before the data split, the reported evaluation metrics should not be interpreted as validated out-of-sample performance. The predictors showed associations with reported HPV vaccine receipt within the analyzed sample, but these patterns cannot be generalized as nationally representative estimates because survey design weights were not applied.",
   outputDisclosure:
-    "The HPV vaccination status distribution and XGBoost feature importance chart are original outputs from the course analysis. The model comparison preview is an illustrative representation of the evaluation framework. Reported evaluation metrics are from the original post-SMOTE split and should be interpreted with the methodological limitations described in the Limitations section.",
+    "All six charts below are native interactive visualizations built from the original course analysis data. Count values for descriptive charts (A through D) are confirmed from the rendered table outputs in the original BMIN 5030 course submission. Feature importance rankings (E) reflect the XGBoost gain ordering reported in the course output; exact gain values are approximate. Logistic regression coefficient directions (F) are qualitative representations based on the feature importance order and expected predictor relationships; exact values were not extracted from the original submission. All reported evaluation metrics should be interpreted with the methodological limitations described below.",
 }

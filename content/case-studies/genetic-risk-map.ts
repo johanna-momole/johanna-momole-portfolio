@@ -45,7 +45,7 @@ export const geneticRiskMapCaseStudy: CaseStudy = {
       name: "MAGMA or GWAS Gene-Level Association Input",
       acronym: "Gene CSV",
       type: "Structured tabular input format",
-      period: "Variable — depends on upstream analysis",
+      period: "Variable (depends on upstream analysis)",
       scale: "Minimum: GENE, BETA, P per row; optional: ZSTAT, SE, NSNPS, GENE_SET",
       notes:
         "The pipeline accepts a comma-separated gene-level association file exported from MAGMA or a compatible gene-level analysis tool. Column names are normalized to uppercase on load, making the format case-insensitive. Required columns are GENE (unique symbol), BETA (effect size), and P (p-value in the range 0 to 1 exclusive-inclusive). Optional columns NSNPS and GENE_SET enable bubble-size encoding in the score map and gene-set breakdown in the JSON summary respectively. Raw input data are never modified.",
@@ -54,7 +54,7 @@ export const geneticRiskMapCaseStudy: CaseStudy = {
       name: "50-Gene Synthetic Example Dataset",
       acronym: "Sample",
       type: "Synthetic example dataset included in the repository",
-      period: "N/A — demonstration input",
+      period: "N/A, demonstration input",
       scale: "50 genes across 6 gene sets",
       notes:
         "The repository includes a 50-gene synthetic example dataset covering six gene sets: Lipid Metabolism, DNA Repair, Cell Cycle Regulation, Inflammatory Response, Neurological Function, and Metabolic Signaling. The dataset uses well-known publicly documented gene symbols (including APOE, TP53, INS, SNCA, and TNF) as demonstration inputs. These gene symbols are used to make the example readable; they do not represent new biological findings or confirmed risk associations. The data values are synthetic and the file is labeled as such in the repository.",
@@ -199,7 +199,7 @@ export const geneticRiskMapCaseStudy: CaseStudy = {
     },
   ],
   dataQualityMeasures: [
-    "Input validation runs before any computation: non-empty check, required column presence, numeric type enforcement for BETA and P, p-value range enforcement, null check on required columns, and gene symbol uniqueness — six checks in order with descriptive error messages at the first failure",
+    "Input validation runs before any computation: non-empty check, required column presence, numeric type enforcement for BETA and P, p-value range enforcement, null check on required columns, and gene symbol uniqueness. Six checks in order with descriptive error messages at the first failure.",
     "Raw input data are never modified: all transformations write new columns or new output files, and data/input/ is treated as read-only by the pipeline",
     "Transformations are deterministic: given the same input CSV and Python environment, the pipeline produces identical outputs on every run",
     "P-values of exactly 0 (MAGMA numerical underflow artifacts) are clamped to 1e-300 before the log transformation as a numerical safeguard to prevent undefined log values, not as a statistical correction",

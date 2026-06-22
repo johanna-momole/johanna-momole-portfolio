@@ -47,6 +47,7 @@ interface CaseStudyTemplateProps {
   caseStudy: CaseStudy
   workflowDiagram?: ReactNode
   methodologyDiagram?: ReactNode
+  chartRegistry?: Record<string, ReactNode>
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -56,6 +57,7 @@ export function CaseStudyTemplate({
   caseStudy: cs,
   workflowDiagram,
   methodologyDiagram,
+  chartRegistry,
 }: CaseStudyTemplateProps) {
 
   // TOC is computed from props so the "Results" entry appears only when the
@@ -151,13 +153,13 @@ export function CaseStudyTemplate({
                 <SectionH2 id="project-context">Project Context</SectionH2>
                 <div className="mt-6 space-y-5">
                   <div>
-                    <p className="mb-1.5 text-[10px] font-medium tracking-[0.14em] uppercase text-white/30">
+                    <p className="mb-1.5 text-[10px] font-medium tracking-[0.14em] uppercase text-white/45">
                       Motivation
                     </p>
                     <p className="text-sm leading-relaxed text-white/60">{cs.context.motivation}</p>
                   </div>
                   <div>
-                    <p className="mb-1.5 text-[10px] font-medium tracking-[0.14em] uppercase text-white/30">
+                    <p className="mb-1.5 text-[10px] font-medium tracking-[0.14em] uppercase text-white/45">
                       Background
                     </p>
                     <p className="text-sm leading-relaxed text-white/60">{cs.context.background}</p>
@@ -210,7 +212,7 @@ export function CaseStudyTemplate({
                       key={label}
                       className="rounded-[16px] border border-white/[0.07] bg-white/[0.03] px-4 py-4"
                     >
-                      <p className="mb-1 text-[9px] font-medium tracking-[0.14em] uppercase text-white/28">
+                      <p className="mb-1 text-[9px] font-medium tracking-[0.14em] uppercase text-white/42">
                         {label}
                       </p>
                       <p className="text-2xl font-bold leading-none text-chartreuse">
@@ -223,7 +225,7 @@ export function CaseStudyTemplate({
                 {/* Exposures — only rendered when the project has an exposures list */}
                 {cs.exposures && cs.exposures.length > 0 && (
                   <div className="mt-6">
-                    <p className="mb-3 text-[10px] font-medium tracking-[0.14em] uppercase text-white/28">
+                    <p className="mb-3 text-[10px] font-medium tracking-[0.14em] uppercase text-white/42">
                       Exposures analyzed
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -368,11 +370,25 @@ export function CaseStudyTemplate({
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {cs.outputPreviews.map((preview) => (
-                    <OutputPreviewCard key={preview.id} preview={preview} />
-                  ))}
-                </div>
+                {(() => {
+                  const hasCharts = Boolean(chartRegistry && Object.keys(chartRegistry).length > 0)
+                  return (
+                    <div className={cn(
+                      "mt-6 gap-5",
+                      hasCharts
+                        ? "flex flex-col"
+                        : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    )}>
+                      {cs.outputPreviews.map((preview) => (
+                        <OutputPreviewCard
+                          key={preview.id}
+                          preview={preview}
+                          chartContent={chartRegistry?.[preview.id]}
+                        />
+                      ))}
+                    </div>
+                  )
+                })()}
               </Reveal>
             </section>
 
@@ -454,7 +470,7 @@ export function CaseStudyTemplate({
                 <div className="mt-6 flex flex-wrap gap-6">
                   {cs.technologies.map((group) => (
                     <div key={group.category}>
-                      <p className="mb-2 text-[9px] font-medium tracking-[0.14em] uppercase text-white/28">
+                      <p className="mb-2 text-[9px] font-medium tracking-[0.14em] uppercase text-white/42">
                         {group.category}
                       </p>
                       <div className="flex flex-wrap gap-1.5">

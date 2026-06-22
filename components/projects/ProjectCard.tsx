@@ -1,15 +1,10 @@
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
+import { GithubMark } from "@/components/shared/GithubMark"
 import { cn } from "@/lib/utils"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
+import { StatusBadge } from "@/components/shared/StatusBadge"
 import type { Project } from "@/content/projects"
-
-const statusColors: Record<string, string> = {
-  "Ongoing":        "text-chartreuse/80 border-chartreuse/25 bg-chartreuse/5",
-  "In development": "text-lilac/80 border-lilac/25 bg-lilac/5",
-  "Completed":      "text-aqua/70 border-aqua/20 bg-aqua/5",
-  "Conceptual":     "text-blush/70 border-blush/20 bg-blush/5",
-}
 
 interface ProjectCardProps {
   project: Project
@@ -25,10 +20,10 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         "transition-all duration-200 hover:border-white/15 hover:bg-white/6",
         className
       )}
-      aria-label={`${project.title} — ${project.category}`}
+      aria-label={`${project.title}: ${project.category}`}
     >
       {/* Visual */}
-      <div className="relative h-52 shrink-0 overflow-hidden">
+      <div className="relative aspect-[8/5] w-full shrink-0 overflow-hidden">
         <div className="absolute inset-0 z-10 ring-1 ring-inset ring-white/5" aria-hidden="true" />
         <ProjectVisual variant={project.visual} className="h-full w-full" />
       </div>
@@ -40,14 +35,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           <span className="text-[9px] font-medium tracking-[0.16em] uppercase text-white/40 leading-relaxed">
             {project.category}
           </span>
-          <span
-            className={cn(
-              "ml-auto shrink-0 rounded-full border px-2.5 py-0.5 text-[9px] font-medium tracking-wide",
-              statusColors[project.status] ?? "text-white/40 border-white/15"
-            )}
-          >
-            {project.status}
-          </span>
+          <StatusBadge status={project.status} className="ml-auto shrink-0" />
         </div>
 
         {/* Title */}
@@ -115,50 +103,43 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           </div>
         </div>
 
-        {/* Actions — only render when URLs exist */}
-        {(project.repositoryUrl || project.demoUrl) && (
-          <div className="flex flex-wrap gap-2 pt-2 mt-auto border-t border-white/8">
-            {project.repositoryUrl && (
-              <a
-                href={project.repositoryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/15 px-3 py-1.5 text-[10px] font-medium text-white/55 hover:text-white hover:border-white/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-              >
-                Repository
-              </a>
-            )}
-            {project.demoUrl && (
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-chartreuse/10 border border-chartreuse/25 px-3 py-1.5 text-[10px] font-medium text-chartreuse/80 hover:bg-chartreuse/20 hover:text-chartreuse transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chartreuse/30"
-              >
-                Live demo
-              </a>
-            )}
-          </div>
-        )}
-
-        {/* Case study link or coming-soon note */}
-        {!project.repositoryUrl && !project.demoUrl && (
-          project.hasCaseStudy ? (
-            <div className="mt-auto border-t border-white/[0.06] pt-3">
-              <Link
-                href={`/projects/${project.slug}`}
-                className="inline-flex items-center gap-1.5 text-[10px] font-medium text-aqua/70 transition-colors hover:text-aqua focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-aqua/40"
-              >
-                View case study
-                <ArrowRightIcon className="size-3" aria-hidden="true" />
-              </Link>
-            </div>
+        {/* Bottom action bar — always visible */}
+        <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-white/[0.06] pt-3">
+          {project.hasCaseStudy ? (
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-flex items-center gap-1.5 text-[10px] font-medium text-aqua/70 transition-colors hover:text-aqua focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-aqua/40"
+            >
+              View case study
+              <ArrowRightIcon className="size-3" aria-hidden="true" />
+            </Link>
           ) : (
-            <p className="mt-auto border-t border-white/[0.06] pt-3 text-[9px] text-white/22">
-              Case study coming soon
-            </p>
-          )
-        )}
+            <span className="text-[9px] text-white/22">Case study coming soon</span>
+          )}
+          {project.repositoryUrl && (
+            <a
+              href={project.repositoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View GitHub repository for ${project.title}`}
+              className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1 text-[10px] font-medium text-white/50 transition-colors hover:border-white/28 hover:text-white/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+            >
+              <GithubMark className="size-3 shrink-0" />
+              GitHub
+            </a>
+          )}
+          {project.demoUrl && (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View live demo for ${project.shortTitle}`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-chartreuse/25 bg-chartreuse/10 px-2.5 py-1 text-[10px] font-medium text-chartreuse/80 transition-colors hover:bg-chartreuse/20 hover:text-chartreuse focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chartreuse/30"
+            >
+              Live demo
+            </a>
+          )}
+        </div>
       </div>
     </article>
   )

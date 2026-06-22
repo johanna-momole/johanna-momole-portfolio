@@ -110,7 +110,7 @@ export function VaccinationModelDiagram({ className }: VaccinationModelDiagramPr
 
         {/* Leakage note */}
         <text x="340" y="156" fontSize="4.5" fill="#C7FF35" fillOpacity="0.48" fontFamily="monospace" textAnchor="middle">
-          ! Applied to full dataset before 70/30 split — introduces potential information leakage
+          ! Applied to full dataset before 70/30 split. Introduces potential information leakage.
         </text>
 
         {/* Branching arrows → two model boxes */}
@@ -140,7 +140,7 @@ export function VaccinationModelDiagram({ className }: VaccinationModelDiagramPr
         {/* Footer */}
         <line x1="16" y1="282" x2="664" y2="282" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.08" />
         <text x="340" y="292" fontSize="4.5" fill="#C7FF35" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">
-          ! Diagram documents the original course workflow — see Limitations for methodological notes
+          ! Diagram documents the original course workflow. See Limitations for methodological notes.
         </text>
       </svg>
     </div>

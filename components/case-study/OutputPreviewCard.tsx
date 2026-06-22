@@ -1,4 +1,4 @@
-import React from "react"
+import React, { type ReactNode } from "react"
 import type { OutputPreview } from "@/content/case-studies/types"
 
 function ForestPlotSVG() {
@@ -86,9 +86,9 @@ function TrendChartSVG() {
 function DataQualitySVG() {
   const rows = [
     { var: "CASEID",  missingness: "0%",   completeness: 1.00 },
-    { var: "Sex",     missingness: "—",    completeness: 0.72 },
-    { var: "Age",     missingness: "—",    completeness: 0.65 },
-    { var: "Country", missingness: "—",    completeness: 0.88 },
+    { var: "Sex",     missingness: "n/a",  completeness: 0.72 },
+    { var: "Age",     missingness: "n/a",  completeness: 0.65 },
+    { var: "Country", missingness: "n/a",  completeness: 0.88 },
     { var: "Drug",    missingness: "0%",   completeness: 1.00 },
     { var: "AE (PT)", missingness: "0%",   completeness: 1.00 },
   ]
@@ -121,7 +121,7 @@ function DataQualitySVG() {
 
       <line x1="8" y1="142" x2="282" y2="142" stroke="#7FE7F2" strokeWidth="0.4" strokeOpacity="0.08" />
       <text x="8" y="147" fontSize="4" fill="#7FE7F2" fillOpacity="0.18" fontFamily="monospace">
-        Exact missingness values: analysis in progress — values are illustrative layout only
+        Exact missingness values: analysis in progress. Values are illustrative layout only.
       </text>
     </svg>
   )
@@ -174,7 +174,7 @@ function PicotInterfaceSVG() {
       <text x="114" y="158" fontSize="4.5" fill="#7FE7F2" fillOpacity="0.28" fontFamily="monospace">{"− Add exclusion criterion"}</text>
 
       <text x="8" y="168" fontSize="4" fill="#7FE7F2" fillOpacity="0.18" fontFamily="monospace">
-        Illustrative interface layout — example criteria shown
+        Illustrative interface layout. Example criteria shown.
       </text>
     </svg>
   )
@@ -225,7 +225,7 @@ function SqlPreviewSVG() {
       })}
 
       <text x="8" y="155" fontSize="4" fill="#7FE7F2" fillOpacity="0.15" fontFamily="monospace">
-        Illustrative SQL — does not reference a real database or patient population
+        Illustrative SQL. Does not reference a real database or patient population.
       </text>
     </svg>
   )
@@ -265,7 +265,7 @@ function BarChartSVG() {
 
       <line x1="8" y1="142" x2="292" y2="142" stroke="#7FE7F2" strokeWidth="0.4" strokeOpacity="0.08" />
       <text x="8" y="148" fontSize="4" fill="#7FE7F2" fillOpacity="0.18" fontFamily="monospace">
-        Diagnostic preview — values shown are illustrative
+        Diagnostic preview. Values shown are illustrative.
       </text>
       <text x="8" y="155" fontSize="4" fill="#7FE7F2" fillOpacity="0.18" fontFamily="monospace">
         Actual cohort diagnostics require a connected OMOP CDM data source
@@ -436,6 +436,7 @@ import Image from "next/image"
 
 interface OutputPreviewCardProps {
   preview: OutputPreview
+  chartContent?: ReactNode
 }
 
 function PlaceholderVisual({ preview }: { preview: OutputPreview }) {
@@ -449,7 +450,7 @@ function PlaceholderVisual({ preview }: { preview: OutputPreview }) {
             Analysis output preview
           </p>
           <p className="mt-0.5 text-[8px] text-white/28">
-            Illustrative layout — actual findings not shown
+            Illustrative layout. Actual findings not shown.
           </p>
         </div>
       </div>
@@ -476,8 +477,9 @@ function RealImageVisual({ preview }: { preview: OutputPreview }) {
   )
 }
 
-export function OutputPreviewCard({ preview }: OutputPreviewCardProps) {
-  const hasRealImage = Boolean(preview.imageSrc)
+export function OutputPreviewCard({ preview, chartContent }: OutputPreviewCardProps) {
+  const hasChart     = Boolean(chartContent)
+  const hasRealImage = !hasChart && Boolean(preview.imageSrc)
 
   return (
     <div className="overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.02]">
@@ -486,7 +488,11 @@ export function OutputPreviewCard({ preview }: OutputPreviewCardProps) {
         <span className="text-[9px] font-medium tracking-[0.16em] uppercase text-aqua/55">
           {preview.title}
         </span>
-        {hasRealImage ? (
+        {hasChart ? (
+          <span className="rounded-full border border-chartreuse/22 bg-chartreuse/[0.06] px-2 py-0.5 text-[8px] font-medium tracking-wide text-chartreuse/70">
+            Analysis output
+          </span>
+        ) : hasRealImage ? (
           <span className="rounded-full border border-organic-green/22 bg-organic-green/[0.06] px-2 py-0.5 text-[8px] font-medium tracking-wide text-organic-green/65">
             Original project output
           </span>
@@ -498,18 +504,22 @@ export function OutputPreviewCard({ preview }: OutputPreviewCardProps) {
       </div>
 
       {/* Visual area */}
-      {hasRealImage ? (
+      {hasChart ? (
+        <div className="px-4 py-4">{chartContent}</div>
+      ) : hasRealImage ? (
         <RealImageVisual preview={preview} />
       ) : (
         <PlaceholderVisual preview={preview} />
       )}
 
-      {/* Description */}
-      <div className="px-4 py-3">
-        <p className="text-[11px] leading-relaxed text-white/40">
-          {preview.description}
-        </p>
-      </div>
+      {/* Description — suppressed for interactive chart cards; the chart renders its own explanation */}
+      {!hasChart && (
+        <div className="px-4 py-3">
+          <p className="text-[11px] leading-relaxed text-white/40">
+            {preview.description}
+          </p>
+        </div>
+      )}
     </div>
   )
 }

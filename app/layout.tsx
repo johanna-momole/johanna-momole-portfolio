@@ -25,24 +25,24 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Johanna Momole — Biomedical Informatics & Healthcare Analytics",
+    default: "Johanna Momole | Biomedical Informatics & Healthcare Analytics",
     template: "%s | Johanna Momole",
   },
   description:
-    "Biomedical informatics and healthcare analytics professional. I turn healthcare data into evidence people can act on — across pharmacovigilance, real-world evidence, and healthcare operations.",
+    "Biomedical informatics and healthcare analytics professional. I turn healthcare data into evidence people can act on, spanning pharmacovigilance, real-world evidence, and healthcare operations.",
   authors: [{ name: "Johanna Momole" }],
   creator: "Johanna Momole",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Johanna Momole — Biomedical Informatics & Healthcare Analytics",
+    title: "Johanna Momole | Biomedical Informatics & Healthcare Analytics",
     description:
       "Biomedical informatics and healthcare analytics professional. I turn healthcare data into evidence people can act on.",
     siteName: "Johanna Momole",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Johanna Momole — Biomedical Informatics & Healthcare Analytics",
+    title: "Johanna Momole | Biomedical Informatics & Healthcare Analytics",
     description:
       "Biomedical informatics and healthcare analytics professional. I turn healthcare data into evidence people can act on.",
   },
@@ -68,7 +68,7 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
         <div className="relative z-[1] flex min-h-screen flex-col">
           <div className="print:hidden">
             <SiteHeader />

@@ -37,7 +37,7 @@ function MetricItem({
     >
       <p
         className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-        aria-label={`${value} — ${label}`}
+        aria-label={`${value}: ${label}`}
       >
         {value}
       </p>

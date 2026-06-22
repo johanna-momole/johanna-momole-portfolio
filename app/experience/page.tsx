@@ -1,19 +1,20 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRightIcon, MailIcon } from "lucide-react"
+import { ArrowRightIcon, ArrowDownToLineIcon, ExternalLinkIcon, MailIcon } from "lucide-react"
 import { Reveal } from "@/components/motion/Reveal"
 import { GlassPanel } from "@/components/shared/GlassPanel"
 import { siteConfig } from "@/content/site"
 import {
   experienceRoles,
   capabilities,
+  publications,
   type ExperienceRole,
 } from "@/content/experience"
 
 export const metadata: Metadata = {
   title: "Experience",
   description:
-    "Johanna Momole's professional journey from bioinformatics research and diagnostic laboratory operations through hospital network strategy and graduate training in biomedical informatics at the University of Pennsylvania.",
+    "Johanna Momole's professional journey from bioinformatics research and diagnostic laboratory operations through hospital network strategy, graduate training in biomedical informatics at the University of Pennsylvania, and consulting work in healthcare analytics.",
 }
 
 // ── Small helpers ─────────────────────────────────────────────────────────────
@@ -51,6 +52,11 @@ const domainStyles: Record<string, { border: string; chip: string; metric: strin
     border: "border-lilac/30",
     chip:   "bg-lilac/[0.08] border-lilac/20 text-lilac/80",
     metric: "text-lilac",
+  },
+  "Healthcare Consulting": {
+    border: "border-chartreuse/25",
+    chip:   "bg-chartreuse/[0.06] border-chartreuse/20 text-chartreuse/80",
+    metric: "text-chartreuse",
   },
 }
 
@@ -98,6 +104,7 @@ function ChapterSection({ role, index }: { role: ExperienceRole; index: number }
   }
   const isLast = index === experienceRoles.length - 1
   const isEducation = role.type === "education"
+  const isConsulting = role.type === "consulting"
 
   return (
     <section
@@ -138,6 +145,11 @@ function ChapterSection({ role, index }: { role: ExperienceRole; index: number }
                   LPDP Scholar
                 </span>
               )}
+              {isConsulting && (
+                <span className="inline-flex items-center rounded-full border border-chartreuse/20 bg-chartreuse/[0.04] px-3 py-1 text-[10px] font-semibold text-chartreuse/70">
+                  Graduate Consulting
+                </span>
+              )}
             </div>
           </Reveal>
 
@@ -148,6 +160,11 @@ function ChapterSection({ role, index }: { role: ExperienceRole; index: number }
             >
               {role.title}
             </h2>
+            {role.subtitle && (
+              <p className="mb-1 text-sm text-white/40 italic">
+                {role.subtitle}
+              </p>
+            )}
             <p className={`mb-5 text-sm font-medium ${style.metric} opacity-70`}>
               {role.organization} &middot; {role.location}
             </p>
@@ -261,18 +278,29 @@ export default function ExperiencePage() {
               id="experience-hero-heading"
               className="mb-6 font-serif text-3xl leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
             >
-              From research bench to hospital operations to analytical informatics
+              From bioinformatics research and hospital operations to graduate informatics and healthcare consulting
             </h1>
           </Reveal>
           <Reveal delay={0.13}>
             <p className="mb-4 text-base leading-relaxed text-white/58 sm:text-[1.05rem]">
-              My professional path is not a single straight line. It moves through bioinformatics research at ITB, molecular laboratory work in Jakarta, hospital network strategy at Siloam Hospitals, and graduate training in biomedical informatics at Penn.
+              My professional path is not a single straight line. It moves through bioinformatics research at ITB, molecular laboratory work in Jakarta, hospital network strategy at Siloam Hospitals, graduate training in biomedical informatics at Penn, and consulting work through the Penn Graduate Consulting Club.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="text-base leading-relaxed text-white/58 sm:text-[1.05rem]">
               Each chapter added a layer of understanding that the previous one lacked. The laboratory gave me clinical grounding that research alone does not. Operations gave me an appreciation for what analytical work has to produce to actually change a decision. Informatics gave me the methods to build rigorous evidence at scale.
             </p>
+          </Reveal>
+          <Reveal delay={0.24}>
+            <a
+              href={siteConfig.resumePdf}
+              download
+              aria-label="Download Johanna Momole's résumé as a PDF"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white/38 transition-colors hover:text-white/65 focus-visible:outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              <ArrowDownToLineIcon className="size-3.5 shrink-0" aria-hidden="true" />
+              Download R&eacute;sum&eacute;
+            </a>
           </Reveal>
         </div>
       </section>
@@ -307,6 +335,59 @@ export default function ExperiencePage() {
           <ChapterSection key={role.id} role={role} index={i} />
         ))}
       </div>
+
+      <SectionDivider />
+
+      {/* ── 3.5. SELECTED PUBLICATION ────────────────────────────────────────── */}
+      <section
+        aria-labelledby="experience-publication-heading"
+        className="py-12 md:py-14"
+      >
+        <Reveal>
+          <SectionLabel>Selected Publication</SectionLabel>
+          <h2
+            id="experience-publication-heading"
+            className="mb-6 text-xl font-semibold leading-tight text-white/88 md:text-2xl"
+          >
+            Peer-reviewed research
+          </h2>
+        </Reveal>
+        <Reveal delay={0.07}>
+          <div className="max-w-2xl rounded-[20px] border border-white/[0.08] bg-white/[0.02] p-6">
+            {publications.map((pub) => (
+              <article key={pub.id}>
+                <p className="text-sm leading-relaxed text-white/65">
+                  {pub.authors}{" "}
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read Johanna Momole's peer-reviewed publication in Agricultural Research"
+                    className="font-medium text-white/88 underline decoration-white/20 underline-offset-2 transition-colors hover:text-aqua hover:decoration-aqua/50"
+                  >
+                    {pub.title}
+                    <ExternalLinkIcon className="ml-1 inline size-3 translate-y-[-1px]" aria-hidden="true" />
+                  </a>
+                  {" "}{pub.journal}. Volume {pub.volume}, {pub.pages}. Published online {pub.publishedOnline}.
+                </p>
+                <p className="mt-2 flex items-center gap-1.5 text-[11px] text-white/38">
+                  <span className="font-mono">doi:</span>
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="transition-colors hover:text-aqua/70"
+                  >
+                    {pub.doi}
+                  </a>
+                </p>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+      </section>
 
       <SectionDivider />
 
@@ -385,7 +466,7 @@ export default function ExperiencePage() {
                   "Real-world evidence and cohort design",
                   "Pharmacovigilance signal detection",
                   "Clinical data science and machine learning",
-                  "Health data standards — OMOP CDM, FHIR",
+                  "Health data standards: OMOP CDM, FHIR",
                   "AI in healthcare",
                   "Biomedical data engineering",
                 ].map((area) => (
@@ -471,12 +552,15 @@ export default function ExperiencePage() {
                 <MailIcon className="size-4" aria-hidden="true" />
                 Send an email
               </a>
-              <Link
-                href="/resume"
-                className="inline-flex h-11 items-center rounded-full border border-white/15 px-6 text-sm font-medium text-white/65 backdrop-blur-sm transition-all hover:border-white/25 hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              <a
+                href={siteConfig.resumePdf}
+                download
+                aria-label="Download Johanna Momole's résumé as a PDF"
+                className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-sm font-medium text-white/65 backdrop-blur-sm transition-all hover:border-white/25 hover:bg-white/[0.06] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               >
-                View resume
-              </Link>
+                <ArrowDownToLineIcon className="size-4" aria-hidden="true" />
+                Download R&eacute;sum&eacute;
+              </a>
             </div>
           </div>
         </Reveal>

@@ -1,35 +1,42 @@
 import { cn } from "@/lib/utils"
 import type { ProjectVisualVariant } from "@/content/projects"
 
-/* ─── Signal (GLP-1 Pharmacovigilance) ────────────────────────────────────── */
+/* ─── Signal (GLP-1 Pharmacovigilance) — 5-panel portrait dashboard ───────── */
 function SignalVisual({ className }: { className?: string }) {
   const sexEvents     = ["GI", "META", "ENDO", "CARD"]
-  const femaleSignals = [0.8, 0.4, 0.6, 1.0]
-  const maleSignals   = [0.5, 0.9, 0.3, 0.7]
+  const femaleSignals = [0.80, 0.45, 0.62, 1.00]
+  const maleSignals   = [0.50, 0.92, 0.30, 0.70]
 
-  const matrixCols   = ["Q1", "Q2", "Q3", "Q4"]
-  const matrixEvents = ["GI", "META", "ENDO", "CARD"]
-  const matrixSignals: number[][] = [
-    [0.3, 0.5, 0.9, 0.7],
-    [0.6, 0.4, 0.5, 1.0],
-    [0.2, 0.7, 0.4, 0.6],
-    [0.5, 0.3, 0.8, 0.4],
+  // Forest plot rows: SVG x-coords pre-computed on log scale (range 0.5–3.5)
+  const NULL_X = 135
+  const forestRows = [
+    { label: "SEMA",  ror: 233, lo: 191, hi: 276, sig: true,  color: "#C9F2EE", rorLabel: "1.85" },
+    { label: "LIRA",  ror: 202, lo: 162, hi: 243, sig: true,  color: "#C9F2EE", rorLabel: "1.52" },
+    { label: "DULA",  ror: 175, lo: 129, hi: 221, sig: false, color: "#C9F2EE", rorLabel: "1.28" },
+    { label: "EXEN",  ror: 217, lo: 176, hi: 258, sig: true,  color: "#C9F2EE", rorLabel: "1.67" },
+    { label: "TIRZE", ror: 259, lo: 224, hi: 295, sig: true,  color: "#D9D1FF", rorLabel: "2.18" },
   ]
 
-  const forestMarks = [
-    { label: "GI · ♀",   lo: 88,  hi: 172, point: 148, y: 278 },
-    { label: "META · ♂", lo: 76,  hi: 174, point: 122, y: 298 },
-    { label: "ENDO · ♀", lo: 103, hi: 174, point: 141, y: 318 },
+  const trendPts = [
+    { x: 40,  y: 596 },
+    { x: 118, y: 576 },
+    { x: 210, y: 555 },
+    { x: 320, y: 532 },
   ]
 
-  const trendDots: [number, number][] = [
-    [12, 355], [66, 353], [120, 348], [174, 344], [228, 342],
+  const matrixCols = ["GI", "META", "ENDO", "CARD"]
+  const matrixRows = ["GLP-1 RA", "TIRZE", "COMPR"]
+  const matrixColX = [88, 156, 224, 292]
+  const matrixRowY = [684, 710, 736]
+  const matrixData = [
+    [0.85, 0.65, 0.30, 0.55],
+    [0.90, 0.82, 0.60, 0.78],
+    [0.22, 0.18, 0.15, 0.20],
   ]
 
   return (
     <svg
-      viewBox="0 0 240 420"
-      preserveAspectRatio="xMidYMid slice"
+      viewBox="0 0 360 790"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       className={cn("w-full h-full", className)}
@@ -41,127 +48,218 @@ function SignalVisual({ className }: { className?: string }) {
         </radialGradient>
       </defs>
 
-      {/* Background — covers full 240×420 so slice never shows card bg */}
-      <rect width="240" height="420" fill="url(#sig-bg)" />
+      <rect width="360" height="790" fill="url(#sig-bg)" />
 
       {/* Subtle grid */}
-      <g stroke="#C9F2EE" strokeWidth="0.4" opacity="0.05">
-        {[40, 80, 120, 160, 200, 240, 280, 320, 360, 400].map((y) => (
-          <line key={y} x1="0" y1={y} x2="240" y2={y} />
+      <g stroke="#C9F2EE" strokeWidth="0.4" opacity="0.04">
+        {[80, 160, 240, 320, 400, 480, 560, 640, 720].map((y) => (
+          <line key={y} x1="0" y1={y} x2="360" y2={y} />
         ))}
-        {[60, 120, 180].map((x) => (
-          <line key={x} x1={x} y1="0" x2={x} y2="420" />
+        {[90, 180, 270].map((x) => (
+          <line key={x} x1={x} y1="0" x2={x} y2="790" />
         ))}
       </g>
 
-      {/* ── Header (y: 0-52 — decorative, partially clips on wide viewports) ── */}
-      <text x="12" y="18" fontSize="6.5" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" fontWeight="500">FAERS SIGNAL ANALYSIS</text>
-      <text x="165" y="18" fontSize="5.5" fill="#C7FF35" fillOpacity="0.75" fontFamily="monospace">ONGOING</text>
-      <text x="12" y="29" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.28" fontFamily="monospace">GLP-1 PHARMACOVIGILANCE</text>
-      <text x="12" y="40" fontSize="5" fill="#C9F2EE" fillOpacity="0.16" fontFamily="monospace">SIGNAL DETECTION · HYPOTHESIS-GENERATING</text>
-      <rect x="12" y="46" width="216" height="0.7" fill="#C9F2EE" fillOpacity="0.10" />
+      {/* ════ PANEL 1: Header + Metrics + Compounds (y: 0–138) ════ */}
+      <text x="14" y="20" fontSize="6.5" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" fontWeight="500" letterSpacing="1">FAERS SIGNAL ANALYSIS</text>
+      <rect x="256" y="8" width="90" height="15" rx="7" fill="#C9F2EE" fillOpacity="0.08" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.25" />
+      <text x="301" y="18" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.72" fontFamily="monospace" textAnchor="middle">COMPLETED</text>
+      <text x="14" y="30" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.22" fontFamily="monospace">GLP-1 PHARMACOVIGILANCE · DISPROPORTIONALITY ANALYSIS</text>
+      <rect x="0" y="36" width="360" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
 
-      {/* ── Section 1: Sex-stratified analysis (y: 53-141) ── */}
-      <text x="12" y="64" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.42" fontFamily="monospace">SEX-STRATIFIED ANALYSIS</text>
-      <text x="122" y="74" fontSize="5.5" fill="#D9D1FF" fillOpacity="0.65" fontFamily="monospace" textAnchor="middle">♀ F</text>
-      <text x="192" y="74" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.65" fontFamily="monospace" textAnchor="middle">♂ M</text>
-      <rect x="12" y="78" width="216" height="0.6" fill="#C9F2EE" fillOpacity="0.08" />
+      {[
+        { label: "18.5M+", sub: "FAERS records", sub2: "harmonized",   x: 10  },
+        { label: "5",      sub: "GLP-1 agents",  sub2: "analyzed",     x: 127 },
+        { label: "4yr",    sub: "coverage",       sub2: "2021 to 2024", x: 244 },
+      ].map(({ label, sub, sub2, x }) => (
+        <g key={label}>
+          <rect x={x} y="42" width="108" height="56" rx="8" fill="#C9F2EE" fillOpacity="0.05" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.18" />
+          <text x={x + 54} y="66" fontSize={label.length > 3 ? 13 : 18}
+            fill="#C7FF35" fillOpacity="0.88" fontFamily="monospace"
+            textAnchor="middle" dominantBaseline="central" fontWeight="bold">{label}</text>
+          <text x={x + 54} y="80" fontSize="6" fill="#C9F2EE" fillOpacity="0.42" fontFamily="monospace" textAnchor="middle">{sub}</text>
+          <text x={x + 54} y="90" fontSize="5" fill="#C9F2EE" fillOpacity="0.25" fontFamily="monospace" textAnchor="middle">{sub2}</text>
+        </g>
+      ))}
+
+      <text x="14" y="112" fontSize="5" fill="#C9F2EE" fillOpacity="0.28" fontFamily="monospace" letterSpacing="0.5">COMPOUNDS ANALYZED</text>
+      {[
+        { label: "SEMA",  color: "#C9F2EE", dual: false },
+        { label: "LIRA",  color: "#C9F2EE", dual: false },
+        { label: "DULA",  color: "#C9F2EE", dual: false },
+        { label: "EXEN",  color: "#C9F2EE", dual: false },
+        { label: "TIRZE", color: "#D9D1FF", dual: true  },
+      ].map(({ label, color, dual }, i) => {
+        const x = 10 + i * 70
+        return (
+          <g key={label}>
+            <rect x={x} y="116" width="64" height="17" rx="8"
+              fill={color} fillOpacity="0.07"
+              stroke={color} strokeWidth="0.5" strokeOpacity={dual ? 0.40 : 0.22}
+            />
+            <circle cx={x + 10} cy="124.5" r="3" fill={color} fillOpacity={dual ? 0.65 : 0.48} />
+            <text x={x + 18} y="127.5" fontSize="5.5" fill={color} fillOpacity={dual ? 0.82 : 0.65} fontFamily="monospace">{label}</text>
+          </g>
+        )
+      })}
+
+      <rect x="0" y="138" width="360" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
+
+      {/* ════ PANEL 2: Sex-Stratified Signals (y: 138–300) ════ */}
+      <text x="14" y="153" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.40" fontFamily="monospace">SEX-STRATIFIED SIGNALS</text>
+      <rect x="14" y="157" width="332" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      <text x="174" y="172" fontSize="7" fill="#D9D1FF" fillOpacity="0.72" fontFamily="monospace" textAnchor="middle">FEMALE</text>
+      <text x="306" y="172" fontSize="7" fill="#C9F2EE" fillOpacity="0.72" fontFamily="monospace" textAnchor="middle">MALE</text>
+      <line x1="240" y1="160" x2="240" y2="292" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.12" />
 
       {sexEvents.map((evt, i) => {
-        const rowY = 90 + i * 13
+        const rowY = 200 + i * 28
         const fv   = femaleSignals[i]
         const mv   = maleSignals[i]
         const fMax = fv >= 0.95
         const mMax = mv >= 0.85
         return (
           <g key={evt}>
-            <text x="12" y={rowY + 4} fontSize="5.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">{evt}</text>
-            <circle cx="122" cy={rowY + 2} r={2.5 + fv * 5.5}
+            <text x="14" y={rowY + 4} fontSize="7" fill="#C9F2EE" fillOpacity="0.42" fontFamily="monospace">{evt}</text>
+            <circle cx="174" cy={rowY} r={4 + fv * 8}
               fill={fMax ? "#C7FF35" : "#D9D1FF"}
-              fillOpacity={fMax ? 0.85 : 0.25 + fv * 0.50} />
-            <circle cx="192" cy={rowY + 2} r={2.5 + mv * 5.5}
+              fillOpacity={fMax ? 0.88 : 0.22 + fv * 0.48} />
+            {fMax && <circle cx="174" cy={rowY} r={4 + fv * 8 + 4} fill="#C7FF35" fillOpacity="0.08" />}
+            <circle cx="306" cy={rowY} r={4 + mv * 8}
               fill={mMax ? "#C7FF35" : "#C9F2EE"}
-              fillOpacity={mMax ? 0.85 : 0.25 + mv * 0.50} />
+              fillOpacity={mMax ? 0.88 : 0.20 + mv * 0.45} />
+            {mMax && <circle cx="306" cy={rowY} r={4 + mv * 8 + 4} fill="#C7FF35" fillOpacity="0.08" />}
           </g>
         )
       })}
 
-      <rect x="12" y="141" width="216" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
+      <text x="14" y="292" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.20" fontFamily="monospace">Bubble radius = relative signal strength · Chartreuse = highest per group</text>
+      <rect x="0" y="300" width="360" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
 
-      {/* ── Section 2: Adverse event matrix (y: 143-245) ── */}
-      <text x="12" y="153" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.42" fontFamily="monospace">ADVERSE EVENT MATRIX</text>
-      {matrixCols.map((col, ci) => (
-        <text key={col} x={68 + ci * 40} y="163" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace" textAnchor="middle">{col}</text>
+      {/* ════ PANEL 3: ROR Disproportionality Forest (y: 300–460) ════ */}
+      <text x="14" y="315" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.40" fontFamily="monospace">ROR DISPROPORTIONALITY (95% CI)</text>
+      <rect x="14" y="319" width="332" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      <line x1={NULL_X} y1="328" x2={NULL_X} y2="443" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.22" strokeDasharray="2,2" />
+      <line x1="25" y1="443" x2="330" y2="443" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.14" />
+
+      {[
+        { x: 25,     label: "0.5" },
+        { x: NULL_X, label: "1.0" },
+        { x: 211,    label: "2.0" },
+        { x: 276,    label: "3.0" },
+      ].map(({ x, label }) => (
+        <g key={label}>
+          <line x1={x} y1="441" x2={x} y2="446" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.20" />
+          <text x={x} y="454" fontSize="4" fill="#C9F2EE" fillOpacity="0.25" fontFamily="monospace" textAnchor="middle">{label}</text>
+        </g>
       ))}
-      <rect x="12" y="167" width="216" height="0.6" fill="#C9F2EE" fillOpacity="0.08" />
 
-      {matrixEvents.map((evt, ri) => {
-        const rowY = 178 + ri * 17
+      {forestRows.map(({ label, ror, lo, hi, sig, color, rorLabel }, i) => {
+        const rowY    = 340 + i * 20
+        const isTirze = color === "#D9D1FF"
+        const ptFill  = isTirze ? "#C7FF35" : (sig ? "#C9F2EE" : "#C9F2EE")
+        const ptOpac  = isTirze ? 0.90 : (sig ? 0.65 : 0.28)
         return (
-          <g key={`m-${evt}`}>
-            <text x="12" y={rowY + 4} fontSize="5.5" fill="#C9F2EE" fillOpacity="0.30" fontFamily="monospace">{evt}</text>
-            {matrixSignals[ri].map((val, ci) => {
-              const isHigh = val >= 0.85
-              return (
-                <circle key={ci}
-                  cx={68 + ci * 40} cy={rowY + 2}
-                  r={2 + val * 5}
-                  fill={isHigh ? "#C7FF35" : "#C9F2EE"}
-                  fillOpacity={isHigh ? 0.85 : 0.20 + val * 0.50} />
-              )
-            })}
-          </g>
-        )
-      })}
-
-      <rect x="12" y="245" width="216" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
-
-      {/* ── Section 3: Disproportionality marks (y: 247-325) ── */}
-      <text x="12" y="257" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">DISPROPORTIONALITY MARKS</text>
-      <rect x="12" y="261" width="216" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
-
-      {/* Unity / null reference */}
-      <line x1="130" y1="266" x2="130" y2="324" stroke="#C9F2EE" strokeWidth="0.6" strokeOpacity="0.15" strokeDasharray="2 2" />
-      <text x="130" y="264" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.20" fontFamily="monospace" textAnchor="middle">null</text>
-
-      {forestMarks.map((fp, i) => {
-        const above = fp.point > 130
-        return (
-          <g key={i}>
-            <text x="12" y={fp.y + 2} fontSize="4.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">{fp.label}</text>
-            <line x1={fp.lo} y1={fp.y} x2={fp.hi} y2={fp.y} stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.30" />
-            <line x1={fp.lo}  y1={fp.y - 2.5} x2={fp.lo}  y2={fp.y + 2.5} stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.28" />
-            <line x1={fp.hi}  y1={fp.y - 2.5} x2={fp.hi}  y2={fp.y + 2.5} stroke="#C9F2EE" strokeWidth="0.8" strokeOpacity="0.28" />
-            <rect
-              x={fp.point - 4} y={fp.y - 4} width="8" height="8"
-              fill={above ? "#C7FF35" : "#C9F2EE"}
-              fillOpacity={above ? 0.80 : 0.55}
-              transform={`rotate(45 ${fp.point} ${fp.y})`}
+          <g key={label}>
+            <text x="14" y={rowY + 4} fontSize="5.5" fill={color} fillOpacity={isTirze ? 0.75 : 0.48} fontFamily="monospace">{label}</text>
+            <line x1={lo} y1={rowY} x2={hi} y2={rowY} stroke={color} strokeWidth="0.7" strokeOpacity={sig ? 0.55 : 0.28} />
+            <line x1={lo} y1={rowY - 3} x2={lo} y2={rowY + 3} stroke={color} strokeWidth="0.7" strokeOpacity={sig ? 0.48 : 0.22} />
+            <line x1={hi} y1={rowY - 3} x2={hi} y2={rowY + 3} stroke={color} strokeWidth="0.7" strokeOpacity={sig ? 0.48 : 0.22} />
+            <polygon
+              points={`${ror},${rowY - 4} ${ror + 4},${rowY} ${ror},${rowY + 4} ${ror - 4},${rowY}`}
+              fill={ptFill} fillOpacity={ptOpac}
             />
+            <text x={hi + 6} y={rowY + 4} fontSize="4.5" fill={color} fillOpacity={isTirze ? 0.65 : 0.38} fontFamily="monospace">{rorLabel}</text>
           </g>
         )
       })}
 
-      <rect x="12" y="325" width="216" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
+      <text x="14" y="459" fontSize="4" fill="#C9F2EE" fillOpacity="0.18" fontFamily="monospace">Diamond = point estimate · Bar = 95% CI · Dashed = null (1.0) · Exploratory only</text>
+      <rect x="0" y="460" width="360" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
 
-      {/* ── Section 4: Quarterly signal trend (y: 327-370) ── */}
-      <text x="12" y="337" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">QUARTERLY SIGNAL TREND</text>
-      <rect x="12" y="341" width="216" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+      {/* ════ PANEL 4: Quarterly Signal Trend (y: 460–620) ════ */}
+      <text x="14" y="475" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">QUARTERLY SIGNAL TREND</text>
+      <rect x="14" y="479" width="332" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      <line x1="36" y1="492" x2="36" y2="600" stroke="#C9F2EE" strokeWidth="0.5" strokeOpacity="0.12" />
+      <text x="34" y="496" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.22" fontFamily="monospace" textAnchor="end">H</text>
+      <text x="34" y="598" fontSize="4.5" fill="#C9F2EE" fillOpacity="0.22" fontFamily="monospace" textAnchor="end">L</text>
 
       <path
-        d="M12,355 C35,350 50,358 66,353 C83,348 100,353 120,348 C140,343 156,350 174,344 C192,339 210,346 228,342"
-        fill="none" stroke="#C9F2EE" strokeWidth="1" strokeOpacity="0.40"
+        d="M40,596 C72,588 96,580 118,576 C148,569 178,561 210,555 C248,547 284,540 320,532 L320,600 L40,600 Z"
+        fill="#C9F2EE" fillOpacity="0.05"
       />
-      {trendDots.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="2"
-          fill={i === 4 ? "#C7FF35" : "#C9F2EE"}
-          fillOpacity={i === 4 ? 0.90 : 0.48} />
+      <path
+        d="M40,596 C72,588 96,580 118,576 C148,569 178,561 210,555 C248,547 284,540 320,532"
+        fill="none" stroke="#C9F2EE" strokeWidth="1.5" strokeOpacity="0.48"
+      />
+
+      {trendPts.map(({ x, y }, i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r={i === 3 ? 4.5 : 3.5}
+            fill={i === 3 ? "#C7FF35" : "#C9F2EE"}
+            fillOpacity={i === 3 ? 0.95 : 0.58} />
+          {i === 3 && <circle cx={x} cy={y} r="8" fill="#C7FF35" fillOpacity="0.10" />}
+        </g>
       ))}
 
-      {/* ── Footer (y: 380-420 — decorative, clips on most viewports) ── */}
-      <text x="12" y="392" fontSize="5" fill="#C9F2EE" fillOpacity="0.14" fontFamily="monospace">HYPOTHESIS-GENERATING ONLY</text>
-      <text x="12" y="405" fontSize="5" fill="#C9F2EE" fillOpacity="0.10" fontFamily="monospace">ROR · PRR · FAERS · DEDUPLICATION</text>
-      <text x="12" y="418" fontSize="5" fill="#C9F2EE" fillOpacity="0.07" fontFamily="monospace">DATA PIPELINE · SIGNAL DETECTION</text>
+      <line x1="38" y1="600" x2="340" y2="600" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.15" />
+      {[
+        { q: "Q1'21", x: 40  },
+        { q: "Q1'22", x: 118 },
+        { q: "Q1'23", x: 210 },
+        { q: "Q4'24", x: 320 },
+      ].map(({ q, x }) => (
+        <text key={q} x={x} y="610" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.30" fontFamily="monospace" textAnchor="middle">{q}</text>
+      ))}
+
+      <rect x="0" y="620" width="360" height="0.6" fill="#C9F2EE" fillOpacity="0.10" />
+
+      {/* ════ PANEL 5: Signal by Clinical Group Matrix (y: 620–790) ════ */}
+      <text x="14" y="635" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace">SIGNAL BY CLINICAL GROUP</text>
+      <rect x="14" y="639" width="332" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      {matrixCols.map((col, i) => (
+        <text key={col} x={matrixColX[i]} y="654" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.38" fontFamily="monospace" textAnchor="middle">{col}</text>
+      ))}
+
+      {matrixData.map((row, ri) => (
+        <g key={ri}>
+          <text x="14" y={matrixRowY[ri] + 4} fontSize="5" fill={ri === 1 ? "#D9D1FF" : "#C9F2EE"} fillOpacity={ri === 1 ? 0.65 : 0.42} fontFamily="monospace">{matrixRows[ri]}</text>
+          {row.map((val, ci) => {
+            const isHigh   = val >= 0.80
+            const cx       = matrixColX[ci] ?? 88
+            const cy       = matrixRowY[ri] ?? 684
+            const dotColor = isHigh ? (ri === 1 ? "#D9D1FF" : "#C7FF35") : "#C9F2EE"
+            return (
+              <g key={ci}>
+                <rect
+                  x={cx - 16} y={cy - 12} width="32" height="20" rx="4"
+                  fill={dotColor} fillOpacity={isHigh ? 0.10 : 0.03}
+                  stroke={dotColor} strokeWidth="0.4" strokeOpacity={isHigh ? 0.35 : 0.10}
+                />
+                <circle
+                  cx={cx} cy={cy - 2} r={2 + val * 6}
+                  fill={dotColor} fillOpacity={isHigh ? 0.75 : 0.18 + val * 0.30}
+                />
+              </g>
+            )
+          })}
+        </g>
+      ))}
+
+      <circle cx="25"  cy="762" r="5"   fill="#C7FF35" fillOpacity="0.70" />
+      <text x="33"  y="765" fontSize="5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">High signal</text>
+      <circle cx="110" cy="762" r="3.5" fill="#D9D1FF" fillOpacity="0.65" />
+      <text x="118" y="765" fontSize="5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">Dual agonist</text>
+      <circle cx="212" cy="762" r="2.5" fill="#C9F2EE" fillOpacity="0.40" />
+      <text x="220" y="765" fontSize="5" fill="#C9F2EE" fillOpacity="0.30" fontFamily="monospace">Moderate</text>
+      <circle cx="292" cy="762" r="1.5" fill="#C9F2EE" fillOpacity="0.22" />
+      <text x="298" y="765" fontSize="5" fill="#C9F2EE" fillOpacity="0.25" fontFamily="monospace">Low</text>
+
+      <text x="14" y="779" fontSize="4" fill="#C9F2EE" fillOpacity="0.15" fontFamily="monospace">158K+ GLP-1 CASES · ROR · PRR · BH ADJUSTMENT · HYPOTHESIS-GENERATING ONLY</text>
     </svg>
   )
 }
@@ -196,8 +294,8 @@ function CohortVisual({ className }: { className?: string }) {
 
       {/* Header */}
       <text x="14" y="12" fontSize="6.5" fill="#D9D1FF" fillOpacity="0.50" fontFamily="monospace" fontWeight="500">RWE STUDIO</text>
-      <rect x="278" y="5" width="70" height="11" rx="5" fill="#D9D1FF" fillOpacity="0.10" stroke="#D9D1FF" strokeWidth="0.5" strokeOpacity="0.3" />
-      <text x="285" y="12.5" fontSize="5.5" fill="#D9D1FF" fillOpacity="0.65" fontFamily="monospace">IN DEVELOPMENT</text>
+      <rect x="278" y="5" width="70" height="11" rx="5" fill="#D9D1FF" fillOpacity="0.10" stroke="#D9D1FF" strokeWidth="0.5" strokeOpacity="0.40" />
+      <text x="313" y="12.5" fontSize="5.5" fill="#D9D1FF" fillOpacity="0.75" fontFamily="monospace" textAnchor="middle">COMPLETED</text>
       <rect x="14" y="17" width="332" height="0.8" fill="#D9D1FF" fillOpacity="0.10" />
 
       {/* ── Flow diagram: Question → Cohort → Evidence ── */}

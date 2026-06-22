@@ -84,18 +84,13 @@ export default function AboutPage() {
           {/* Hero portrait — appears second in DOM (below text on mobile, right on desktop) */}
           <div className="order-2">
             <Reveal delay={0.1} direction="none">
-              {/*
-                Aspect 4:5 editorial portrait.
-                object-top keeps face and graduation cap both visible
-                through any responsive resize.
-              */}
               <div className="relative overflow-hidden rounded-[28px] border border-white/[0.08] aspect-[4/5] shadow-[0_12px_80px_rgba(0,0,0,0.50)]">
                 <Image
-                  src="/images/about/johanna-graduation-portrait.jpg"
-                  alt="Johanna Momole in graduation regalia at the University of Pennsylvania"
+                  src="/images/about/about-opening-portrait-4x5.jpg"
+                  alt="Johanna Momole at the University of Pennsylvania"
                   fill
                   priority
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 640px) 92vw, (max-width: 1024px) 50vw, 460px"
                 />
               </div>
@@ -117,18 +112,12 @@ export default function AboutPage() {
           {/* Penn portrait — left on desktop, below heading on mobile */}
           <div className="lg:sticky lg:top-28">
             <Reveal direction="left" delay={0.05}>
-              {/*
-                Tall 3:4 editorial composition.
-                object-position: center 15% keeps Johanna's face in the upper
-                third while preserving the graduation stole and architectural
-                context in the background — avoids a tight face crop.
-              */}
-              <div className="relative overflow-hidden rounded-[24px] border border-white/[0.07] aspect-[3/4] shadow-[0_8px_48px_rgba(0,0,0,0.40)]">
+              <div className="relative overflow-hidden rounded-[24px] border border-white/[0.07] aspect-[4/5] shadow-[0_8px_48px_rgba(0,0,0,0.40)]">
                 <Image
-                  src="/images/about/johanna-penn-portrait.jpg"
+                  src="/images/about/about-story-penn-4x5.jpg"
                   alt="Johanna Momole wearing her Penn graduation stole on campus"
                   fill
-                  className="object-cover [object-position:center_15%]"
+                  className="object-cover object-center"
                   sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 380px"
                 />
               </div>
@@ -151,7 +140,7 @@ export default function AboutPage() {
               {about.story.chapters.map((chapter, i) => (
                 <Reveal key={chapter.label} delay={0.1 + i * 0.07}>
                   <div className="border-l-2 border-white/[0.07] pl-6">
-                    <p className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-aqua/40">
+                    <p className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-aqua/55">
                       {chapter.label}
                     </p>
                     <h3 className="mb-3 text-base font-semibold text-white/80">
@@ -169,65 +158,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <SectionDivider />
-
-      {/* ── 3. GRADUATION MILESTONE — cap toss ─────────────────────────────── */}
-      <section
-        aria-labelledby="about-milestone-heading"
-        className="py-12 md:py-16"
-      >
-        {/*
-          Responsive composition:
-          - Mobile (<sm): aspect-[2/3] — tall portrait crop so the airborne
-            cap above Johanna stays visible without the horizontal crop
-            cutting it out
-          - Desktop (sm+): aspect-[16/7] — wide cinematic frame, tree-lined
-            walkway visible on both sides
-          object-position center 20%: shifts anchor point up so the cap in
-          flight at the top of the frame is not cropped on wide viewports.
-        */}
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.07] aspect-[2/3] shadow-[0_8px_64px_rgba(0,0,0,0.45)] sm:aspect-[16/7]">
-            <Image
-              src="/images/about/johanna-cap-toss.jpg"
-              alt="Johanna Momole tossing her graduation cap on the University of Pennsylvania campus"
-              fill
-              className="object-cover [object-position:center_20%]"
-              sizes="(max-width: 640px) 95vw, 90vw"
-            />
-            {/* Gradient to ensure overlay legibility without covering the subject */}
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/60 to-transparent"
-              aria-hidden="true"
-            />
-            {/* Metadata overlay — bottom left, never over Johanna's face */}
-            <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6">
-              <div
-                className="inline-flex flex-col gap-0.5 rounded-[12px] border border-white/[0.14] bg-black/65 px-4 py-3 backdrop-blur-sm"
-                aria-hidden="true"
-              >
-                <span className="text-[11px] font-semibold tracking-wide text-white/90">
-                  Master of Biomedical Informatics
-                </span>
-                <span className="text-[10px] text-white/55">
-                  University of Pennsylvania &middot; 2026
-                </span>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* The milestone text is below the image, NOT over it */}
-        <Reveal delay={0.1}>
-          <p
-            id="about-milestone-heading"
-            className="mt-5 text-center text-xs text-white/28 tracking-wide"
-            aria-label="Master of Biomedical Informatics, University of Pennsylvania, Class of 2026"
-          >
-            Master of Biomedical Informatics &middot; University of Pennsylvania &middot; Class of 2026
-          </p>
-        </Reveal>
-      </section>
 
       <SectionDivider />
 

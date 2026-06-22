@@ -20,7 +20,7 @@ export const healthcareReferralCaseStudy: CaseStudy = {
       "Referral analytics in hospital settings sits at the intersection of business intelligence, clinical operations, and relationship management. The analytical challenge is not just generating metrics, but translating them into views that operational and strategic stakeholders can act on. EMR-related administrative workflows often carry hidden latency that compounds over volume, and identifying the specific friction points requires combining multiple operational data categories.",
   },
   role: {
-    title: "Network & Relation Executive",
+    title: "Network & Relation Executive (Healthcare Analytics & Strategy)",
     summary:
       "In this role, I was responsible for both the relationship management dimension of provider partnerships and the analytical work that informed those partnerships. The title reflects a professional function combining external relationship development with operational and strategic analysis. Portfolio case study materials represent the analytical contribution to this work.",
     responsibilities: [

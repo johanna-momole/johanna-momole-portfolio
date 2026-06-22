@@ -140,7 +140,7 @@ export const rweStudioCaseStudy: CaseStudy = {
       name: "PICOT-to-Cohort Translation",
       type: "primary",
       description:
-        "A structured mapping process that decomposes the clinical question into five components — Population, Intervention, Comparator, Outcome, Time — and translates each into an operationalizable cohort specification using OMOP CDM concept sets and domain tables.",
+        "A structured mapping process that decomposes the clinical question into five components (Population, Intervention, Comparator, Outcome, Time) and translates each into an operationalizable cohort specification using OMOP CDM concept sets and domain tables.",
       purpose:
         "Ensures that clinical reasoning is preserved through the analytical workflow. Reduces the gap between study intent and analytical implementation and creates a documented audit trail for all design decisions.",
     },
@@ -180,7 +180,7 @@ export const rweStudioCaseStudy: CaseStudy = {
       name: "Analytical Safeguards Layer",
       type: "validation",
       description:
-        "Each design decision — PICOT specification, cohort criteria, index event logic, analysis method, and interpretation framing — is documented and versioned within the workflow before analysis proceeds. Results link back to their upstream design choices.",
+        "Each design decision (PICOT specification, cohort criteria, index event logic, analysis method, and interpretation framing) is documented and versioned within the workflow before analysis proceeds. Results link back to their upstream design choices.",
       purpose:
         "Creates an auditable evidence record. Enables reviewers to trace any result to the design decisions that produced it, supporting both reproducibility and critical appraisal of the study.",
     },
@@ -191,7 +191,7 @@ export const rweStudioCaseStudy: CaseStudy = {
       id: "picot-interface",
       title: "PICOT and Cohort Definition Interface",
       description:
-        "Structured input interface for decomposing clinical questions into Population, Intervention, Comparator, Outcome, and Time components. Illustrative interface layout — example criteria shown.",
+        "Structured input interface for decomposing clinical questions into Population, Intervention, Comparator, Outcome, and Time components. Illustrative interface layout. Example criteria shown.",
       visualType: "picot-interface",
       isPlaceholder: true,
     },
@@ -199,7 +199,7 @@ export const rweStudioCaseStudy: CaseStudy = {
       id: "sql-workspace",
       title: "Generated SQL Workspace",
       description:
-        "SQL generation output targeting OMOP CDM tables. Query logic reflects the cohort criteria entered in the definition stage. Illustrative SQL — does not reference a real database or patient population.",
+        "SQL generation output targeting OMOP CDM tables. Query logic reflects the cohort criteria entered in the definition stage. Illustrative SQL. Does not reference a real database or patient population.",
       visualType: "sql-preview",
       isPlaceholder: true,
     },
@@ -207,7 +207,7 @@ export const rweStudioCaseStudy: CaseStudy = {
       id: "cohort-diagnostics",
       title: "Cohort Diagnostics Interface",
       description:
-        "Cohort characterization output including attrition tracking, covariate distribution, and baseline balance summary across exposure groups. Diagnostic preview — layout shown, values illustrative.",
+        "Cohort characterization output including attrition tracking, covariate distribution, and baseline balance summary across exposure groups. Diagnostic preview. Layout shown, values illustrative.",
       visualType: "bar-chart",
       isPlaceholder: true,
     },

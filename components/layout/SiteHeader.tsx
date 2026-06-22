@@ -37,7 +37,7 @@ export function SiteHeader() {
         {/* Logo / monogram */}
         <Link
           href="/"
-          aria-label="Johanna Momole — home"
+          aria-label="Johanna Momole home"
           className="flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <span
@@ -68,17 +68,6 @@ export function SiteHeader() {
             </li>
           ))}
         </ul>
-
-        {/* Desktop right actions */}
-        <div className="hidden items-center gap-2 md:flex">
-          <Button
-            size="sm"
-            className="rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
-            asChild
-          >
-            <Link href="/contact">Contact</Link>
-          </Button>
-        </div>
 
         {/* Mobile: hamburger */}
         <div className="flex items-center gap-1 md:hidden">
@@ -123,17 +112,6 @@ export function SiteHeader() {
               ))}
             </ul>
           </nav>
-          <div className="mt-8 px-4">
-            <Button
-              size="lg"
-              className="w-full rounded-full bg-[#7FE7F2] text-[#050713] font-semibold hover:opacity-90"
-              asChild
-            >
-              <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                Contact
-              </Link>
-            </Button>
-          </div>
         </SheetContent>
       </Sheet>
     </motion.header>

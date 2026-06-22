@@ -2,7 +2,7 @@ export const aboutContent = {
   eyebrow: "Biomedical Informatics · Healthcare Analytics",
   headline: "I turn healthcare data into evidence people can act on.",
   intro: [
-    "My work is built on a direct conviction: better analytical infrastructure produces better health decisions. The gap between available data and actionable evidence is not primarily a data problem — it is an infrastructure problem.",
+    "My work is built on a direct conviction: better analytical infrastructure produces better health decisions. The gap between available data and actionable evidence is not primarily a data problem. It is an infrastructure problem.",
     "With a background in biology, direct experience in hospital operations, and graduate training in biomedical informatics at the University of Pennsylvania, I work at the intersection of clinical context, analytical methods, and product thinking.",
   ],
 
@@ -14,12 +14,12 @@ export const aboutContent = {
       {
         label: "Foundation",
         heading: "Biology, hospitals, and a data gap",
-        body: "My interest in health data developed during my biology training and sharpened through direct experience in hospital operations in Indonesia. Working at the intersection of clinical care and operations, I observed how much analytical capacity went unused — not because data was absent, but because the infrastructure to make it useful was. Understanding that gap became the driving question behind everything that followed.",
+        body: "My interest in health data developed during my biology training and sharpened through direct experience in hospital operations in Indonesia. Working at the intersection of clinical care and operations, I observed how much analytical capacity went unused, not because data was absent, but because the infrastructure to make it useful was. Understanding that gap became the driving question behind everything that followed.",
       },
       {
         label: "Graduate Study",
         heading: "Biomedical informatics at Penn",
-        body: "As an LPDP Scholar, supported by the Ministry of Finance of the Republic of Indonesia, I pursued the Master of Biomedical Informatics at the University of Pennsylvania to build the technical depth needed to address that gap. Penn gave me the methods — epidemiology, clinical data science, computational health informatics — alongside a clinical perspective that keeps research grounded in real decisions.",
+        body: "As an LPDP Scholar, supported by the Ministry of Finance of the Republic of Indonesia, I pursued the Master of Biomedical Informatics at the University of Pennsylvania to build the technical depth needed to address that gap. Penn gave me the methods (epidemiology, clinical data science, computational health informatics) alongside a clinical perspective that keeps research grounded in real decisions.",
       },
       {
         label: "Practice",

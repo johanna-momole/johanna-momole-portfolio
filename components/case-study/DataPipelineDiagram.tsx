@@ -1,18 +1,18 @@
 import { cn } from "@/lib/utils"
 
 const STEPS = [
-  { label: "INGEST",      sub: "FAERS ASCII → PostgreSQL",  color: "#7FE7F2", x: 20  },
-  { label: "HARMONIZE",   sub: "Drug names · MedDRA terms",  color: "#7FE7F2", x: 128 },
-  { label: "DEDUPLICATE", sub: "CASEID-based · Cross-qtr",   color: "#C6A0FF", x: 236 },
+  { label: "INGEST",      sub: "FAERS ASCII · PostgreSQL",    color: "#7FE7F2", x: 20  },
+  { label: "HARMONIZE",   sub: "Drug names · MedDRA terms",   color: "#7FE7F2", x: 128 },
+  { label: "DEDUPLICATE", sub: "CASEID-based · Cross-qtr",    color: "#C6A0FF", x: 236 },
   { label: "EXPOSE",      sub: "5 compounds · PS + SS roles", color: "#C6A0FF", x: 344 },
-  { label: "STRATIFY",    sub: "Female · Male · 2×2 tables", color: "#C7FF35", x: 452 },
-  { label: "COMPUTE",     sub: "ROR · PRR · Multiple adj.",  color: "#C7FF35", x: 560 },
-  { label: "OUTPUT",      sub: "665 signals · QC-validated", color: "#C7FF35", x: 668 },
+  { label: "STRATIFY",    sub: "Sex strata · 2×2 tables",     color: "#C7FF35", x: 452 },
+  { label: "COMPUTE",     sub: "ROR/PRR · BH adj.",           color: "#C7FF35", x: 560 },
+  { label: "OUTPUT",      sub: "665 signals · QC-validated",  color: "#C7FF35", x: 668 },
 ]
 
 const BOX_W  = 96
-const BOX_H  = 52
-const BOX_Y  = 58
+const BOX_H  = 62
+const BOX_Y  = 56
 const ARROW_Y = BOX_Y + BOX_H / 2
 
 interface DataPipelineDiagramProps {
@@ -23,7 +23,7 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
   return (
     <div className={cn("w-full overflow-x-auto", className)}>
       <svg
-        viewBox="0 0 784 148"
+        viewBox="0 0 784 162"
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -40,7 +40,7 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
           </marker>
         </defs>
 
-        <rect width="784" height="148" rx="16" fill="url(#pipe-bg)" />
+        <rect width="784" height="162" rx="16" fill="url(#pipe-bg)" />
 
         {/* Subtle dot grid */}
         <defs>
@@ -48,7 +48,7 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
             <circle cx="1" cy="1" r="0.8" fill="#7FE7F2" fillOpacity="0.04" />
           </pattern>
         </defs>
-        <rect width="784" height="148" rx="16" fill="url(#pipe-dots)" />
+        <rect width="784" height="162" rx="16" fill="url(#pipe-dots)" />
 
         {/* Header */}
         <text x="16" y="20" fontSize="6" fill="#7FE7F2" fillOpacity="0.38" fontFamily="monospace" fontWeight="500" letterSpacing="2">
@@ -102,8 +102,8 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
               {/* Step number */}
               <text
                 x={step.x + 6}
-                y={BOX_Y + 12}
-                fontSize="5"
+                y={BOX_Y + 13}
+                fontSize="5.5"
                 fill={step.color}
                 fillOpacity="0.45"
                 fontFamily="monospace"
@@ -114,8 +114,8 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
               {/* Label */}
               <text
                 x={step.x + BOX_W / 2}
-                y={BOX_Y + 27}
-                fontSize={isLast ? "7.5" : "7"}
+                y={BOX_Y + 28}
+                fontSize={isLast ? "9" : "8"}
                 fill={step.color}
                 fillOpacity={isLast ? 0.92 : 0.78}
                 fontFamily="monospace"
@@ -130,10 +130,10 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
                 <text
                   key={li}
                   x={step.x + BOX_W / 2}
-                  y={BOX_Y + 37 + li * 8}
-                  fontSize="4.5"
+                  y={BOX_Y + 41 + li * 10}
+                  fontSize="5.5"
                   fill={step.color}
-                  fillOpacity="0.38"
+                  fillOpacity="0.40"
                   fontFamily="monospace"
                   textAnchor="middle"
                 >
@@ -145,10 +145,10 @@ export function DataPipelineDiagram({ className }: DataPipelineDiagramProps) {
         })}
 
         {/* Bottom scale note */}
-        <text x="16" y="138" fontSize="4.5" fill="#7FE7F2" fillOpacity="0.15" fontFamily="monospace">
+        <text x="16" y="152" fontSize="5" fill="#7FE7F2" fillOpacity="0.15" fontFamily="monospace">
           DOCKER · POSTGRESQL · SQL · R · PYTHON · GIT
         </text>
-        <text x="680" y="138" fontSize="4.5" fill="#C7FF35" fillOpacity="0.28" fontFamily="monospace">
+        <text x="616" y="152" fontSize="5" fill="#C7FF35" fillOpacity="0.28" fontFamily="monospace">
           HYPOTHESIS-GENERATING ONLY
         </text>
       </svg>

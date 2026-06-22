@@ -3,16 +3,11 @@
 import Link from "next/link"
 import { motion, useReducedMotion } from "motion/react"
 import { ArrowRightIcon } from "lucide-react"
+import { GithubMark } from "@/components/shared/GithubMark"
 import { cn } from "@/lib/utils"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
+import { StatusBadge } from "@/components/shared/StatusBadge"
 import type { Project } from "@/content/projects"
-
-const statusColors: Record<string, string> = {
-  "Ongoing":       "text-chartreuse/80 border-chartreuse/25 bg-chartreuse/5",
-  "In development":"text-lilac/80 border-lilac/25 bg-lilac/5",
-  "Completed":     "text-aqua/70 border-aqua/20 bg-aqua/5",
-  "Conceptual":    "text-blush/70 border-blush/20 bg-blush/5",
-}
 
 interface FeaturedProjectCardProps {
   project: Project
@@ -50,17 +45,15 @@ export function FeaturedProjectCard({
         "hover:border-white/[0.20] hover:bg-[#111A2A]/72",
         isHero ? "flex-col lg:flex-row" : "flex-col"
       )}
-      aria-label={`${project.title} — ${project.category}`}
+      aria-label={`${project.title}: ${project.category}`}
     >
       {/* Visual preview */}
       <div
         className={cn(
           "relative shrink-0 overflow-hidden",
           isHero
-            ? "h-56 lg:h-full lg:w-[46%]"
-            : layout === "compact"
-              ? "h-36"
-              : "h-40"
+            ? "aspect-[8/5] lg:aspect-auto lg:h-full lg:w-[46%]"
+            : "aspect-[8/5]"
         )}
       >
         {/* Subtle inner border on visual */}
@@ -84,14 +77,7 @@ export function FeaturedProjectCard({
           <span className="text-[9px] font-medium tracking-[0.16em] uppercase text-white/40">
             {project.category}
           </span>
-          <span
-            className={cn(
-              "ml-auto rounded-full border px-2 py-0.5 text-[9px] font-medium tracking-wide",
-              statusColors[project.status] ?? "text-white/40 border-white/15"
-            )}
-          >
-            {project.status}
-          </span>
+          <StatusBadge status={project.status} className="ml-auto" />
         </div>
 
         {/* Title */}
@@ -150,9 +136,9 @@ export function FeaturedProjectCard({
           )}
         </div>
 
-        {/* Case study link */}
+        {/* Case study link + optional source */}
         {project.hasCaseStudy && (
-          <div className="mt-3 border-t border-white/[0.07] pt-3">
+          <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-white/[0.07] pt-3">
             <Link
               href={`/projects/${project.slug}`}
               className="inline-flex items-center gap-1.5 text-[11px] font-medium text-aqua/70 transition-colors hover:text-aqua focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-aqua/40"
@@ -161,6 +147,19 @@ export function FeaturedProjectCard({
               View case study
               <ArrowRightIcon className="size-3" aria-hidden="true" />
             </Link>
+            {project.repositoryUrl && (
+              <a
+                href={project.repositoryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View GitHub repository for ${project.title}`}
+                className="ml-auto inline-flex items-center gap-1 text-[10px] font-medium text-white/35 transition-colors hover:text-white/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <GithubMark className="size-3 shrink-0" />
+                GitHub
+              </a>
+            )}
           </div>
         )}
       </div>

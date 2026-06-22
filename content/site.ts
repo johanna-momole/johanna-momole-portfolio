@@ -10,8 +10,7 @@ export const siteConfig = {
     { label: "Work",       href: "/#work" },
     { label: "About",      href: "/about" },
     { label: "Experience", href: "/experience" },
-    { label: "Resume",     href: "/resume" },
-    { label: "Notes",      href: "/notes" },
+    { label: "Contact",    href: "/contact" },
   ],
 
   social: {
@@ -20,7 +19,6 @@ export const siteConfig = {
     email:    "johanna.momole@gmail.com",
   },
 
-  resume: "/resume",
   resumePdf: "/resume/Johanna-Momole-Resume.pdf",
 
   contact: {
@@ -33,7 +31,7 @@ export const siteConfig = {
       "Healthcare strategy",
     ],
     location:
-      "Based in the Philadelphia region and open to opportunities across Pennsylvania, New Jersey, New York, and remote U.S. teams.",
+      "Based in Philadelphia and open to opportunities in Philadelphia, New Jersey, New York, and remote roles across the United States.",
     collaboration:
       "Open to full-time roles, contract research, and collaborative projects in healthcare analytics, real-world evidence, and biomedical informatics.",
   },

@@ -20,6 +20,17 @@ import { GenomicsPipelineDiagram } from "@/components/case-study/GenomicsPipelin
 import { ScoringMethodologyDiagram } from "@/components/case-study/ScoringMethodologyDiagram"
 import { VaccinationWorkflowDiagram } from "@/components/case-study/VaccinationWorkflowDiagram"
 import { VaccinationModelDiagram } from "@/components/case-study/VaccinationModelDiagram"
+import { Glp1SexScatterChart } from "@/components/case-study/Glp1SexScatterChart"
+import { Glp1QuarterlyTrendChart } from "@/components/case-study/Glp1QuarterlyTrendChart"
+import { Glp1ForestPlotChart } from "@/components/case-study/Glp1ForestPlotChart"
+import {
+  HpvVaccinationStatusChart,
+  HpvInsuranceCoverageChart,
+  HpvFamilySavingsChart,
+  HpvEducationLevelChart,
+  HpvFeatureImportanceChart,
+  HpvLogiCoefficientsChart,
+} from "@/components/case-study/HpvCharts"
 
 // ── Case study registry ───────────────────────────────────────────────────────
 
@@ -27,6 +38,7 @@ interface CaseStudyEntry {
   data: CaseStudy
   workflowDiagram?: ReactNode
   methodologyDiagram?: ReactNode
+  chartRegistry?: Record<string, ReactNode>
 }
 
 const caseStudyMap: Record<string, CaseStudyEntry> = {
@@ -34,6 +46,11 @@ const caseStudyMap: Record<string, CaseStudyEntry> = {
     data: glp1CaseStudy,
     workflowDiagram: <DataPipelineDiagram />,
     methodologyDiagram: <StudyDesignDiagram className="mb-6" />,
+    chartRegistry: {
+      "sex-ror-scatter":      <Glp1SexScatterChart />,
+      "quarterly-trend":      <Glp1QuarterlyTrendChart />,
+      "clinical-groups-forest": <Glp1ForestPlotChart />,
+    },
   },
   "real-world-evidence-studio": {
     data: rweStudioCaseStudy,
@@ -54,6 +71,14 @@ const caseStudyMap: Record<string, CaseStudyEntry> = {
     data: hpvVaccinationCaseStudy,
     workflowDiagram: <VaccinationWorkflowDiagram />,
     methodologyDiagram: <VaccinationModelDiagram className="mb-6" />,
+    chartRegistry: {
+      "hpv-vaccination-status":  <HpvVaccinationStatusChart />,
+      "hpv-insurance-coverage":  <HpvInsuranceCoverageChart />,
+      "hpv-family-savings":      <HpvFamilySavingsChart />,
+      "hpv-education-level":     <HpvEducationLevelChart />,
+      "hpv-feature-importance":  <HpvFeatureImportanceChart />,
+      "hpv-logi-coefficients":   <HpvLogiCoefficientsChart />,
+    },
   },
 }
 
@@ -100,6 +125,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         caseStudy={entry.data}
         workflowDiagram={entry.workflowDiagram}
         methodologyDiagram={entry.methodologyDiagram}
+        chartRegistry={entry.chartRegistry}
       />
     </>
   )

@@ -50,7 +50,7 @@ export function HeroSection() {
     },
   })
 
-  const { social, resume } = siteConfig
+  const { social } = siteConfig
 
   return (
     <section
@@ -101,11 +101,11 @@ export function HeroSection() {
               <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Link>
             <Link
-              href={resume}
-              aria-label="View Johanna Momole's résumé"
+              href="/experience"
+              aria-label="View Johanna Momole's professional experience"
               className="inline-flex h-11 items-center rounded-full border border-white/25 px-8 text-sm font-medium text-white/85 transition-all hover:border-white/38 hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             >
-              View Resume
+              My Experience
             </Link>
           </motion.div>
 

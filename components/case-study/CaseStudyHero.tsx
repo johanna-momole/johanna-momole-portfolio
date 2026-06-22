@@ -1,14 +1,8 @@
-import { cn } from "@/lib/utils"
+import { GithubMark } from "@/components/shared/GithubMark"
 import { ProjectVisual } from "@/components/projects/ProjectVisual"
+import { StatusBadge } from "@/components/shared/StatusBadge"
 import type { Project } from "@/content/projects"
 import type { CaseStudy } from "@/content/case-studies/types"
-
-const statusColors: Record<string, string> = {
-  "Ongoing":        "text-chartreuse/80 border-chartreuse/25 bg-chartreuse/5",
-  "In development": "text-lilac/80 border-lilac/25 bg-lilac/5",
-  "Completed":      "text-aqua/70 border-aqua/20 bg-aqua/5",
-  "Conceptual":     "text-blush/70 border-blush/20 bg-blush/5",
-}
 
 interface CaseStudyHeroProps {
   project: Project
@@ -65,27 +59,38 @@ export function CaseStudyHero({ project, caseStudy }: CaseStudyHeroProps) {
             {/* Metadata strip */}
             <dl className="flex flex-wrap gap-x-8 gap-y-4">
               <div>
-                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">Status</dt>
+                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/42">Status</dt>
                 <dd>
-                  <span className={cn(
-                    "inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-medium tracking-wide",
-                    statusColors[project.status] ?? "text-white/50 border-white/15"
-                  )}>
-                    {project.status}
-                  </span>
+                  <StatusBadge status={project.status} />
                 </dd>
               </div>
               {caseStudy.dataScale.items.slice(0, 2).map(({ label, value }) => (
                 <div key={label}>
-                  <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">{label}</dt>
+                  <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/42">{label}</dt>
                   <dd className="text-sm font-medium text-white/75">{value}</dd>
                 </div>
               ))}
               <div>
-                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/28">Role</dt>
+                <dt className="mb-1 text-[9px] font-medium tracking-[0.16em] uppercase text-white/42">Role</dt>
                 <dd className="text-sm font-medium text-white/75">{project.role}</dd>
               </div>
             </dl>
+
+            {/* Repository action */}
+            {project.repositoryUrl && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={project.repositoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View GitHub repository for ${project.title}`}
+                  className="inline-flex h-10 items-center gap-2 rounded-full border border-white/20 bg-white/[0.05] px-5 text-sm font-medium text-white/75 transition-all hover:border-white/30 hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <GithubMark className="size-4 shrink-0" />
+                  View GitHub repository
+                </a>
+              </div>
+            )}
           </div>
 
           {/* ── Right: project visual ──────────────────────────────────────── */}
