@@ -6,7 +6,7 @@ export const rweStudioCaseStudy: CaseStudy = {
   subtitle:
     "An analytical product translating structured clinical questions into cohort definitions, generated queries, and interpretable evidence workflows",
   positioning:
-    "In development. Workflow examples are illustrative and do not contain identifiable patient data.",
+    "Workflow examples are illustrative and do not contain identifiable patient data.",
 
   summary: [
     "RWE Evidence Studio is an analytical product designed to guide researchers from a structured clinical question through cohort definition, SQL generation, cohort diagnostics, and evidence interpretation in a reproducible, auditable workflow.",
@@ -71,7 +71,7 @@ export const rweStudioCaseStudy: CaseStudy = {
     items: [
       { label: "Workflow Stages",   value: "7" },
       { label: "Target Data Model", value: "OMOP CDM" },
-      { label: "Project Status",    value: "In Development" },
+      { label: "Project Status",    value: "Completed" },
       { label: "Primary Output",    value: "Reproducible SQL" },
     ],
   },
@@ -237,12 +237,12 @@ export const rweStudioCaseStudy: CaseStudy = {
 
   limitations: [
     {
-      id: "in-development",
-      title: "Product in development",
+      id: "illustrative-scope",
+      title: "Illustrative analytical outputs",
       description:
-        "RWE Evidence Studio is an active development project. Workflow examples are illustrative. The product has not yet been validated against a real OMOP CDM implementation or a completed observational study.",
+        "All workflow examples and output visualizations use synthetic data and illustrative cohort counts. The product design has not been validated against a live OMOP CDM implementation or a completed external observational study.",
       mitigation:
-        "All workflow examples are clearly labeled as illustrative. Statements about product capabilities describe design intent, not validated performance in a production environment.",
+        "All outputs are clearly labeled as illustrative and synthetic. Product capabilities reflect design intent and implemented workflow architecture, not production performance on a deployed data environment.",
     },
     {
       id: "omop-variation",
