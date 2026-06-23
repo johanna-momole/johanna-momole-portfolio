@@ -1,0 +1,4 @@
+Contact: mailto:johanna.momole@gmail.com
+Preferred-Languages: en
+Canonical: https://johannamomole.com/.well-known/security.txt
+Expires: 2027-06-23T00:00:00.000Z
