@@ -74,13 +74,12 @@ export const experienceRoles: ExperienceRole[] = [
     highlights: [
       "Conducted metagenomics and metatranscriptomics analysis characterizing microbial communities from environmental and clinical samples",
       "Applied Mothur for amplicon-based microbiome analysis and community profiling",
-      "Used TopHat and Cufflinks for RNA-seq alignment and differential transcript assembly",
       "Developed bioinformatics analysis scripts using Biopython and R",
       "Contributed analytical support across multiple concurrent study workflows",
       "Co-authored a peer-reviewed publication in Agricultural Research on microbial-community changes during banana ripening and chitosan treatment",
     ],
     metrics: null,
-    technologies: ["Mothur", "TopHat", "Cufflinks", "Biopython", "R"],
+    technologies: ["Mothur", "Biopython", "R"],
     linkedProjectSlugs: [],
   },
   {
