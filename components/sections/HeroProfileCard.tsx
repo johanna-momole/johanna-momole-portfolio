@@ -144,7 +144,7 @@ export function HeroProfileCard({
       <GlassPanel
         variant="dark"
         className={cn(
-          "w-full p-3.5",
+          "w-full h-full p-3.5",
           "transition-all duration-200",
           "group-hover:border-white/[0.20] group-hover:bg-white/[0.08] group-hover:shadow-[0_8px_36px_rgba(0,0,0,0.45)]",
           "group-focus-visible:border-white/[0.18] group-focus-visible:bg-white/[0.07]"

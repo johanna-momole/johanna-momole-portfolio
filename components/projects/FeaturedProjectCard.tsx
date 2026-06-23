@@ -58,10 +58,21 @@ export function FeaturedProjectCard({
       >
         {/* Subtle inner border on visual */}
         <div className="absolute inset-0 z-10 rounded-t-[24px] ring-1 ring-inset ring-white/5 lg:rounded-none" aria-hidden="true" />
-        <ProjectVisual
-          variant={project.visual}
-          className="h-full w-full object-cover"
-        />
+        {isHero ? (
+          <>
+            <div className="absolute inset-0 hidden lg:block">
+              <ProjectVisual variant={project.visual} className="h-full w-full" />
+            </div>
+            <div className="absolute inset-0 lg:hidden">
+              <ProjectVisual variant={project.visual} className="h-full w-full" context="compact" />
+            </div>
+          </>
+        ) : (
+          <ProjectVisual
+            variant={project.visual}
+            className="h-full w-full object-cover"
+          />
+        )}
       </div>
 
       {/* Content */}
