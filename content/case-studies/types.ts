@@ -61,6 +61,12 @@ export type OutputPreview = {
     | "rwe-sql-workspace"
     | "rwe-baseline-balance"
     | "rwe-evidence-brief"
+    | "genomics-score-distribution"
+    | "genomics-score-map"
+    | "genomics-scored-table"
+    | "strategy-care-pathway"
+    | "strategy-payer-landscape"
+    | "strategy-sensitivity-matrix"
   isPlaceholder: boolean
   imageSrc?: string
   imageAlt?: string

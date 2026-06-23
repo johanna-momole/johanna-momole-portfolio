@@ -177,7 +177,7 @@ export function CaseStudyTemplate({
                 <SectionH2 id="my-role">My Role</SectionH2>
                 <div className="mt-6">
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="rounded-full border border-lilac/25 bg-lilac/[0.06] px-3 py-1 text-xs font-medium text-lilac/75">
+                    <span className="inline-flex items-center rounded-full border border-lilac/25 bg-lilac/[0.06] px-3 py-1.5 text-xs font-medium leading-none text-lilac/75">
                       {cs.role.title}
                     </span>
                     <p className="text-sm text-white/50">{cs.role.summary}</p>
@@ -244,7 +244,11 @@ export function CaseStudyTemplate({
                 {/* Source cards — single source spans full width */}
                 <div className={cn(
                   "mt-6 grid gap-4",
-                  cs.dataSources.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"
+                  cs.dataSources.length === 1
+                    ? "grid-cols-1"
+                    : cs.dataSources.length % 2 !== 0
+                      ? "grid-cols-1 sm:grid-cols-2 [&>*:last-child]:sm:col-span-2"
+                      : "grid-cols-1 sm:grid-cols-2"
                 )}>
                   {cs.dataSources.map((source) => (
                     <DataSourceCard key={source.acronym} source={source} />

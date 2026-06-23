@@ -428,19 +428,37 @@ import {
   RweEvidenceBriefSVG,
 } from "@/components/case-study/RweOutputVisuals"
 
+import {
+  GenomicsScoreDistributionSVG,
+  GenomicsScoreMapSVG,
+  GenomicsScoredTableSVG,
+} from "@/components/case-study/GenomicsOutputVisuals"
+
+import {
+  StrategyCarePathwaySVG,
+  StrategyPayerLandscapeSVG,
+  StrategySensitivityMatrixSVG,
+} from "@/components/case-study/ConsultingStrategyOutputVisuals"
+
 const VISUAL_MAP: Record<OutputPreview["visualType"], () => React.ReactElement> = {
-  "forest-plot":            ForestPlotSVG,
-  "trend-chart":            TrendChartSVG,
-  "table":                  DataQualitySVG,
-  "bar-chart":              BarChartSVG,
-  "picot-interface":        PicotInterfaceSVG,
-  "sql-preview":            SqlPreviewSVG,
-  "network":                NetworkSVG,
-  "matrix":                 MatrixSVG,
-  "rwe-attrition-funnel":   RweAttritionFunnelSVG,
-  "rwe-sql-workspace":      RweSqlWorkspaceSVG,
-  "rwe-baseline-balance":   RweBaselineBalanceSVG,
-  "rwe-evidence-brief":     RweEvidenceBriefSVG,
+  "forest-plot":                  ForestPlotSVG,
+  "trend-chart":                  TrendChartSVG,
+  "table":                        DataQualitySVG,
+  "bar-chart":                    BarChartSVG,
+  "picot-interface":              PicotInterfaceSVG,
+  "sql-preview":                  SqlPreviewSVG,
+  "network":                      NetworkSVG,
+  "matrix":                       MatrixSVG,
+  "rwe-attrition-funnel":         RweAttritionFunnelSVG,
+  "rwe-sql-workspace":            RweSqlWorkspaceSVG,
+  "rwe-baseline-balance":         RweBaselineBalanceSVG,
+  "rwe-evidence-brief":           RweEvidenceBriefSVG,
+  "genomics-score-distribution":  GenomicsScoreDistributionSVG,
+  "genomics-score-map":           GenomicsScoreMapSVG,
+  "genomics-scored-table":        GenomicsScoredTableSVG,
+  "strategy-care-pathway":        StrategyCarePathwaySVG,
+  "strategy-payer-landscape":     StrategyPayerLandscapeSVG,
+  "strategy-sensitivity-matrix":  StrategySensitivityMatrixSVG,
 }
 
 import Image from "next/image"

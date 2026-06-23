@@ -1,9 +1,9 @@
 export const aboutContent = {
-  eyebrow: "Biomedical Informatics · Healthcare Analytics",
+  eyebrow: "Biomedical Informatics · Healthcare Analytics · Life Sciences Strategy",
   headline: "I turn healthcare data into evidence people can act on.",
   intro: [
     "My work is built on a direct conviction: better analytical infrastructure produces better health decisions. The gap between available data and actionable evidence is not primarily a data problem. It is an infrastructure problem.",
-    "With a background in biology, direct experience in hospital operations, and graduate training in biomedical informatics at the University of Pennsylvania, I work at the intersection of clinical context, analytical methods, and product thinking.",
+    "With a background in biology, direct experience in hospital operations, graduate training in biomedical informatics at the University of Pennsylvania, and consulting work in healthcare strategy, I work across the full arc from rigorous analysis to the decisions that analysis is meant to support.",
   ],
 
   story: {
@@ -24,7 +24,7 @@ export const aboutContent = {
       {
         label: "Practice",
         heading: "Analytical work across domains",
-        body: "My work spans pharmacovigilance signal detection using FDA FAERS data, real-world evidence study design on OMOP CDM, hospital referral analytics, and machine learning for public health. The common thread is not the method but the objective: evidence that is rigorous, interpretable, and useful to the people who need to act on it.",
+        body: "My work spans pharmacovigilance signal detection using FDA FAERS data, real-world evidence study design on OMOP CDM, hospital referral analytics, machine learning for public health, and healthcare AI strategy through the Penn Graduate Consulting Club. The common thread is not the method but the objective: evidence that is rigorous, interpretable, and useful to the people who need to act on it.",
       },
     ],
   },
@@ -77,6 +77,7 @@ export const aboutContent = {
           "Real-world evidence",
           "Healthcare operations",
           "Hospital referral analytics",
+          "Life sciences strategy",
           "Public health surveillance",
           "Clinical informatics",
         ],

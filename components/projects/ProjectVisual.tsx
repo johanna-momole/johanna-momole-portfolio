@@ -938,6 +938,142 @@ function VaccinationVisual({ className }: { className?: string }) {
   )
 }
 
+/* ─── Strategy (Healthcare AI Strategy) ───────────────────────────────────── */
+function StrategyVisual({ className }: { className?: string }) {
+  const variables = [
+    { label: "Unit cost · ED visit",    bear: 0.35, base: 0.60, bull: 0.88, color: "#F1D7E4" },
+    { label: "Platform adoption rate",  bear: 0.22, base: 0.52, bull: 0.80, color: "#D9D1FF" },
+    { label: "Care diversion rate",     bear: 0.28, base: 0.58, bull: 0.85, color: "#C9F2EE" },
+    { label: "Follow-up reduction",     bear: 0.15, base: 0.42, bull: 0.70, color: "#87A878" },
+  ]
+
+  const segments = [
+    { label: "Payer",    x: 110, y: 74,  r: 28, color: "#D9D1FF", tier: 1 },
+    { label: "Health\nSystem", x: 210, y: 60,  r: 32, color: "#C7FF35", tier: 1 },
+    { label: "Employer", x: 300, y: 80,  r: 22, color: "#C9F2EE", tier: 2 },
+    { label: "ACO",      x: 330, y: 140, r: 18, color: "#87A878", tier: 3 },
+  ]
+
+  return (
+    <svg
+      viewBox="0 0 360 230"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={cn("w-full h-full", className)}
+    >
+      <defs>
+        <radialGradient id="strat-bg" cx="35%" cy="30%" r="80%">
+          <stop offset="0%" stopColor="#101824" />
+          <stop offset="100%" stopColor="#090B0C" />
+        </radialGradient>
+      </defs>
+
+      <rect width="360" height="230" fill="url(#strat-bg)" rx="12" />
+
+      {/* Subtle grid */}
+      <g stroke="#C9F2EE" strokeWidth="0.4" opacity="0.04">
+        {[40, 80, 120, 160, 200].map((y) => (
+          <line key={y} x1="0" y1={y} x2="360" y2={y} />
+        ))}
+        {[60, 120, 180, 240, 300].map((x) => (
+          <line key={x} x1={x} y1="0" x2={x} y2="230" />
+        ))}
+      </g>
+
+      {/* Header */}
+      <text x="14" y="12" fontSize="6.5" fill="#C9F2EE" fillOpacity="0.50" fontFamily="monospace" fontWeight="500">AI STRATEGY · BUSINESS CASE</text>
+      <rect x="246" y="4" width="100" height="13" rx="6" fill="#C7FF35" fillOpacity="0.08" stroke="#C7FF35" strokeWidth="0.5" strokeOpacity="0.35" />
+      <text x="296" y="12.5" fontSize="5.5" fill="#C7FF35" fillOpacity="0.75" fontFamily="monospace" textAnchor="middle">PENN GCC</text>
+      <rect x="14" y="17" width="332" height="0.7" fill="#C9F2EE" fillOpacity="0.10" />
+
+      {/* ── LEFT: Segment landscape (x 0–190, y 17–170) ════ */}
+      <text x="14" y="27" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">CUSTOMER SEGMENT LANDSCAPE</text>
+
+      {segments.map(({ label, x, y, r, color, tier }) => (
+        <g key={label}>
+          <circle cx={x} cy={y} r={r}
+            fill={color}
+            fillOpacity={tier === 1 ? 0.12 : tier === 2 ? 0.07 : 0.04}
+            stroke={color}
+            strokeWidth={tier === 1 ? 1.0 : 0.6}
+            strokeOpacity={tier === 1 ? 0.55 : tier === 2 ? 0.32 : 0.20}
+          />
+          {label.includes("\n") ? (
+            <>
+              <text x={x} y={y - 3} fontSize="5" fill={color} fillOpacity={tier === 1 ? 0.88 : 0.60} fontFamily="monospace" textAnchor="middle">{label.split("\n")[0]}</text>
+              <text x={x} y={y + 6} fontSize="5" fill={color} fillOpacity={tier === 1 ? 0.88 : 0.60} fontFamily="monospace" textAnchor="middle">{label.split("\n")[1]}</text>
+            </>
+          ) : (
+            <text x={x} y={y + 3} fontSize="5" fill={color} fillOpacity={tier === 1 ? 0.88 : 0.60} fontFamily="monospace" textAnchor="middle">{label}</text>
+          )}
+        </g>
+      ))}
+
+      {/* Tier labels */}
+      <text x="14" y="118" fontSize="5" fill="#C7FF35" fillOpacity="0.50" fontFamily="monospace">TIER 1 · Near-term</text>
+      <text x="14" y="127" fontSize="5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">TIER 2 · Mid-term</text>
+      <text x="14" y="136" fontSize="5" fill="#87A878" fillOpacity="0.35" fontFamily="monospace">TIER 3 · Long horizon</text>
+
+      {/* Column separator */}
+      <line x1="188" y1="18" x2="188" y2="170" stroke="#C9F2EE" strokeWidth="0.4" strokeOpacity="0.10" />
+
+      {/* ── RIGHT: Sensitivity analysis (x 193–360, y 17–170) ════ */}
+      <text x="196" y="27" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.35" fontFamily="monospace">SCENARIO SENSITIVITY</text>
+      <text x="248" y="35" fontSize="5" fill="#F1D7E4" fillOpacity="0.50" fontFamily="monospace" textAnchor="middle">BEAR</text>
+      <text x="300" y="35" fontSize="5" fill="#C9F2EE" fillOpacity="0.60" fontFamily="monospace" textAnchor="middle">BASE</text>
+      <text x="346" y="35" fontSize="5" fill="#C7FF35" fillOpacity="0.65" fontFamily="monospace" textAnchor="middle">BULL</text>
+
+      {variables.map(({ label, bear, base, bull, color }, i) => {
+        const rowY = 44 + i * 28
+        const vals = [bear, base, bull]
+        const barX = 196
+        const barW = 145
+        return (
+          <g key={label}>
+            <text x="196" y={rowY - 2} fontSize="5" fill={color} fillOpacity="0.55" fontFamily="monospace">{label}</text>
+            {/* Range bar */}
+            <rect x={barX} y={rowY + 1} width={barW} height="6" rx="3" fill={color} fillOpacity="0.06" />
+            <rect x={barX + Math.round(bear * barW)} y={rowY + 1}
+              width={Math.round((bull - bear) * barW)} height="6" rx="3"
+              fill={color} fillOpacity="0.20" />
+            {vals.map((v, vi) => (
+              <circle key={vi}
+                cx={barX + Math.round(v * barW)} cy={rowY + 4}
+                r={vi === 1 ? 3.5 : 2.5}
+                fill={vi === 2 ? "#C7FF35" : vi === 0 ? "#F1D7E4" : color}
+                fillOpacity={vi === 1 ? 0.85 : 0.65}
+              />
+            ))}
+          </g>
+        )
+      })}
+
+      {/* Bottom row */}
+      <rect x="14" y="175" width="332" height="0.5" fill="#C9F2EE" fillOpacity="0.07" />
+
+      {/* Care pathway comparison */}
+      <text x="14" y="186" fontSize="5.5" fill="#C9F2EE" fillOpacity="0.28" fontFamily="monospace">CARE PATHWAY ECONOMICS</text>
+      {[
+        { label: "ED",            w: 160, color: "#F1D7E4" },
+        { label: "Ambulatory",    w: 85,  color: "#D9D1FF" },
+        { label: "AI-Supported",  w: 55,  color: "#C7FF35" },
+      ].map(({ label, w, color }, i) => {
+        const y = 190 + i * 11
+        return (
+          <g key={label}>
+            <text x="14" y={y + 7} fontSize="5" fill={color} fillOpacity="0.55" fontFamily="monospace">{label}</text>
+            <rect x="100" y={y} width={w} height="8" rx="2"
+              fill={color} fillOpacity={i === 2 ? 0.18 : 0.10}
+              stroke={color} strokeWidth="0.5" strokeOpacity={i === 2 ? 0.55 : 0.28} />
+          </g>
+        )
+      })}
+
+      <text x="180" y="226" fontSize="3.8" fill="#C9F2EE" fillOpacity="0.15" fontFamily="monospace" textAnchor="middle">ECONOMIC MODELING · PAYER SEGMENTATION · SENSITIVITY ANALYSIS · CONFIDENTIAL</text>
+    </svg>
+  )
+}
+
 /* ─── Public export ────────────────────────────────────────────────────────── */
 interface ProjectVisualProps {
   variant: ProjectVisualVariant
@@ -955,5 +1091,6 @@ export function ProjectVisual({ variant, className, context = "homepage" }: Proj
     case "referral":   return <ReferralVisual className={className} />
     case "genomics":   return <GenomicsVisual className={className} />
     case "vaccination":return <VaccinationVisual className={className} />
+    case "strategy":   return <StrategyVisual className={className} />
   }
 }

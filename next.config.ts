@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: "/experience",
         permanent: false,
       },
+      {
+        source: "/projects/healthcare-referral-analytics",
+        destination: "/experience",
+        permanent: true,
+      },
     ]
   },
 };

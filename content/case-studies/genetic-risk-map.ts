@@ -168,34 +168,35 @@ export const geneticRiskMapCaseStudy: CaseStudy = {
         "Produces human-interpretable outputs for exploratory review and structured machine-readable outputs for downstream analysis. Visual outputs are labeled as exploratory and do not replace formal statistical analysis.",
     },
   ],
+  outputLayout: "stacked",
+
+  outputDisclosure:
+    "All outputs shown below are portfolio-native redesigns inspired by the original project pipeline. Data values are illustrative and drawn from the 50-gene synthetic example dataset included in the repository. They do not represent real biological findings or confirmed gene-disease associations. Tier assignments are relative to the submitted gene set only.",
+
   outputPreviews: [
     {
       id: "score-distribution",
-      title: "Score Distribution by Relative Tier",
+      title: "Relative Score Distribution",
       description:
-        "Histogram with KDE overlay showing the distribution of gene-level association scores grouped by relative score tier. Tiers are defined by 75th and 25th percentile thresholds within the submitted input. See the caption below regarding the repository's category labels.",
-      visualType: "bar-chart",
+        "This histogram shows how gene-level association scores are spread across the full 50-gene dataset, with each bar colored to reflect its relative tier assignment. The peak around score 8 is where the most genes cluster. The two vertical dashed lines mark the 25th percentile (where the lower tier ends) and the 75th percentile (where the upper tier begins). Genes to the left of the P25 line fall in the lower tier; genes between the lines fall in the middle tier; genes to the right fall in the upper tier. Bars labeled with counts show how many genes fall in each score bin.",
+      visualType: "genomics-score-distribution",
       isPlaceholder: false,
-      imageSrc: "/images/case-studies/genetic-risk-map/prs-distribution.png",
-      imageAlt: "Distribution of gene-level association scores across repository-defined relative categories, shown as a histogram with KDE overlay for the 50-gene synthetic example dataset",
     },
     {
       id: "gene-score-map",
-      title: "Gene-Level Score Map",
+      title: "Ranked Gene Score Map",
       description:
-        "Ranked bubble chart where position reflects relative score rank, bubble size encodes the number of SNPs in the gene analysis window, and color indicates relative score tier. Top-scoring genes are labeled. See the caption below regarding the repository's category labels.",
-      visualType: "bar-chart",
+        "Each circle represents one gene, positioned by its rank along the horizontal axis and its raw association score on the vertical axis. Bubble size reflects the number of SNPs in the gene analysis window. Color indicates tier: chartreuse for upper, aqua for middle, and green for lower. The five highest-scoring genes from the example dataset are labeled. The two horizontal dashed lines mark the P25 and P75 percentile thresholds that determine tier boundaries within this input.",
+      visualType: "genomics-score-map",
       isPlaceholder: false,
-      imageSrc: "/images/case-studies/genetic-risk-map/gene-score-map.png",
-      imageAlt: "Ranked bubble chart showing gene-level association scores and relative score tiers for the 50-gene synthetic example dataset, with top genes labeled",
     },
     {
       id: "output-table",
       title: "Scored Output Table",
       description:
-        "Illustrative representation of the exported gene_prs_results.csv and JSON outputs. Each row in the real output contains the gene symbol, original input columns, raw score, normalized score, percentile rank, and relative tier assignment.",
-      visualType: "table",
-      isPlaceholder: true,
+        "This panel previews the structure of the exported gene_prs_results.csv that the pipeline writes for every run. Each row is one gene. The raw_score column is the primary computed value (BETA times negative log10 of P). The norm_score column is the z-score normalized version. The pct_rank column expresses each gene's standing as a percentile from 0 to 100 within the input. The final column shows the tier label: upper means the gene scored in the top quarter of the submitted set, middle falls between the 25th and 75th percentiles, and lower falls below the 25th percentile. All tier assignments are relative to this specific input and do not represent absolute disease risk.",
+      visualType: "genomics-scored-table",
+      isPlaceholder: false,
     },
   ],
   dataQualityMeasures: [
@@ -311,6 +312,4 @@ export const geneticRiskMapCaseStudy: CaseStudy = {
   ],
   resultsProvenance:
     "This project is a research and educational pipeline. Its scores and rankings are relative to the submitted gene set and are not validated for clinical diagnosis, patient-level prediction, or medical decision-making. The example dataset uses well-known publicly documented gene symbols as demonstration inputs. These gene symbols are used to make the example readable; they do not represent new biological findings or confirmed risk associations.",
-  outputDisclosure:
-    "Original project plots are shown where available. The scored-table interface is an illustrative representation of the exported tabular output. Note: the source pipeline's repository uses the labels Low, Moderate, and High for the three percentile-based groups. On this portfolio page, these are interpreted only as lower, middle, and upper relative score tiers within the submitted gene set and do not represent absolute disease risk or patient-level clinical risk.",
 }

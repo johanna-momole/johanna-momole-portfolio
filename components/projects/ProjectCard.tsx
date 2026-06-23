@@ -78,11 +78,6 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
                 {m}
               </span>
             ))}
-            {project.methods.length > 4 && (
-              <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[9px] font-medium text-white/28">
-                +{project.methods.length - 4} more
-              </span>
-            )}
           </div>
         </div>
 
@@ -92,7 +87,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
             Technologies
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {project.technologies.map((t) => (
+            {project.technologies.slice(0, 4).map((t) => (
               <span
                 key={t}
                 className="rounded-full border border-white/10 px-2.5 py-0.5 text-[9px] font-medium text-white/45"

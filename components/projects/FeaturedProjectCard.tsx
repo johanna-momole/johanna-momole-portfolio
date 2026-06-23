@@ -119,21 +119,14 @@ export function FeaturedProjectCard({
 
         {/* Tech tags */}
         <div className="flex flex-wrap gap-1.5 mt-auto pt-1">
-          {(isHero ? project.technologies : project.technologies.slice(0, 3)).map(
-            (tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-white/10 px-2.5 py-0.5 text-[9px] font-medium text-white/45"
-              >
-                {tech}
-              </span>
-            )
-          )}
-          {!isHero && project.technologies.length > 3 && (
-            <span className="rounded-full border border-white/10 px-2.5 py-0.5 text-[9px] font-medium text-white/30">
-              +{project.technologies.length - 3}
+          {project.technologies.slice(0, 4).map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-white/10 px-2.5 py-0.5 text-[9px] font-medium text-white/45"
+            >
+              {tech}
             </span>
-          )}
+          ))}
         </div>
 
         {/* Case study link + optional source */}

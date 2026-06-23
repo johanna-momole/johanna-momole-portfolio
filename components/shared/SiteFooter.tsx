@@ -38,7 +38,7 @@ export function SiteFooter() {
         {/* Bottom row */}
         <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-muted-foreground">
-            {year} {siteConfig.name}. Built with Next.js and Tailwind CSS.
+            &copy; {year} {siteConfig.name}
           </p>
           <a
             href={`mailto:${siteConfig.social.email}`}

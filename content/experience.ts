@@ -147,7 +147,7 @@ export const experienceRoles: ExperienceRole[] = [
       },
     ],
     technologies: ["SQL", "Python", "Tableau"],
-    linkedProjectSlugs: ["healthcare-referral-analytics"],
+    linkedProjectSlugs: [],
   },
   {
     id: "penn-mbi",
@@ -198,7 +198,7 @@ export const experienceRoles: ExperienceRole[] = [
     ],
     metrics: null,
     technologies: [],
-    linkedProjectSlugs: [],
+    linkedProjectSlugs: ["healthcare-ai-strategy"],
   },
 ]
 
@@ -353,10 +353,10 @@ export const resumeProjects = [
       "Analytical product concept guiding researchers from structured clinical questions through OMOP CDM cohort definition and evidence outputs.",
   },
   {
-    slug: "healthcare-referral-analytics",
-    title: "Healthcare Referral Analytics",
+    slug: "healthcare-ai-strategy",
+    title: "Healthcare AI Strategy and Business Case",
     description:
-      "Provider network and referral performance analytics supporting hospital operations and 216% referral revenue growth.",
+      "Economic modeling, payer segmentation, and scenario analysis for a healthcare AI business case through the Penn Graduate Consulting Club.",
   },
   {
     slug: "genetic-risk-map",

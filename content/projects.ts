@@ -9,6 +9,7 @@ export type ProjectVisualVariant =
   | "referral"
   | "genomics"
   | "vaccination"
+  | "strategy"
 
 export type FilterCategory =
   | "All"
@@ -16,6 +17,7 @@ export type FilterCategory =
   | "Healthcare Analytics"
   | "Biomedical Data Science"
   | "Public Health"
+  | "Consulting & Strategy"
 
 export type ProjectStatus =
   | "Ongoing"
@@ -108,35 +110,34 @@ export const projects: Project[] = [
     visual: "cohort",
   },
   {
-    slug: "healthcare-referral-analytics",
-    title: "Healthcare Referral Analytics",
-    shortTitle: "Referral Analytics",
+    slug: "healthcare-ai-strategy",
+    title: "Healthcare AI Strategy and Business Case",
+    shortTitle: "AI Strategy",
     description:
-      "Healthcare operations analytics connecting patient access, provider networks, referral performance, and geographic reach. Analysis informed hospital referral strategy and supported partnership agreements across a regional health system.",
+      "Business case development and strategic analysis for a conversational AI platform in early pregnancy care, conducted through the Penn Graduate Consulting Club. Work included economic modeling across care delivery pathways, payer and customer segment analysis, and scenario and sensitivity frameworks. Engagement details are confidential.",
     shortDescription:
-      "Provider network and referral performance analytics supporting hospital operations, access strategy, and revenue growth.",
-    category: "Healthcare Operations · Analytics",
-    filterCategory: "Healthcare Analytics",
+      "Economic modeling, payer segmentation, and scenario analysis for a healthcare AI business case, conducted through the Penn Graduate Consulting Club.",
+    category: "Consulting · Life Sciences Strategy",
+    filterCategory: "Consulting & Strategy",
     status: "Completed",
     date: "",
-    role: "Network & Relation Executive (Healthcare Analytics & Strategy)",
+    role: "Business Analyst, Penn Graduate Consulting Club",
     methods: [
-      "Network analysis",
-      "Revenue attribution",
-      "Operational analytics",
-      "Geographic analysis",
+      "Economic modeling",
+      "Care pathway analysis",
+      "Payer and customer segment analysis",
+      "Sensitivity analysis",
+      "Business case development",
+      "Stakeholder communication",
     ],
-    technologies: ["SQL", "Python", "Tableau"],
-    metrics: [
-      { value: "216%", label: "Referral revenue growth" },
-      { value: "45.5%", label: "Reduction in EMR-related processing time" },
-    ],
+    technologies: ["Excel", "Financial modeling"],
+    metrics: [],
     image: "",
     repositoryUrl: "",
     demoUrl: "",
-    featured: true,
+    featured: false,
     hasCaseStudy: true,
-    visual: "referral",
+    visual: "strategy",
   },
   {
     slug: "genetic-risk-map",
@@ -213,4 +214,5 @@ export const filterCategories: FilterCategory[] = [
   "Healthcare Analytics",
   "Biomedical Data Science",
   "Public Health",
+  "Consulting & Strategy",
 ]

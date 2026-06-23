@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { projects } from "@/content/projects"
 import { glp1CaseStudy } from "@/content/case-studies/glp1-pharmacovigilance"
 import { rweStudioCaseStudy } from "@/content/case-studies/real-world-evidence-studio"
-import { healthcareReferralCaseStudy } from "@/content/case-studies/healthcare-referral-analytics"
+import { healthcareAiStrategyCaseStudy } from "@/content/case-studies/healthcare-ai-strategy"
 import { geneticRiskMapCaseStudy } from "@/content/case-studies/genetic-risk-map"
 import { hpvVaccinationCaseStudy } from "@/content/case-studies/hpv-vaccination-analytics"
 import type { CaseStudy } from "@/content/case-studies/types"
@@ -14,8 +14,6 @@ import { DataPipelineDiagram } from "@/components/case-study/DataPipelineDiagram
 import { StudyDesignDiagram } from "@/components/case-study/StudyDesignDiagram"
 import { RwePipelineDiagram } from "@/components/case-study/RwePipelineDiagram"
 import { RweCohortDesignDiagram } from "@/components/case-study/RweCohortDesignDiagram"
-import { ReferralWorkflowDiagram } from "@/components/case-study/ReferralWorkflowDiagram"
-import { ReferralNetworkDiagram } from "@/components/case-study/ReferralNetworkDiagram"
 import { GenomicsPipelineDiagram } from "@/components/case-study/GenomicsPipelineDiagram"
 import { ScoringMethodologyDiagram } from "@/components/case-study/ScoringMethodologyDiagram"
 import { VaccinationWorkflowDiagram } from "@/components/case-study/VaccinationWorkflowDiagram"
@@ -57,10 +55,8 @@ const caseStudyMap: Record<string, CaseStudyEntry> = {
     workflowDiagram: <RwePipelineDiagram />,
     methodologyDiagram: <RweCohortDesignDiagram className="mb-6" />,
   },
-  "healthcare-referral-analytics": {
-    data: healthcareReferralCaseStudy,
-    workflowDiagram: <ReferralWorkflowDiagram />,
-    methodologyDiagram: <ReferralNetworkDiagram className="mb-6" />,
+  "healthcare-ai-strategy": {
+    data: healthcareAiStrategyCaseStudy,
   },
   "genetic-risk-map": {
     data: geneticRiskMapCaseStudy,

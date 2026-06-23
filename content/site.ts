@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: "Johanna Momole",
   initials: "JM",
-  title: "Biomedical Informatics and Healthcare Analytics",
-  eyebrow: "Biomedical Informatics · Healthcare Analytics",
+  title: "Biomedical Informatics, Healthcare Analytics, and Life Sciences Strategy",
+  eyebrow: "Biomedical Informatics · Healthcare Analytics · Life Sciences Strategy",
   headline: "I turn healthcare data into evidence people can act on.",
-  bio: "I combine clinical context, analytical methods, and product thinking to build tools for real-world evidence, patient access, and healthcare operations.",
+  bio: "I combine clinical context, analytical methods, and product thinking to build tools for real-world evidence, patient access, and healthcare operations. I also work at the strategy layer, translating analytical findings into business cases and decisions.",
 
   nav: [
     { label: "Work",       href: "/#work" },
@@ -33,7 +33,7 @@ export const siteConfig = {
     location:
       "Based in Philadelphia and open to opportunities in Philadelphia, New Jersey, New York, and remote roles across the United States.",
     collaboration:
-      "Open to full-time roles, contract research, and collaborative projects in healthcare analytics, real-world evidence, and biomedical informatics.",
+      "Open to full-time roles, contract research, and collaborative projects in healthcare analytics, real-world evidence, biomedical informatics, and life sciences strategy and consulting.",
   },
 
   metrics: [
