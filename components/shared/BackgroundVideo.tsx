@@ -15,33 +15,85 @@ export function BackgroundVideo() {
   // and the OS reduced-motion preference is not active
   const isPlaying = !manuallyPaused && prefersReduced !== true
 
-  // Sync the video element whenever the derived playing state changes
+  // Reinforce mobile autoplay requirements and register an interaction retry
+  // if the initial play() call is blocked by the browser's autoplay policy.
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    if (isPlaying) {
-      video.play().catch(() => {})
-    } else {
+
+    // iOS Safari requires muted and playsInline set as DOM *properties*, not
+    // just HTML attributes. React's JSX props only set attributes on the
+    // server-rendered HTML; the properties must be assigned imperatively.
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+
+    if (!isPlaying) {
       video.pause()
+      return
     }
-  }, [isPlaying])
 
-  // Page Visibility API: pause when tab is hidden, resume when visible
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
+    // Guard against the race where cleanup runs before the .catch() microtask
+    let active = true
 
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        video.pause()
-      } else if (isPlaying) {
+    const removeRetry = () => {
+      window.removeEventListener("touchstart", onInteraction)
+      window.removeEventListener("pointerdown", onInteraction)
+      window.removeEventListener("scroll", onInteraction, true)
+    }
+
+    // Listeners are removed only after play() *succeeds*, so a failed gesture
+    // leaves them active and allows further interaction attempts to retry.
+    const onInteraction = () => {
+      video
+        .play()
+        .then(() => {
+          removeRetry()
+        })
+        .catch(() => {
+          // Keep listeners active so a later interaction can retry.
+        })
+    }
+
+    // Resume after returning to the page (tab switch, app switch, lock/unlock).
+    // Registered here so it shares the same isPlaying closure and cleanup path.
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible" && isPlaying) {
         video.play().catch(() => {})
       }
     }
 
-    document.addEventListener("visibilitychange", handleVisibilityChange)
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange)
+    document.addEventListener("visibilitychange", onVisibilityChange)
+
+    // Attempt autoplay immediately; if the browser blocks it, wait for the
+    // first user gesture (touchstart / pointerdown / scroll).
+    video.play().catch(() => {
+      if (!active) return
+      window.addEventListener("touchstart", onInteraction, { passive: true })
+      window.addEventListener("pointerdown", onInteraction, { passive: true })
+      window.addEventListener("scroll", onInteraction, { capture: true, passive: true })
+    })
+
+    return () => {
+      active = false
+      removeRetry()
+      document.removeEventListener("visibilitychange", onVisibilityChange)
+    }
   }, [isPlaying])
+
+  // Pause when the page is hidden (tab/window loses visibility, phone locked).
+  // Resume is owned by the effect above; this only handles the pause direction.
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleHidden = () => {
+      if (document.hidden) video.pause()
+    }
+
+    document.addEventListener("visibilitychange", handleHidden)
+    return () => document.removeEventListener("visibilitychange", handleHidden)
+  }, [])
 
   const togglePlayPause = useCallback(() => {
     setManuallyPaused((prev) => !prev)
@@ -54,21 +106,26 @@ export function BackgroundVideo() {
         className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        {/* Fallback background color if video is unavailable */}
+        {/* Solid fallback — visible while video loads or if autoplay is blocked */}
         <div className="absolute inset-0 bg-[#050713]" />
 
-        {/* TODO: Add poster="/images/dna-poster.jpg" for faster initial paint once generated */}
+        {/*
+          autoPlay is unconditional so it is present in both the SSR HTML and
+          the client hydration, avoiding any hydration mismatch. The effect
+          above calls video.pause() for reduced-motion users after mount.
+        */}
         <video
           ref={videoRef}
           className={cn(
             "absolute inset-0 h-full w-full object-cover",
             "object-center sm:object-[58%_center] xl:object-[62%_center]"
           )}
-          autoPlay={prefersReduced !== true}
+          autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
+          poster="/images/dna-hero.jpg"
           tabIndex={-1}
           disablePictureInPicture
         >
