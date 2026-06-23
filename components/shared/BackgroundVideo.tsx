@@ -9,6 +9,8 @@ export function BackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   // Tracks only the user's manual toggle decision
   const [manuallyPaused, setManuallyPaused] = useState(false)
+  // Stays false until the browser has decoded the first video frame
+  const [isVideoReady, setIsVideoReady] = useState(false)
   const prefersReduced = useReducedMotion()
 
   // Derived: the video is considered playing when the user hasn't paused it
@@ -106,26 +108,31 @@ export function BackgroundVideo() {
         className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        {/* Solid fallback — visible while video loads or if autoplay is blocked */}
+        {/* Dark background — shown while video buffers; no image flash */}
         <div className="absolute inset-0 bg-[#050713]" />
 
         {/*
           autoPlay is unconditional so it is present in both the SSR HTML and
           the client hydration, avoiding any hydration mismatch. The effect
           above calls video.pause() for reduced-motion users after mount.
+          opacity-0 until isVideoReady prevents any flash before the first frame.
         */}
         <video
           ref={videoRef}
           className={cn(
             "absolute inset-0 h-full w-full object-cover",
-            "object-center sm:object-[58%_center] xl:object-[62%_center]"
+            "object-center sm:object-[58%_center] xl:object-[62%_center]",
+            "transition-opacity duration-700 motion-reduce:duration-0",
+            isVideoReady ? "opacity-100" : "opacity-0"
           )}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster="/images/dna-hero.jpg"
+          onLoadedData={() => setIsVideoReady(true)}
+          onCanPlay={() => setIsVideoReady(true)}
+          onPlaying={() => setIsVideoReady(true)}
           tabIndex={-1}
           disablePictureInPicture
         >
