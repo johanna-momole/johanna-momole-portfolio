@@ -14,10 +14,9 @@ export type ProjectVisualVariant =
 export type FilterCategory =
   | "All"
   | "Real-World Evidence"
-  | "Healthcare Analytics"
+  | "Life Sciences Consulting"
   | "Biomedical Data Science"
   | "Public Health"
-  | "Consulting & Strategy"
 
 export type ProjectStatus =
   | "Ongoing"
@@ -118,7 +117,7 @@ export const projects: Project[] = [
     shortDescription:
       "Economic modeling, payer segmentation, and scenario analysis for a healthcare AI business case, conducted through the Penn Graduate Consulting Club.",
     category: "Consulting · Life Sciences Strategy",
-    filterCategory: "Consulting & Strategy",
+    filterCategory: "Life Sciences Consulting",
     status: "Completed",
     date: "",
     role: "Business Analyst, Penn Graduate Consulting Club",
@@ -211,8 +210,7 @@ export const featuredProjects = projects.filter((p) => p.featured)
 export const filterCategories: FilterCategory[] = [
   "All",
   "Real-World Evidence",
-  "Healthcare Analytics",
+  "Life Sciences Consulting",
   "Biomedical Data Science",
   "Public Health",
-  "Consulting & Strategy",
 ]

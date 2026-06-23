@@ -70,7 +70,7 @@ export function HeroSection() {
       <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-1 lg:grid-cols-2">
 
         {/* ── Left: Content column ──────────────────────────────────────────── */}
-        <div className="flex flex-col justify-center px-8 pb-16 pt-32 md:px-16 lg:pb-0 lg:pr-12 lg:pt-0">
+        <div className="flex flex-col justify-center px-8 pb-16 pt-32 md:px-16 lg:pb-0 lg:pr-12 lg:pt-28">
           <motion.p
             {...fadeUp(0.1)}
             className="mb-6 text-xs font-medium tracking-[0.18em] uppercase text-white/45"
@@ -181,7 +181,7 @@ export function HeroSection() {
                 />
               </div>
 
-              {/* Row 2 — left: Research Scale | right: Leadership */}
+              {/* Row 2 — left: Research Scale | right: Signal Detection */}
               <div className="w-[166px]">
                 <HeroProfileCard
                   type="metric"
@@ -197,31 +197,6 @@ export function HeroSection() {
               </div>
               <div className="w-[166px]">
                 <HeroProfileCard
-                  type="leadership"
-                  eyebrow="Leadership"
-                  primary="Executive-Facing"
-                  secondary="Weekly insights presented to the CEO and Hospital Director"
-                  floatDelay={0.5}
-                  floatY={-3}
-                  floatDuration={5.0}
-                />
-              </div>
-
-              {/* Row 3 — left: Partnerships | right: Signal Detection */}
-              <div className="w-[166px]">
-                <HeroProfileCard
-                  type="metric"
-                  eyebrow="Partnerships"
-                  primary="200+"
-                  secondary="Hospital and clinic agreements secured"
-                  visual="partnerships"
-                  floatDelay={1.5}
-                  floatY={-3}
-                  floatDuration={4.5}
-                />
-              </div>
-              <div className="w-[166px]">
-                <HeroProfileCard
                   type="metric"
                   eyebrow="Signal Detection"
                   primary="665"
@@ -231,6 +206,33 @@ export function HeroSection() {
                   floatDelay={1.9}
                   floatY={-5}
                   floatDuration={3.9}
+                />
+              </div>
+
+              {/* Row 3 — left: Partnerships | right: Leadership */}
+              <div className="w-[166px] flex flex-col">
+                <HeroProfileCard
+                  type="metric"
+                  eyebrow="Partnerships"
+                  primary="200+"
+                  secondary="Hospital and clinic agreements secured"
+                  visual="partnerships"
+                  floatDelay={1.5}
+                  floatY={-3}
+                  floatDuration={4.5}
+                  className="flex-1"
+                />
+              </div>
+              <div className="w-[166px] flex flex-col">
+                <HeroProfileCard
+                  type="leadership"
+                  eyebrow="Leadership"
+                  primary="Executive-Facing"
+                  secondary="Weekly insights presented to the CEO and Hospital Director"
+                  floatDelay={0.5}
+                  floatY={-3}
+                  floatDuration={5.0}
+                  className="flex-1"
                 />
               </div>
 
@@ -257,7 +259,7 @@ export function HeroSection() {
               supporting="LPDP · Ministry of Finance of Indonesia"
               floatY={0}
             />
-            {/* Row 2: Research Scale | Leadership */}
+            {/* Row 2: Research Scale | Signal Detection */}
             <HeroProfileCard
               type="metric"
               eyebrow="Research Scale"
@@ -268,13 +270,15 @@ export function HeroSection() {
               floatY={0}
             />
             <HeroProfileCard
-              type="leadership"
-              eyebrow="Leadership"
-              primary="Executive-Facing"
-              secondary="Weekly insights presented to the CEO and Hospital Director"
+              type="metric"
+              eyebrow="Signal Detection"
+              primary="665"
+              secondary="Multiple-testing-adjusted safety signals detected"
+              supporting="FAERS · ROR · PRR"
+              visual="signals"
               floatY={0}
             />
-            {/* Row 3: Partnerships | Signal Detection */}
+            {/* Row 3: Partnerships | Leadership */}
             <HeroProfileCard
               type="metric"
               eyebrow="Partnerships"
@@ -284,12 +288,10 @@ export function HeroSection() {
               floatY={0}
             />
             <HeroProfileCard
-              type="metric"
-              eyebrow="Signal Detection"
-              primary="665"
-              secondary="Multiple-testing-adjusted safety signals detected"
-              supporting="FAERS · ROR · PRR"
-              visual="signals"
+              type="leadership"
+              eyebrow="Leadership"
+              primary="Executive-Facing"
+              secondary="Weekly insights presented to the CEO and Hospital Director"
               floatY={0}
             />
           </div>
